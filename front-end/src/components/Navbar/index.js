@@ -31,7 +31,7 @@ function Navbar() {
       <AppBar position="static" sx={{bgcolor:"white"}}>
         <Container maxWidth="lg">
           <Toolbar disableGutters>
-          <img src="https://cdn.discordapp.com/attachments/937323523444187159/1101610378028400732/PieCentral_Pizza_sonlogo3.png" alt="photo" width={"300px"} height={"80px"}></img>
+          <img src="https://raw.githubusercontent.com/SDU-Bilgisayar-Muhendisligi/PieCentralPizza/zehra/photos/PieCentral%20Pizza%20sonlogo3.png" alt="photo" width={"300px"} height={"80px"}></img>
   
             <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' },justifyContent:'flex-end'}}>
               <IconButton
@@ -83,8 +83,6 @@ function Navbar() {
                 </Button>
               ))}
             </Box>
-          {/* <AccountCircleIcon />
-          <Button variant="text" >Giriş Yap</Button> */}
           <Button variant="text" sx={{color:"black",fontWeight:'bold',border:"none",textTransform: 'none'}} startIcon={<AccountCircleIcon sx={{color:'black'}}/>}>Giriş Yap</Button>
           </Toolbar>
         </Container>
