@@ -6,13 +6,26 @@ import Button from '@mui/joy/Button';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import { CardActionArea, CardActions, Container } from '@mui/material';
+import { useState } from 'react';
+import FavoriteBorderRoundedIcon from '@mui/icons-material/FavoriteBorderRounded';
+import IconButton from '@mui/joy/IconButton';
+function CardComponent({imageUrl,name,description,price}) {
+    const [isFavorite, setIsFavorite] = useState(false);
 
-function index({imageUrl,name,description,price}) {
+    const handleFavoriteClick = () => {
+      setIsFavorite(!isFavorite);
+    };
     return (
         <Grid item xs={12} sm={6} md={3} sx={{ mb: 2 }}>
             <CardActionArea>
-            <Card sx={{ maxWidth: 280, height: 380 }}>
-                
+            <Card sx={{ maxWidth: 280, height: 400 }}>
+             <IconButton onClick={handleFavoriteClick}
+             size="sm"
+             variant="plain"
+             color="neutral"
+             sx={{ ml: 'auto', alignSelf: 'flex-start' }}>
+          {isFavorite ? <FavoriteBorderRoundedIcon style={{ color: 'red' }} /> : <FavoriteBorderRoundedIcon />}
+        </IconButton>
                 <CardMedia
                     sx={{ height: 180 }}
                     image={imageUrl}
@@ -48,4 +61,4 @@ function index({imageUrl,name,description,price}) {
     )
 }
 
-export default index
+export default CardComponent

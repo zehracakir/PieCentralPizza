@@ -18,7 +18,7 @@ function Footer() {
   const [color, setColor] = React.useState('neutral');
   return (
     <Container maxWidth="100%" sx={{
-      position: 'auto',
+      position: 'relative',
       bottom: '0',
       width: '100%',
       textAlign: 'center',
