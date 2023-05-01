@@ -51,7 +51,7 @@ function Navbar() {
       <>
       <GirisYap login={login} closeDialog={closeDialog} closeLogin={closeLogin} openRegister={openRegister}/>
       <KayitOl register={register} closeDialog={closeDialog} closeRegister={closeRegister} openLogin={openLogin}/>
-      <AppBar position="static" sx={{bgcolor:"white"}}>
+      <AppBar position="fixed" sx={{bgcolor:"white", mt:0}}>
         <Container maxWidth="lg">
           <Toolbar disableGutters>
           <img src="https://raw.githubusercontent.com/SDU-Bilgisayar-Muhendisligi/PieCentralPizza/zehra/photos/PieCentral%20Pizza%20sonlogo3.png" alt="photo" width={"300px"} height={"80px"}></img>

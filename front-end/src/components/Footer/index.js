@@ -18,13 +18,13 @@ function Footer() {
   const [color, setColor] = React.useState('neutral');
   return (
     <Container maxWidth="100%" sx={{
-      position: 'fixed',
+      position: 'relative',
       bottom: '0',
       width: '100%',
       textAlign: 'center',
       p: '10px',
       display: 'flex',
-      justifyContent: 'center'
+      justifyContent: 'center',
     }}>
       <Sheet
         variant="solid"
