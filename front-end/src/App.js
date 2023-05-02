@@ -4,8 +4,8 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Pizzalar from './pages/Urunler/Pizzalar';
 import YanUrunler from './pages/Urunler/YanUrunler';
-import UrunDetay from './pages/UrunDetay'
 import Hakkimizda from './pages/Hakkimizda'
+import UrunDetay from './pages/UrunDetay';
 function App() {
   return (
     <>
@@ -13,8 +13,8 @@ function App() {
       <Routes>
         <Route path='/pizzalar' element={<Pizzalar/>}/>
         <Route path='/yan-urunler' element={<YanUrunler/>}/>
-        <Route path='/urun-detay' element={<UrunDetay/>}/>
         <Route path='/hakkimizda' element={<Hakkimizda/>}/>
+        <Route path='/pizzalar/urun-detay' element={<UrunDetay/>}/>
       </Routes>
       <Footer/>
     </>

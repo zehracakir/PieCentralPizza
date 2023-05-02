@@ -1,61 +1,55 @@
 import React from "react";
-import UrunDetayComponent from "../../components/UrunDetayComponent";
-import CheckboxEkstraMalzeme from "../../components/UrunDetayComponent/CheckboxEkstraMalzeme"
 import { Container } from "@mui/material";
 import Typography from "@mui/material/Typography";
-import CheckboxCikarilacakMalzeme from "../../components/UrunDetayComponent/CheckboxCikarilacakMalzeme";
-
-const UrunDetay = () => {
-  let urunDetay = {
-    imageUrl: "https://raw.githubusercontent.com/SDU-Bilgisayar-Muhendisligi/PieCentralPizza/zehra/photos/urunler/pizzalar/ciftlik-evi.jpg",
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
+import AccordionMalzemeEkleCikar from "../../components/UrunDetayComponent/AccordionMalzemeEkleCikar";
+import SelectHamurSecimi from "../../components/UrunDetayComponent/SelectHamurSecimi";
+import UrunAdeti from "../../components/UrunDetayComponent/UrunDetayAltKisim/UrunAdeti";
+import SepeteEkle from "../../components/UrunDetayComponent/UrunDetayAltKisim/SepeteEkle";
+function UrunDetay ()  {
+  const urunDetay = {
     name: "Çiftlik Evi (Büyük)",
     description: "Pizza sosu, mozzarella peyniri, salam, mantar",
-    price: "149.90 TL"
+    imageUrl: "https://raw.githubusercontent.com/SDU-Bilgisayar-Muhendisligi/PieCentralPizza/zehra/photos/urunler/pizzalar/ciftlik-evi.jpg"
   };
-  const items = [
-    {name:"Beyaz Peynir + 6,00 TL"},
-    {name:"Domates + 6,00 TL"},
-    {name:"Jalapeno Biber + 6,00 TL"},
-    {name:"Kırmızı Köz Biber + 6,00 TL"},
-    {name:"Extra Mozarella + 6,00 TL"},
-    {name:"Siyah Zeytin + 6,00 TL"},
-    {name:"Kekik + 0,25 TL"},
-    {name:"Parmesan Peyniri + 6,00 TL"},
-    {name:"Tavuk Parçaları + 6,00 TL"},
-    {name:"Soğan + 6,00 TL"},
-    {name:"Pul Biber + 0,25 TL"},
-    
-  ];
-  const removedItem = [
-    {name:"Beyaz Peynir + 6,00 TL"},
-    {name:"Domates + 6,00 TL"},
-    {name:"Jalapeno Biber + 6,00 TL"},
-    {name:"Kırmızı Köz Biber + 6,00 TL"},
-    {name:"Extra Mozarella + 6,00 TL"},
-    {name:"Siyah Zeytin + 6,00 TL"},
-    {name:"Kekik + 0,25 TL"},
-    {name:"Parmesan Peyniri + 6,00 TL"},
-    {name:"Tavuk Parçaları + 6,00 TL"},
-    {name:"Soğan + 6,00 TL"},
-    {name:"Pul Biber + 0,25 TL"},
-    
-  ];
+  
 
+  
+  
+ 
   return (
     <Container maxWidth="lg" sx={{mt:15,mb:10}}>
-      {/* <UrunDetayComponent
-        imageUrl={urunDetay.imageUrl}
-        name={urunDetay.name}
-        description={urunDetay.description}
-        price={urunDetay.price}
-      /> */}
-      <Typography variant="body2"  sx={{fontWeight:'bold'}}>Ekstra Malzemeler </Typography>
-       {items.map((item) => (
-        <CheckboxEkstraMalzeme name={item.name} />
-      ))}
-      {removedItem.map((item) => (
-        <CheckboxCikarilacakMalzeme name={[item.name]}/>
-      ))}
+       <Box sx={{ flexGrow: 1 }}>
+      <Grid container spacing={2}>
+      
+        <Grid item xs={12} md={6}>
+          <Typography sx={{fontWeight:"bold",fontSize:'30px'}}>{urunDetay.name}</Typography>
+          <Typography sx={{fontWeight:"bold",mt:3}}>İçindekiler</Typography>
+          <Typography variant="body2" color="text.secondary" sx={{mb:3}}>{urunDetay.description}</Typography> 
+      <SelectHamurSecimi/>
+      
+        </Grid>
+        <Grid item xs={12} md={6} sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+        <img src={urunDetay.imageUrl} alt="pizzaResmi" width="50%"/>
+        <Box sx={{ mt: 3,mb:3 }}>
+    <UrunAdeti />
+    
+      
+    
+  </Box>
+  <SepeteEkle />
+        </Grid>
+        
+      </Grid>
+    </Box>
+    <AccordionMalzemeEkleCikar
+        header="Malzeme Ekle Çıkar"/>
+    
+   
+    
+      
+
       
     </Container>
   );

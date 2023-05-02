@@ -9,6 +9,7 @@ import { CardActionArea, CardActions, Container } from '@mui/material';
 import { useState } from 'react';
 import FavoriteBorderRoundedIcon from '@mui/icons-material/FavoriteBorderRounded';
 import IconButton from '@mui/joy/IconButton';
+import { Link } from 'react-router-dom';
 function CardComponent({imageUrl,name,description,price}) {
     const [isFavorite, setIsFavorite] = useState(false);
 
@@ -17,8 +18,9 @@ function CardComponent({imageUrl,name,description,price}) {
     };
     return (
         <Grid item xs={12} sm={6} md={3} sx={{ mb: 2 }}>
-            <CardActionArea>
+            
             <Card sx={{ maxWidth: 280, height: 400 }}>
+            <CardActionArea>
              <IconButton onClick={handleFavoriteClick}
              size="sm"
              variant="plain"
@@ -26,6 +28,7 @@ function CardComponent({imageUrl,name,description,price}) {
              sx={{ ml: 'auto', alignSelf: 'flex-start' }}>
           {isFavorite ? <FavoriteBorderRoundedIcon style={{ color: 'red' }} /> : <FavoriteBorderRoundedIcon />}
         </IconButton>
+                <Link to={'/pizzalar/urun-detay'} style={{ textDecoration: 'none', color:'black' }}>
                 <CardMedia
                     sx={{ height: 180 }}
                     image={imageUrl}
@@ -53,10 +56,11 @@ function CardComponent({imageUrl,name,description,price}) {
                         Sipariş Ver
                     </Button>
                 </CardActions >
+                </Link>
                 
-                
+                 </CardActionArea>
             </Card>
-            </CardActionArea>
+           
         </Grid>
     )
 }
