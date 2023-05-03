@@ -7,6 +7,7 @@ import Hesabim from './pages/Hesabim';
 import Favorilerim from './pages/Favorilerim';
 import Siparislerim from './pages/Siparislerim';
 import NoMatch from './pages/NoMatch';
+import Adreslerim from './pages/Adreslerim';
 function App() {
   return (
     <div >
@@ -17,6 +18,7 @@ function App() {
           <Route path='hesabim' element={<Hesabim/>}/>
           <Route path='siparislerim' element={<Siparislerim/>}/>
           <Route path='favorilerim' element={<Favorilerim/>}/>
+          <Route path='adreslerim' element={<Adreslerim/>}/>
           <Route path="*" element={<NoMatch />} />
         </Route>
         <Route path="*" element={<NoMatch />} />

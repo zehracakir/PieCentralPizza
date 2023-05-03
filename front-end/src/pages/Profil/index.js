@@ -8,13 +8,13 @@ import { Outlet } from 'react-router-dom';
 // mt 15; mb 10
 function Profil() {
     return (
-        <Container sx={{ mt: 15, mb: 10 }}>
+        <Container sx={{ mt: 15, mb: 10, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
             <Grid container>
                 <Grid item xs={12} md={4}>
-                   <ProfilListe/>
+                    <ProfilListe />
                 </Grid>
                 <Grid item xs={12} md={8}>
-                    <Outlet/>
+                    <Outlet />
                 </Grid>
             </Grid>
         </Container>
