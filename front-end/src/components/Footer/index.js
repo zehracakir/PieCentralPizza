@@ -24,7 +24,7 @@ function Footer() {
       textAlign: 'center',
       p: '10px',
       display: 'flex',
-      justifyContent: 'center'
+      justifyContent: 'center',
     }}>
       <Sheet
         variant="solid"

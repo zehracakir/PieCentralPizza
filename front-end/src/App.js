@@ -1,16 +1,19 @@
 import './Reset.css'
 import { Route,Routes } from 'react-router-dom';
 import Navbar from './components/Navbar';
-import Footer from './components/Footer';
+import Anasayfa from './pages/Anasayfa';
 import Pizzalar from './pages/Urunler/Pizzalar';
 import YanUrunler from './pages/Urunler/YanUrunler';
 import Hakkimizda from './pages/Hakkimizda'
 import UrunDetay from './pages/UrunDetay';
+import Footer from './components/Footer';
+
 function App() {
   return (
     <>
       <Navbar/>
       <Routes>
+        <Route path='/' element={<Anasayfa/>}/>
         <Route path='/pizzalar' element={<Pizzalar/>}/>
         <Route path='/yan-urunler' element={<YanUrunler/>}/>
         <Route path='/hakkimizda' element={<Hakkimizda/>}/>
