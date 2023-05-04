@@ -9,7 +9,6 @@ import {
     Typography,
     Avatar
 } from '@mui/material'
-import { red } from '@mui/material/colors'
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import EventNoteIcon from '@mui/icons-material/EventNote';
@@ -20,7 +19,7 @@ function ProfilListe() {
     return (
         <Box sx={{ width: "100%", bgcolor: "background.paper" }}>
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                <Avatar sx={{ bgcolor: red[600], marginRight: '8px', width: 50, height: 50 }} src='https://raw.githubusercontent.com/SDU-Bilgisayar-Muhendisligi/PieCentralPizza/yusuf/photos/avatar.png'></Avatar>
+                <Avatar sx={{ marginRight: '8px', width: 50, height: 50 }} src='https://raw.githubusercontent.com/SDU-Bilgisayar-Muhendisligi/PieCentralPizza/yusuf/photos/avatar.png'></Avatar>
                 <Typography variant='h6' sx={{ fontWeight: "bold" }}>Profil</Typography>
             </Box>
             <List sx={{ width: "100%" }}>
@@ -87,6 +86,7 @@ function ProfilListe() {
 
                 </ListItem>
                 <ListItem sx={{ display: "block", width: "90%" }}>
+                <Link to="/" style={{ textDecoration: "none", color: "black" }}>
                     <ListItemButton>
                         <ListItemIcon>
                             <LogoutIcon fontSize='large' />
@@ -97,6 +97,7 @@ function ProfilListe() {
                             </Typography>
                         </ListItemText>
                     </ListItemButton>
+                    </Link>
                 </ListItem>
             </List>
         </Box>
