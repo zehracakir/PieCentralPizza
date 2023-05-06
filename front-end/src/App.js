@@ -8,10 +8,12 @@ import Favorilerim from './pages/Favorilerim';
 import Siparislerim from './pages/Siparislerim';
 import NoMatch from './pages/NoMatch';
 import Adreslerim from './pages/Adreslerim';
+import UrunArama from './components/UrunArama';
 function App() {
   return (
     <div >
       <Navbar/>
+      <UrunArama/>
       <Routes>
         <Route path='/profil' element={<Profil/>}>
           <Route index element={<Hesabim />} />
