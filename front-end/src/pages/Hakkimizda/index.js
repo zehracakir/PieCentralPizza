@@ -4,7 +4,7 @@ import React from 'react'
 
 function index() {
     return (
-        <Container sx={{ mt: 15}} maxWidth='lg'>
+        <Container sx={{ mt: 15 }} maxWidth='lg'>
             <Typography sx={{ fontWeight: 'bold', fontSize: "22px" }}>
                 Hakkımızda
             </Typography>
@@ -25,8 +25,8 @@ function index() {
                     Tüm müşterilerimizi, sıcak ve samimi bir ortamda, en lezzetli pizzalarımızı tatmaya davet ediyoruz.
                 </div>
             </Typography>
-                <img src="https://raw.githubusercontent.com/SDU-Bilgisayar-Muhendisligi/PieCentralPizza/zehra/photos/hakkimizda/pizza-seridi.png" alt="" width={"100%"} />
-        
+            <img src="https://raw.githubusercontent.com/SDU-Bilgisayar-Muhendisligi/PieCentralPizza/zehra/photos/hakkimizda/pizza-seridi.png" alt="" width={"100%"} />
+
         </Container>
     )
 }

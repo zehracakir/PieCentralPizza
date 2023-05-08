@@ -4,7 +4,7 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
-function UrunAdeti () {
+function UrunAdeti() {
   const [count, setCount] = useState(1);
 
   const handleIncrement = () => {

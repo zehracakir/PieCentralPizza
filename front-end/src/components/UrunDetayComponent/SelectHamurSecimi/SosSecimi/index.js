@@ -19,7 +19,7 @@ const MenuProps = {
   },
 };
 
-function SosSecimi({sosCesitleri}) {
+function SosSecimi({ sosCesitleri }) {
   const [hamurSecimi, setHamurSecimi] = React.useState('');
 
   const handleChange = (event) => {
@@ -39,16 +39,16 @@ function SosSecimi({sosCesitleri}) {
           MenuProps={MenuProps}
         >
           {sosCesitleri.map((hamur, index) => (
-  <MenuItem key={index} value={hamur.name}>
-    <Box sx={{ display: 'flex', alignItems: 'center' }}>
-      <Grid container spacing={2} alignItems="center">
-        <Grid item>
-          <Typography sx={{ fontWeight: 'bold' }}>{hamur.name}</Typography>
-        </Grid>
-      </Grid>
-    </Box>
-  </MenuItem>
-))}
+            <MenuItem key={index} value={hamur.name}>
+              <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                <Grid container spacing={2} alignItems="center">
+                  <Grid item>
+                    <Typography sx={{ fontWeight: 'bold' }}>{hamur.name}</Typography>
+                  </Grid>
+                </Grid>
+              </Box>
+            </MenuItem>
+          ))}
         </Select>
       </FormControl>
     </Box>

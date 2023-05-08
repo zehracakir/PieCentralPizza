@@ -19,7 +19,7 @@ const MenuProps = {
   },
 };
 
-function SelectSecim({hamurCesitleri}) {
+function SelectSecim({ hamurCesitleri }) {
   const [hamurSecimi, setHamurSecimi] = React.useState('');
 
   const handleChange = (event) => {
@@ -39,22 +39,22 @@ function SelectSecim({hamurCesitleri}) {
           MenuProps={MenuProps}
         >
           {hamurCesitleri.map((hamur, index) => (
-  <MenuItem key={index} value={hamur.name}>
-    <Box sx={{ display: 'flex', alignItems: 'center' }}>
-      <Grid container spacing={2} alignItems="center">
-        <Grid item>
-          <img src="https://raw.githubusercontent.com/SDU-Bilgisayar-Muhendisligi/PieCentralPizza/zehra/photos/urunDetay/selectPhoto.png" alt="" width="50" />
-        </Grid>
-        <Grid item>
-          <Typography sx={{ fontWeight: 'bold' }}>{hamur.name}</Typography>
-          <Typography variant="body2" color="text.secondary">
-            {hamur.description}
-          </Typography>
-        </Grid>
-      </Grid>
-    </Box>
-  </MenuItem>
-))}
+            <MenuItem key={index} value={hamur.name}>
+              <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                <Grid container spacing={2} alignItems="center">
+                  <Grid item>
+                    <img src="https://raw.githubusercontent.com/SDU-Bilgisayar-Muhendisligi/PieCentralPizza/zehra/photos/urunDetay/selectPhoto.png" alt="" width="50" />
+                  </Grid>
+                  <Grid item>
+                    <Typography sx={{ fontWeight: 'bold' }}>{hamur.name}</Typography>
+                    <Typography variant="body2" color="text.secondary">
+                      {hamur.description}
+                    </Typography>
+                  </Grid>
+                </Grid>
+              </Box>
+            </MenuItem>
+          ))}
         </Select>
       </FormControl>
     </Box>

@@ -32,7 +32,9 @@ function Navbar() {
     <AppBar position="fixed" sx={{ bgcolor: "white", mt: 0 }}>
       <Container maxWidth="lg">
         <Toolbar disableGutters>
-          <img src="https://raw.githubusercontent.com/SDU-Bilgisayar-Muhendisligi/PieCentralPizza/zehra/photos/PieCentral%20Pizza%20sonlogo3.png" alt="photo" width={"300px"} height={"80px"}></img>
+          <Link to={'/'}>
+            <img src="https://raw.githubusercontent.com/SDU-Bilgisayar-Muhendisligi/PieCentralPizza/zehra/photos/PieCentral%20Pizza%20sonlogo3.png" alt="photo" width={"300px"} height={"80px"}></img>
+          </Link>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' }, justifyContent: 'flex-end' }}>
             <IconButton
@@ -64,17 +66,17 @@ function Navbar() {
               }}
             >
 
-              <Link to={'/pizzalar'} style={{ textDecoration: 'none', color:'black' }}>
+              <Link to={'/pizzalar'} style={{ textDecoration: 'none', color: 'black' }}>
                 <MenuItem onClick={handleCloseNavMenu}>
                   <Typography textAlign="center">Pizzalar</Typography>
                 </MenuItem>
               </Link>
-              <Link to={'yan-urunler'} style={{ textDecoration: 'none', color:'black' }}>
+              <Link to={'/yan-urunler'} style={{ textDecoration: 'none', color: 'black' }}>
                 <MenuItem onClick={handleCloseNavMenu}>
                   <Typography textAlign="center">Yan Ürünler</Typography>
                 </MenuItem>
               </Link>
-              <Link to={'/hakkimizda'} style={{ textDecoration: 'none', color:'black' }}>
+              <Link to={'/hakkimizda'} style={{ textDecoration: 'none', color: 'black' }}>
                 <MenuItem onClick={handleCloseNavMenu}>
                   <Typography textAlign="center">Hakkımızda</Typography>
                 </MenuItem>
@@ -94,7 +96,7 @@ function Navbar() {
 
               </Button>
             </Link>
-            <Link to={"/yan-urunler"} style={{ textDecoration: 'none'}}>
+            <Link to={"/yan-urunler"} style={{ textDecoration: 'none' }}>
               <Button
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'black', display: 'block', ml: 5, textTransform: 'none' }}
@@ -104,7 +106,7 @@ function Navbar() {
 
               </Button>
             </Link>
-            <Link to={'/hakkimizda'} style={{ textDecoration: 'none'}}>
+            <Link to={'/hakkimizda'} style={{ textDecoration: 'none' }}>
               <Button
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'black', display: 'block', ml: 5, textTransform: 'none' }}

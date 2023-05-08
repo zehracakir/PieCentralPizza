@@ -8,7 +8,7 @@ const ListItem = styled('li')(({ theme }) => ({
   margin: theme.spacing(0.5),
 }));
 
-export default function ChipCikarilacakMalzeme({chipData,setChipData}) {
+export default function ChipCikarilacakMalzeme({ chipData, setChipData }) {
 
   const handleDelete = (chipToDelete) => () => {
     setChipData((chips) =>
