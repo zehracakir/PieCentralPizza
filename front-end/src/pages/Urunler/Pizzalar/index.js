@@ -5,7 +5,7 @@ import { Container } from '@mui/material';
 import CardComponent from "../../../components/CardComponent"
 
 function Pizzalar() {
-
+  
   const pizzalar = [
     {
       imageUrl: "https://raw.githubusercontent.com/SDU-Bilgisayar-Muhendisligi/PieCentralPizza/zehra/photos/urunler/pizzalar/ciftlik-evi.jpg",
@@ -48,15 +48,15 @@ function Pizzalar() {
     <div>
       <Container maxWidth="lg" sx={{ mt: 15 }}>
         <section id='pizzalar'>
-          <Typography sx={{ fontWeight: 'bold', fontSize: "22px" }}>
-            Pizzalar
-          </Typography>
-          <Grid container spacing={2} sx={{ mt: 1, mb: 10 }}>
+        <Typography sx={{ fontWeight: 'bold', fontSize: "22px" }}>
+          Pizzalar
+        </Typography>
+        <Grid container spacing={2} sx={{ mt: 1, mb: 10 }}>
 
-            {pizzalar.map((item) => (
-              <CardComponent imageUrl={item.imageUrl} name={item.name} description={item.description} price={item.price} link={"pizzalar"} />
-            ))}
-          </Grid>
+          {pizzalar.map((item) => (
+            <CardComponent imageUrl={item.imageUrl} name={item.name} description={item.description} price={item.price} link={"pizzalar"} />
+          ))}
+        </Grid>
         </section>
       </Container>
 

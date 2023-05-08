@@ -10,7 +10,7 @@ import { useState } from 'react';
 import FavoriteBorderRoundedIcon from '@mui/icons-material/FavoriteBorderRounded';
 import IconButton from '@mui/joy/IconButton';
 import { Link } from 'react-router-dom';
-import style from './style.css'
+import './style.css'
 
 function CardComponent({ imageUrl, name, description, price, link }) {
     const [isFavorite, setIsFavorite] = useState(false);
@@ -27,7 +27,7 @@ function CardComponent({ imageUrl, name, description, price, link }) {
                         size="sm"
                         variant="plain"
                         color="neutral"
-                        sx={{ ml: 'auto', alignSelf: 'flex-start' }}>
+                        sx={{ ml: 'auto', justifyContent:'flex-end',display:'flex' }}>
                         {isFavorite ? <FavoriteBorderRoundedIcon style={{ color: 'red' }} /> : <FavoriteBorderRoundedIcon />}
                     </IconButton>
                     <Link to={`/${link}/urun-detay`} style={{ textDecoration: 'none', color: 'black' }}>

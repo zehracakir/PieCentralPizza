@@ -11,6 +11,7 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 function YanUrunlerDetay() {
   const urunDetay = {
     name: "Çiftlik Evi (Büyük)",
+    urunDetayi:"Efsane Belçika Çikolatası",
     description: "Pizza sosu, mozzarella peyniri, salam, mantar",
     imageUrl: "https://raw.githubusercontent.com/SDU-Bilgisayar-Muhendisligi/PieCentralPizza/zehra/photos/urunler/pizzalar/ciftlik-evi.jpg"
   };
@@ -23,6 +24,7 @@ function YanUrunlerDetay() {
 
           <Grid item xs={12} md={6}>
             <Typography sx={{ fontWeight: "bold", fontSize: '30px' }}>{urunDetay.name}</Typography>
+            <Typography variant="body2" color="text.secondary">{urunDetay.urunDetayi}</Typography>
             <Typography sx={{ fontWeight: "bold", mt: 3 }}>İçindekiler</Typography>
             <Typography variant="body2" color="text.secondary" sx={{ mb: 3 }}>{urunDetay.description}</Typography>
 
