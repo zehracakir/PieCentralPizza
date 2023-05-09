@@ -9,9 +9,9 @@ import SearchIcon from '@mui/icons-material/Search';
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
   borderRadius: theme.shape.borderRadius,
-  backgroundColor: "#B04759",
+  backgroundColor: "#000000",
   '&:hover': {
-    backgroundColor: "#E76161",
+    backgroundColor: "#181823",
   },
   marginLeft: 0,
   width: '100%',
@@ -51,7 +51,7 @@ function UrunArama() {
   return (
     <Box sx={{ flexGrow: 1, display: "flex", justifyContent: "center", mt:10}}>
       <AppBar position="static">
-        <Toolbar sx={{bgcolor:"white"}}>
+        <Toolbar sx={{bgcolor:"#F6F1F1"}}>
           <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", width: "100%" }}>
             <Search>
               <SearchIconWrapper>

@@ -14,8 +14,10 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import EventNoteIcon from '@mui/icons-material/EventNote';
 import LogoutIcon from '@mui/icons-material/Logout';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 function ProfilListe() {
+    const location = useLocation();
+    const currentPath = location.pathname; 
     return (
         <Box sx={{ width: "100%", bgcolor: "background.paper" }}>
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
@@ -27,7 +29,7 @@ function ProfilListe() {
                     <Link to="hesabim" style={{ textDecoration: "none", color: "black" }}>
                         <ListItemButton>
                             <ListItemIcon>
-                                <AccountCircleIcon fontSize='large' />
+                                <AccountCircleIcon fontSize='large' sx={{ color: currentPath.includes('hesabim') || currentPath ==="/profil" ? '#dc3545' : 'grey' }}/>
                             </ListItemIcon>
 
                             <ListItemText>
@@ -43,7 +45,7 @@ function ProfilListe() {
                     <Link to="adreslerim" style={{ textDecoration: "none", color: "black" }}>
                         <ListItemButton>
                             <ListItemIcon>
-                                <LocationOnIcon fontSize='large' />
+                                <LocationOnIcon fontSize='large' sx={{ color: currentPath.includes('adreslerim') ? '#dc3545' : 'grey' }}/>
                             </ListItemIcon>
 
                             <ListItemText>
@@ -59,7 +61,7 @@ function ProfilListe() {
                     <Link to="siparislerim" style={{ textDecoration: "none", color: "black" }}>
                         <ListItemButton>
                             <ListItemIcon>
-                                <EventNoteIcon fontSize='large' />
+                                <EventNoteIcon fontSize='large' sx={{ color: currentPath.includes('siparislerim') ? '#dc3545' : 'grey' }}/>
                             </ListItemIcon>
                             <ListItemText>
                                 <Typography variant='h6' sx={{ fontWeight: "bold", fontFamily: "serif" }}>
@@ -74,7 +76,7 @@ function ProfilListe() {
                     <Link to="favorilerim" style={{ textDecoration: "none", color: "black" }}>
                         <ListItemButton>
                             <ListItemIcon>
-                                <FavoriteIcon fontSize='large' />
+                                <FavoriteIcon fontSize='large' sx={{ color: currentPath.includes('favorilerim') ? '#dc3545' : 'grey' }} />
                             </ListItemIcon>
                             <ListItemText>
                                 <Typography variant='h6' sx={{ fontWeight: "bold", fontFamily: "revert" }}>
