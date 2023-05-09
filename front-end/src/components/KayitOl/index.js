@@ -25,7 +25,8 @@ function KayitOl({ register, closeDialog, closeRegister, openLogin }) {
       isim: "",
       kullaniciAdi: "",
       email: "",
-      password: ""
+      password: "",
+      passwordConfirmation:""
     },
     onSubmit: async (values) => {
       console.log(values, " bilgileri veritabanına gönderilecek");
@@ -94,6 +95,20 @@ function KayitOl({ register, closeDialog, closeRegister, openLogin }) {
             onBlur={handleBlur}
             value={values.password}
             helperText={errors.password && touched.password && `${errors.password}`}
+            fullWidth
+          />
+          <TextField
+            autoFocus
+            error={Boolean(errors.passwordConfirmation && touched.passwordConfirmation)}
+            margin="dense"
+            label="Şifre Onay"
+            id="passwordConfirmation"
+            name='passwordConfirmation'
+            type="password"
+            onChange={handleChange}
+            onBlur={handleBlur}
+            value={values.passwordConfirmation}
+            helperText={errors.passwordConfirmation && touched.passwordConfirmation && `${errors.passwordConfirmation}`}
             fullWidth
           />
           <FormGroup>

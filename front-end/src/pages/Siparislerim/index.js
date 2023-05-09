@@ -11,7 +11,7 @@ function Siparislerim() {
     <Box sx={{ display: "flex", flexDirection: "column" }}>
       <Typography variant='h5' mb={2} sx={{ fontWeight: 'bold' }}>Siparişlerim</Typography>
       <Box sx={{ width: '100%', bgcolor: 'background.paper' }}>
-        <List sx={{ maxWidth: "70%" }}>
+        <List sx={{ maxWidth: "100%" }}>
           <Divider />
           <SiparisListe urun="Festival" tarih={"5 May, 18:05"} durum={"Sipariş verildi"} link={"https://raw.githubusercontent.com/SDU-Bilgisayar-Muhendisligi/PieCentralPizza/zehra/photos/urunler/pizzalar/festival.jpg"} />
           <Divider />

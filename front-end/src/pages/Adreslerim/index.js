@@ -24,7 +24,7 @@ function Adreslerim() {
             <Typography variant='h5' mb={2} sx={{ fontWeight: 'bold' }}>Adreslerim</Typography>
             {/* <Typography variant='p' sx={{ fontFamily: "sans-serif" }}>Adres Eklenmedi</Typography> */}
             <Box sx={{ width: '100%', bgcolor: 'background.paper' }}>
-                <List sx={{ maxWidth: "70%" }}>
+                <List sx={{ maxWidth: "100%" }}>
                     <Divider />
                     <AdresListe  adresIsmi={"Ev"} adres={"Soğucak Mh, 2, Kuşadası, Aydın"} />
                     <Divider />
