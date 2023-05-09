@@ -12,16 +12,16 @@ import {
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Formik } from 'formik'
 import validations from './Validation';
-function AdresDuzenle({ open, handleClose }) {
+function AdresDuzenle({ open, handleClose, sehir, ilce, mahalle, sokak, adresAdi }) {
   return (
     <Dialog open={open} onClose={handleClose} fullWidth maxWidth={"sm"}>
       <Formik
         initialValues={{
-          sehir: '',
-          ilce: '',
-          mahalle: '',
-          sokak: '',
-          adresAdi: ''
+          sehir: sehir,
+          ilce: ilce,
+          mahalle: mahalle,
+          sokak: sokak,
+          adresAdi: adresAdi
         }}
         onSubmit={(values) => {
           console.log(values, "--> değerleri veritabanına yazılacak");
