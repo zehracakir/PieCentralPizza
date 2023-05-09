@@ -8,40 +8,46 @@ function Pizzalar() {
   
   const pizzalar = [
     {
-      imageUrl: "https://raw.githubusercontent.com/SDU-Bilgisayar-Muhendisligi/PieCentralPizza/zehra/photos/urunler/pizzalar/ciftlik-evi.jpg",
-      name: "Çiftlik Evi (Büyük)",
-      description: "Pizza sosu, mozzarella peyniri, salam, mantar",
-      price: "149.90 TL"
+      resimUrl: "https://raw.githubusercontent.com/SDU-Bilgisayar-Muhendisligi/PieCentralPizza/zehra/photos/urunler/pizzalar/ciftlik-evi.jpg",
+      urunAdi: "Çiftlik Evi (Büyük)",
+      urunDetay:"Bol Malzemeli",
+      urunOzellikler: "Pizza sosu, mozzarella peyniri, salam, mantar",
+      urunFiyat: "149.90 TL"
     },
     {
-      imageUrl: "https://raw.githubusercontent.com/SDU-Bilgisayar-Muhendisligi/PieCentralPizza/zehra/photos/urunler/pizzalar/festival.jpg",
-      name: "Festival (Büyük)",
-      description: "Pizza sosu, mozzarella peyniri, domates, yeşilbiber, sosis, kekik",
-      price: "149.90 TL"
+      resimUrl: "https://raw.githubusercontent.com/SDU-Bilgisayar-Muhendisligi/PieCentralPizza/zehra/photos/urunler/pizzalar/festival.jpg",
+      urunAdi: "Festival (Büyük)",
+      urunDetay:"Bol Malzemeli",
+      urunOzellikler: "Pizza sosu, mozzarella peyniri, domates, yeşilbiber, sosis, kekik",
+      urunFiyat: "149.90 TL"
     },
     {
-      imageUrl: "https://raw.githubusercontent.com/SDU-Bilgisayar-Muhendisligi/PieCentralPizza/zehra/photos/urunler/pizzalar/sebzesever.jpg",
-      name: "Sebzesever (Büyük)",
-      description: "Pizza sosu, mozzarella peyniri, mantar, yeşilbiber, soğan, domates, mısır",
-      price: "149.90 TL"
+      resimUrl: "https://raw.githubusercontent.com/SDU-Bilgisayar-Muhendisligi/PieCentralPizza/zehra/photos/urunler/pizzalar/sebzesever.jpg",
+      urunAdi: "Sebzesever (Büyük)",
+      urunDetay:"Bol Malzemeli",
+      urunOzellikler: "Pizza sosu, mozzarella peyniri, mantar, yeşilbiber, soğan, domates, mısır",
+      urunFiyat: "149.90 TL"
     },
     {
-      imageUrl: "https://raw.githubusercontent.com/SDU-Bilgisayar-Muhendisligi/PieCentralPizza/zehra/photos/urunler/pizzalar/sucuk-misir.jpg",
-      name: "Sucuk Mısır (Büyük)",
-      description: "Pizza sosu, mozzarella peyniri, sucuk, mısır",
-      price: "149.90 TL"
+      resimUrl: "https://raw.githubusercontent.com/SDU-Bilgisayar-Muhendisligi/PieCentralPizza/zehra/photos/urunler/pizzalar/sucuk-misir.jpg",
+      urunAdi: "Sucuk Mısır (Büyük)",
+      urunDetay:"Bol Malzemeli",
+      urunOzellikler: "Pizza sosu, mozzarella peyniri, sucuk, mısır",
+      urunFiyat: "149.90 TL"
     },
     {
-      imageUrl: "https://raw.githubusercontent.com/SDU-Bilgisayar-Muhendisligi/PieCentralPizza/zehra/photos/urunler/pizzalar/lezzet-3lusu.jpg",
-      name: "Lezzet 3'lüsü (Büyük)",
-      description: "Pizza sosu, mozzarella peyniri, sosis, mısır, mantar",
-      price: "149.90 TL"
+      resimUrl: "https://raw.githubusercontent.com/SDU-Bilgisayar-Muhendisligi/PieCentralPizza/zehra/photos/urunler/pizzalar/lezzet-3lusu.jpg",
+      urunAdi: "Lezzet 3'lüsü (Büyük)",
+      urunDetay:"Bol Malzemeli",
+      urunOzellikler: "Pizza sosu, mozzarella peyniri, sosis, mısır, mantar",
+      urunFiyat: "149.90 TL"
     },
     {
-      imageUrl: "https://raw.githubusercontent.com/SDU-Bilgisayar-Muhendisligi/PieCentralPizza/zehra/photos/urunler/pizzalar/margarita.jpg",
-      name: "Margarita",
-      description: "Pizza sosu, mozzarella peyniri",
-      price: "149.90 TL"
+      resimUrl: "https://raw.githubusercontent.com/SDU-Bilgisayar-Muhendisligi/PieCentralPizza/zehra/photos/urunler/pizzalar/margarita.jpg",
+      urunAdi: "Margarita",
+      urunDetay:"Bol Malzemeli",
+      urunOzellikler: "Pizza sosu, mozzarella peyniri",
+      urunFiyat: "149.90 TL"
     }
   ];
   return (
@@ -54,7 +60,7 @@ function Pizzalar() {
         <Grid container spacing={2} sx={{ mt: 1, mb: 10 }}>
 
           {pizzalar.map((item) => (
-            <CardComponent imageUrl={item.imageUrl} name={item.name} description={item.description} price={item.price} link={"pizzalar"} />
+            <CardComponent resimUrl={item.resimUrl} urunAdi={item.urunAdi} urunDetay={item.urunDetay} urunOzellikler={item.urunOzellikler} urunFiyat={item.urunFiyat} link={"pizzalar"} />
           ))}
         </Grid>
         </section>

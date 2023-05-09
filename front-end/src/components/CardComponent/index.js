@@ -12,7 +12,7 @@ import IconButton from '@mui/joy/IconButton';
 import { Link } from 'react-router-dom';
 import './style.css'
 
-function CardComponent({ imageUrl, name, description, price, link }) {
+function CardComponent({ resimUrl, urunAdi,urunDetay, urunOzellikler, urunFiyat, link }) {
     const [isFavorite, setIsFavorite] = useState(false);
 
     const handleFavoriteClick = () => {
@@ -28,25 +28,28 @@ function CardComponent({ imageUrl, name, description, price, link }) {
                         variant="plain"
                         color="neutral"
                         sx={{ ml: 'auto', justifyContent:'flex-end',display:'flex' }}>
-                        {isFavorite ? <FavoriteBorderRoundedIcon style={{ color: 'red' }} /> : <FavoriteBorderRoundedIcon />}
+                        {isFavorite ? <FavoriteBorderRoundedIcon style={{ color: '#dc3545' }} /> : <FavoriteBorderRoundedIcon />}
                     </IconButton>
                     <Link to={`/${link}/urun-detay`} style={{ textDecoration: 'none', color: 'black' }}>
                         <CardMedia
                             sx={{ height: 180 }}
-                            image={imageUrl}
+                            image={resimUrl}
                         />
                         <CardContent sx={{ height: '95px' }}>
                             <Typography gutterBottom variant="h5" component="div" sx={{ fontWeight: 'bold', fontSize: "18px" }}>
-                                {name}
+                                {urunAdi}
                             </Typography>
-                            <Typography variant="body2" color="text.secondary">
-                                {description}
+                            <Typography variant="body2" >
+                                {urunDetay}
+                            </Typography>
+                            <Typography variant="body2" color="text.secondary">                                
+                                {urunOzellikler}
                             </Typography>
                         </CardContent>
                         <CardActions sx={{ display: 'flex' }}>
                             <div>
                                 <Typography fontSize="lg" fontWeight="lg" sx={{ ml: 2, fontWeight: 'bold' }}>
-                                    {price}
+                                    {urunFiyat}
                                 </Typography>
                             </div>
                             <Button

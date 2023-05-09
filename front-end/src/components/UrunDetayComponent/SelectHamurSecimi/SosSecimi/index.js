@@ -20,30 +20,30 @@ const MenuProps = {
 };
 
 function SosSecimi({ sosCesitleri }) {
-  const [hamurSecimi, setHamurSecimi] = React.useState('');
+  const [sosSecimi, setsosSecimi] = React.useState('');
 
   const handleChange = (event) => {
-    setHamurSecimi(event.target.value);
+    setsosSecimi(event.target.value);
   };
 
   return (
     <Box sx={{ minWidth: 120 }}>
       <FormControl fullWidth>
-        <InputLabel id="demo-simple-select-label">Seçimini Yap</InputLabel>
+        <InputLabel id="demo-simple-select-label">Sos Seçimi</InputLabel>
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
-          value={hamurSecimi}
+          value={sosSecimi}
           label="Seçimini Yap"
           onChange={handleChange}
           MenuProps={MenuProps}
         >
-          {sosCesitleri.map((hamur, index) => (
-            <MenuItem key={index} value={hamur.name}>
+          {sosCesitleri.map((sos, index) => (
+            <MenuItem key={index} value={sos.sosAdi}>
               <Box sx={{ display: 'flex', alignItems: 'center' }}>
                 <Grid container spacing={2} alignItems="center">
                   <Grid item>
-                    <Typography sx={{ fontWeight: 'bold' }}>{hamur.name}</Typography>
+                    <Typography sx={{ fontWeight: 'bold' }}>{sos.sosAdi}</Typography>
                   </Grid>
                 </Grid>
               </Box>

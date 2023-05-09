@@ -4,25 +4,25 @@ import SlideComponent from '../../components/Anasayfa/SlideComponent';
 import SipariseBasla from '../../components/Anasayfa/SipariseBasla';
 
 
-const images = [
+const resimler = [
   {
     label: 'piecentral',
-    imgPath:
+    resimUrl:
       'https://raw.githubusercontent.com/SDU-Bilgisayar-Muhendisligi/PieCentralPizza/zehra/photos/anasayfa/slider/anasayfaSlider_1.png',
   },
   {
     label: 'ciftlik',
-    imgPath:
+    resimUrl:
       'https://raw.githubusercontent.com/SDU-Bilgisayar-Muhendisligi/PieCentralPizza/zehra/photos/anasayfa/slider/anaSayfaSlider_2.png',
   },
   {
     label: 'mozzarella',
-    imgPath:
+    resimUrl:
       'https://raw.githubusercontent.com/SDU-Bilgisayar-Muhendisligi/PieCentralPizza/zehra/photos/anasayfa/slider/anaSayfaSlider_3.png',
   },
   {
     label: 'sufle',
-    imgPath:
+    resimUrl:
       'https://raw.githubusercontent.com/SDU-Bilgisayar-Muhendisligi/PieCentralPizza/zehra/photos/anasayfa/slider/anaSayfaSlider_4.png',
   },
 ];
@@ -30,7 +30,7 @@ const images = [
 function Anasayfa() {
   return (
     <Box sx={{ mt: 15, mb: 10 }}  >
-      <SlideComponent images={images} />
+      <SlideComponent resimler={resimler} />
       <SipariseBasla />
       <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: 'auto', mt: 5 }}>
         <img src='https://raw.githubusercontent.com/SDU-Bilgisayar-Muhendisligi/PieCentralPizza/zehra/photos/anasayfa/anasayfaEnAlt.png' alt='anasayfaEnAlt' style={{ display: 'block', margin: 'auto', maxWidth: '75%', width: '100%' }} />

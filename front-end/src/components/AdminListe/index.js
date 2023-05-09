@@ -29,7 +29,7 @@ function AdminListe() {
                     <Link to="admin-yeni-urun" style={{ textDecoration: "none", color: "black" }}>
                         <ListItemButton >
                             <ListItemIcon >
-                                <AddCircleIcon fontSize='large' sx={{ color: currentPath.includes('admin-yeni-urun') ? '#dc3545' : 'grey' }}  />
+                                <AddCircleIcon fontSize='large' sx={{ color: currentPath.includes('admin-yeni-urun') || currentPath==="/admin" ? '#dc3545' : 'grey' }}  />
                             </ListItemIcon>
 
                             <ListItemText>

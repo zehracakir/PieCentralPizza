@@ -16,10 +16,10 @@ import { Popconfirm } from 'antd';
 const confirm = () => {
     console.log("silindi")
 };
-function AdminSiparisListe({ urunAdi, siparisTarihi, siparisDurum, resimUrl, siparisEden,id,siparisAdres}) {
+function AdminSiparisListe({ kullaniciAdi,id,adres,email,telefonNo,kayitTarihi}) {
   const [open, setOpen] = React.useState(false);
 
- 
+  const firstLetter = kullaniciAdi[0].toUpperCase();
   return (
     <React.Fragment >
     <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
@@ -33,22 +33,23 @@ function AdminSiparisListe({ urunAdi, siparisTarihi, siparisDurum, resimUrl, sip
         </IconButton>
       </TableCell>
       <TableCell>
-      <Avatar sx={{ marginRight: '8px', width: 70, height: 50 }} alt="Remy Sharp" src={resimUrl} />
+      <Avatar sx={{ marginRight: '8px', width: 70, height: 50,backgroundColor: open ? '#dc3545' : null }} >{firstLetter}</Avatar>
       </TableCell>
       <TableCell>
-      {siparisEden}
+      {kullaniciAdi}
       </TableCell>
       <TableCell >
-      {siparisDurum}
+      {kayitTarihi}
       </TableCell>
      <TableCell>
      <Popconfirm
                         placement="right"
-                        title="Sipariş Sil"
-                        description="Siparişi silmek istiyor musunuz ?"
+                        title="Kullanıcı Sil"
+                        description="Kullanıcıyı silmek istiyor musunuz ?"
                         onConfirm={confirm}
                         okText="Evet"
                         cancelText="Hayır"
+                        
                     >
                         <IconButton edge="end" aria-label="comments">
                             <DeleteIcon />
@@ -64,21 +65,21 @@ function AdminSiparisListe({ urunAdi, siparisTarihi, siparisDurum, resimUrl, sip
             <Table size="small" aria-label="purchases">
               <TableHead>
                 <TableRow>
-                  <TableCell sx={{fontWeight:'bold'}}>Tarih</TableCell>
-                  <TableCell sx={{fontWeight:'bold'}}>Ürün adı</TableCell>
+                <TableCell sx={{fontWeight:'bold'}}>Email Adresi</TableCell>
+                  <TableCell sx={{fontWeight:'bold'}}>Telefon Numarası</TableCell>
                   <TableCell sx={{fontWeight:'bold'}}>Adres</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
                   <TableRow key={id}>
-                    <TableCell >
-                      {siparisTarihi}
+                  <TableCell >
+                      {email}
                     </TableCell>
                     <TableCell >
-                      {urunAdi}
+                      {telefonNo}
                     </TableCell>
                     <TableCell >
-                      {siparisAdres}
+                      {adres}
                     </TableCell>
                   </TableRow>
                 

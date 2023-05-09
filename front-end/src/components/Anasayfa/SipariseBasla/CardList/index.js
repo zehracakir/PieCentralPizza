@@ -8,7 +8,7 @@ import { Box, CardActionArea } from '@mui/material';
 import { HashLink } from 'react-router-hash-link';
 
 
-function CardList({ imageURL, title, link }) {
+function CardList({ resimUrl, baslik, link }) {
     const [isHovered, setIsHovered] = useState(false);
 
     const handleMouseEnter = () => {
@@ -39,11 +39,11 @@ function CardList({ imageURL, title, link }) {
                         >
                             <CardMedia
                                 sx={{ height: 180, position: 'relative', top: isHovered ? '-10px' : '0' }}
-                                image={imageURL}
+                                image={resimUrl}
                             />
                             <CardContent sx={{ height: '40px' }}>
                                 <Typography gutterBottom variant="h5" component="div" sx={{ fontWeight: 'bold', fontSize: "18px", textAlign: 'center', color: isHovered ? 'red' : 'inherit' }}>
-                                    {title}
+                                    {baslik}
                                 </Typography>
                             </CardContent>
                         </HashLink>

@@ -5,17 +5,17 @@ import ChipCikarilacakMalzeme from './ChipCikarilacakMalzeme';
 
 function AccordionMalzemeEkleCikar({ header }) {
   const items = [
-    { name: "Beyaz Peynir + 6,00 TL" },
-    { name: "Domates + 6,00 TL" },
-    { name: "Jalapeno Biber + 6,00 TL" },
-    { name: "Kırmızı Köz Biber + 6,00 TL" },
-    { name: "Extra Mozarella + 6,00 TL" },
-    { name: "Siyah Zeytin + 6,00 TL" },
-    { name: "Kekik + 0,25 TL" },
-    { name: "Parmesan Peyniri + 6,00 TL" },
-    { name: "Tavuk Parçaları + 6,00 TL" },
-    { name: "Soğan + 6,00 TL" },
-    { name: "Pul Biber + 0,25 TL" },
+    { ekstraMalzemeAdi: "Beyaz Peynir + 6,00 TL" },
+    { ekstraMalzemeAdi: "Domates + 6,00 TL" },
+    { ekstraMalzemeAdi: "Jalapeno Biber + 6,00 TL" },
+    { ekstraMalzemeAdi: "Kırmızı Köz Biber + 6,00 TL" },
+    { ekstraMalzemeAdi: "Extra Mozarella + 6,00 TL" },
+    { ekstraMalzemeAdi: "Siyah Zeytin + 6,00 TL" },
+    { ekstraMalzemeAdi: "Kekik + 0,25 TL" },
+    { ekstraMalzemeAdi: "Parmesan Peyniri + 6,00 TL" },
+    { ekstraMalzemeAdi: "Tavuk Parçaları + 6,00 TL" },
+    { ekstraMalzemeAdi: "Soğan + 6,00 TL" },
+    { ekstraMalzemeAdi: "Pul Biber + 0,25 TL" },
 
   ];
 
@@ -36,7 +36,7 @@ function AccordionMalzemeEkleCikar({ header }) {
         <Typography>
           <Typography variant="body2" sx={{ fontWeight: 'bold' }}>Ekstra Malzemeler </Typography>
           {items.map((item) => (
-            <CheckboxEkstraMalzeme name={item.name} />
+            <CheckboxEkstraMalzeme ekstraMalzemeAdi={item.ekstraMalzemeAdi} />
           ))}
           <Typography variant="body2" sx={{ fontWeight: 'bold', mt: 2 }}>Çıkarmak İstediğiniz Malzemeler </Typography>
           <ChipCikarilacakMalzeme chipData={chipData} setChipData={setChipData} />

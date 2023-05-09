@@ -6,33 +6,33 @@ import Grid from '@mui/material/Grid';
 function SipariseBasla() {
   const cards = [
     {
-      title: 'Pizzalar',
-      imageURL: 'https://raw.githubusercontent.com/SDU-Bilgisayar-Muhendisligi/PieCentralPizza/zehra/photos/anasayfa/sipariseBasla/pizzalarSipariseBasla.png',
+      baslik: 'Pizzalar',
+      resimUrl: 'https://raw.githubusercontent.com/SDU-Bilgisayar-Muhendisligi/PieCentralPizza/zehra/photos/anasayfa/sipariseBasla/pizzalarSipariseBasla.png',
       link: '/pizzalar'
     },
     {
-      title: 'Yan Ürünler',
-      imageURL: 'https://raw.githubusercontent.com/SDU-Bilgisayar-Muhendisligi/PieCentralPizza/zehra/photos/anasayfa/sipariseBasla/yanUrunlerSipariseBasla.png',
+      baslik: 'Yan Ürünler',
+      resimUrl: 'https://raw.githubusercontent.com/SDU-Bilgisayar-Muhendisligi/PieCentralPizza/zehra/photos/anasayfa/sipariseBasla/yanUrunlerSipariseBasla.png',
       link: '/yan-urunler'
     },
     {
-      title: 'Tatlılar',
-      imageURL: 'https://raw.githubusercontent.com/SDU-Bilgisayar-Muhendisligi/PieCentralPizza/zehra/photos/anasayfa/sipariseBasla/tatlilarSipariseBasla.png',
+      baslik: 'Tatlılar',
+      resimUrl: 'https://raw.githubusercontent.com/SDU-Bilgisayar-Muhendisligi/PieCentralPizza/zehra/photos/anasayfa/sipariseBasla/tatlilarSipariseBasla.png',
       link: '/yan-urunler#tatlilar'
     },
     {
-      title: 'Soslar',
-      imageURL: 'https://raw.githubusercontent.com/SDU-Bilgisayar-Muhendisligi/PieCentralPizza/zehra/photos/anasayfa/sipariseBasla/soslarSipariseBasla.jpg',
+      baslik: 'Soslar',
+      resimUrl: 'https://raw.githubusercontent.com/SDU-Bilgisayar-Muhendisligi/PieCentralPizza/zehra/photos/anasayfa/sipariseBasla/soslarSipariseBasla.jpg',
       link: '/yan-urunler#soslar'
     },
     {
-      title: 'İçecekler',
-      imageURL: 'https://raw.githubusercontent.com/SDU-Bilgisayar-Muhendisligi/PieCentralPizza/zehra/photos/anasayfa/sipariseBasla/iceceklerSipariseBasla.png',
+      baslik: 'İçecekler',
+      resimUrl: 'https://raw.githubusercontent.com/SDU-Bilgisayar-Muhendisligi/PieCentralPizza/zehra/photos/anasayfa/sipariseBasla/iceceklerSipariseBasla.png',
       link: '/yan-urunler#icecekler'
     },
     {
-      title: 'Başlangıçlar',
-      imageURL: 'https://raw.githubusercontent.com/SDU-Bilgisayar-Muhendisligi/PieCentralPizza/zehra/photos/anasayfa/sipariseBasla/baslangiclarSipariseBasla.jpg',
+      baslik: 'Başlangıçlar',
+      resimUrl: 'https://raw.githubusercontent.com/SDU-Bilgisayar-Muhendisligi/PieCentralPizza/zehra/photos/anasayfa/sipariseBasla/baslangiclarSipariseBasla.jpg',
       link: '/yan-urunler#baslangiclar'
     },
 
@@ -42,7 +42,7 @@ function SipariseBasla() {
       <Typography sx={{ fontWeight: "bold", fontSize: '20px' }}>Siparişe Başla</Typography>
       <Grid container spacing={2}>
         {cards.map((item) => (
-          <CardList imageURL={item.imageURL} title={item.title} link={item.link} />
+          <CardList resimUrl={item.resimUrl} baslik={item.baslik} link={item.link} />
         ))}
       </Grid>
 

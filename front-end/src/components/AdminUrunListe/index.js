@@ -12,44 +12,103 @@ import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import { Popconfirm } from 'antd';
 import AdminUrunGuncelle from '../AdminUrunGuncelle';
 import { useState } from 'react';
+import Box from '@mui/material/Box';
+import Collapse from '@mui/material/Collapse';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 const confirm = () => {
     console.log("silindi")
 };
-function AdminUrunListe({ urun, ozellikler, fiyat, link }) {
-    const [open, setOpen] = useState(false);
+function AdminUrunListe({ urunAdi, urunOzellikler, urunFiyat, resimUrl,urunDetay,id }) {
+    const [open1, setOpen1] = React.useState(false);
+    const [open2, setOpen2] = React.useState(false);
     const handleClose = () => {
-        setOpen(false)
+        setOpen2(false)
     }
     const clickOpen = () => {
-        setOpen(true)
+        setOpen2(true)
     }
+    
     return (
-        <ListItem disablePadding sx={{ maxWidth: "100%" }}>
-            <ListItemAvatar>
-                <Avatar sx={{ marginRight: '8px', width: 70, height: 50 }} alt="Remy Sharp" src={link} />
-            </ListItemAvatar>
-            <ListItemText primary={<Typography sx={{ fontWeight: "bold", fontFamily: "Sansserif" }}>{urun}</Typography>} secondary={<Typography variant='p' sx={{ color: "#757575" }}>{ozellikler}</Typography>} />
-            <ListItemText primary={<Typography sx={{ fontFamily: "Sansserif", color: "#757575", textAlign: "right", color: "#F45050" }}>{fiyat}</Typography>} />
-
-            <AdminUrunGuncelle open={open} handleClose={handleClose} />
+      <React.Fragment >
+      <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
+        <TableCell>
+          <IconButton
+            aria-label="expand row"
+            size="small"
+            onClick={() => setOpen1(!open1)}
+          >
+            {open1 ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+          </IconButton>
+        </TableCell>
+        <TableCell>
+        <Avatar sx={{ marginRight: '8px', width: 70, height: 50}} src={resimUrl}></Avatar>
+        </TableCell>
+        <TableCell>
+        {urunAdi}
+        </TableCell>
+        <TableCell >
+        <AdminUrunGuncelle open={open2} handleClose={handleClose} />
             <IconButton edge="end" aria-label="comments" onClick={clickOpen}>
                 <ModeEditIcon />
             </IconButton>
-            <Popconfirm
-                placement="right"
-                title="Ürünü Sil"
-                description="Ürünü silmek istiyor musunuz ?"
-                onConfirm={confirm}
-                okText="Evet"
-                cancelText="Hayır"
-                
-            >
-                <IconButton edge="end" aria-label="comments">
-                    <DeleteIcon />
-                </IconButton>
-            </Popconfirm>
-
-        </ListItem>
+        
+        </TableCell>
+       <TableCell>
+       <Popconfirm
+                          placement="right"
+                          title="Kullanıcı Sil"
+                          description="Kullanıcıyı silmek istiyor musunuz ?"
+                          onConfirm={confirm}
+                          okText="Evet"
+                          cancelText="Hayır"
+                          
+                      >
+                          <IconButton edge="end" aria-label="comments">
+                              <DeleteIcon />
+                          </IconButton>
+                      </Popconfirm>
+       </TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
+          <Collapse in={open1} timeout="auto" unmountOnExit>
+            <Box sx={{ margin: 1 }}>
+              
+              <Table size="small" aria-label="purchases">
+                <TableHead>
+                  <TableRow>
+                  <TableCell sx={{fontWeight:'bold'}}>Ürün Fiyatı</TableCell>
+                    <TableCell sx={{fontWeight:'bold'}}>Ürün Detay</TableCell>
+                    <TableCell sx={{fontWeight:'bold'}}>Ürün Özellikleri</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                    <TableRow key={id}>
+                    <TableCell >
+                        {urunFiyat}
+                      </TableCell>
+                      <TableCell >
+                        {urunDetay}
+                      </TableCell>
+                      <TableCell >
+                        {urunOzellikler}
+                      </TableCell>
+                    </TableRow>
+                  
+                </TableBody>
+              </Table>
+            </Box>
+          </Collapse>
+        </TableCell>
+      </TableRow>
+    </React.Fragment>
+    
     )
 }
 

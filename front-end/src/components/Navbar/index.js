@@ -33,7 +33,7 @@ function Navbar() {
       <Container maxWidth="lg">
         <Toolbar disableGutters>
           <Link to={'/'}>
-            <img src="https://raw.githubusercontent.com/SDU-Bilgisayar-Muhendisligi/PieCentralPizza/zehra/photos/PieCentral%20Pizza%20sonlogo3.png" alt="photo" width={"300px"} height={"80px"}></img>
+            <img src="https://raw.githubusercontent.com/SDU-Bilgisayar-Muhendisligi/PieCentralPizza/zehra/photos/PieCentral%20Pizza%20sonlogo3.png" alt="photo" width={"204px"} height={"80px"}></img>
           </Link>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' }, justifyContent: 'flex-end' }}>

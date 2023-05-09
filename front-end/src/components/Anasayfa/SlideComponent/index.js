@@ -8,7 +8,7 @@ import "./styles.css";
 import { Autoplay, Pagination, Navigation } from "swiper";
 import { Container } from "@mui/material";
 
-function SlideComponent({ images }) {
+function SlideComponent({ resimler }) {
   return (
     <Container maxWidth={'xl'}>
       <Swiper
@@ -26,7 +26,7 @@ function SlideComponent({ images }) {
         modules={[Autoplay, Pagination, Navigation]}
         className="mySwiper"
       >
-        {images.map((step) => (
+        {resimler.map((step) => (
           <SwiperSlide key={step.label} >
 
             <Box
@@ -38,7 +38,7 @@ function SlideComponent({ images }) {
                 overflow: 'hidden',
                 width: '100%',
               }}
-              src={step.imgPath}
+              src={step.resimUrl}
               alt={step.label}
             />
 

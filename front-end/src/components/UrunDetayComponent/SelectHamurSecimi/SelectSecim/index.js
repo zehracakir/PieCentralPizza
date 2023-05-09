@@ -29,7 +29,7 @@ function SelectSecim({ hamurCesitleri }) {
   return (
     <Box sx={{ minWidth: 120 }}>
       <FormControl fullWidth>
-        <InputLabel id="demo-simple-select-label">Seçimini Yap</InputLabel>
+        <InputLabel id="demo-simple-select-label" >Hamur Seçimi</InputLabel>
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
@@ -39,16 +39,16 @@ function SelectSecim({ hamurCesitleri }) {
           MenuProps={MenuProps}
         >
           {hamurCesitleri.map((hamur, index) => (
-            <MenuItem key={index} value={hamur.name}>
+            <MenuItem key={index} value={hamur.hamurAdi}>
               <Box sx={{ display: 'flex', alignItems: 'center' }}>
                 <Grid container spacing={2} alignItems="center">
                   <Grid item>
                     <img src="https://raw.githubusercontent.com/SDU-Bilgisayar-Muhendisligi/PieCentralPizza/zehra/photos/urunDetay/selectPhoto.png" alt="" width="50" />
                   </Grid>
                   <Grid item>
-                    <Typography sx={{ fontWeight: 'bold' }}>{hamur.name}</Typography>
+                    <Typography sx={{ fontWeight: 'bold' }}>{hamur.hamurAdi}</Typography>
                     <Typography variant="body2" color="text.secondary">
-                      {hamur.description}
+                      {hamur.hamurOzellikler}
                     </Typography>
                   </Grid>
                 </Grid>
