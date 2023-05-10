@@ -29,7 +29,7 @@ const resimler = [
 
 function Anasayfa() {
   return (
-    <Box sx={{ mt: 15, mb: 10 }}  >
+    <Box sx={{ mt: 10, mb: 10 }}  >
       <SlideComponent resimler={resimler} />
       <SipariseBasla />
       <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: 'auto', mt: 5 }}>

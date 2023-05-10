@@ -8,7 +8,7 @@ import { Outlet } from 'react-router-dom';
 
 function Admin() {
     return (
-        <Container sx={{ mt: 15, mb: 10, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        <Container sx={{ mt: 10, mb: 10, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
             <Grid container>
                 <Grid item xs={12} md={4}>
                     <AdminListe />
