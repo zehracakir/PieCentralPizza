@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
-import {Container } from '@mui/material';
+import { Container } from '@mui/material';
 import CardComponent from "../../../components/CardComponent"
 
 function YanUrunler() {
@@ -11,21 +11,21 @@ function YanUrunler() {
     {
       resimUrl: "https://raw.githubusercontent.com/SDU-Bilgisayar-Muhendisligi/PieCentralPizza/zehra/photos/urunler/yanUrunler/bombe.jpg",
       urunAdi: "Bombe",
-      urunDetay:"Efsane Belçika Çikolatası",
+      urunDetay: "Efsane Belçika Çikolatası",
       urunOzellikler: "",
       urunFiyat: "14.90 TL"
     },
     {
       resimUrl: "https://raw.githubusercontent.com/SDU-Bilgisayar-Muhendisligi/PieCentralPizza/zehra/photos/urunler/yanUrunler/cokomania.jpg",
       urunAdi: "Çokomania",
-      urunDetay:"Efsane Belçika Çikolatası",
+      urunDetay: "Efsane Belçika Çikolatası",
       urunOzellikler: "Bitter ve beyaz çikolatalı",
       urunFiyat: "19.90 TL"
     },
     {
       resimUrl: "https://raw.githubusercontent.com/SDU-Bilgisayar-Muhendisligi/PieCentralPizza/zehra/photos/urunler/yanUrunler/sufle.jpg",
       urunAdi: "Sufle",
-      urunDetay:"Efsane Belçika Çikolatası",
+      urunDetay: "Efsane Belçika Çikolatası",
       urunOzellikler: "Eşsiz çikolata tadı",
       urunFiyat: "34.90 TL"
     },
@@ -34,21 +34,21 @@ function YanUrunler() {
     {
       resimUrl: "https://raw.githubusercontent.com/SDU-Bilgisayar-Muhendisligi/PieCentralPizza/zehra/photos/urunler/yanUrunler/sweet-chili-sos.jpg",
       urunAdi: "Ketçap",
-      urunDetay:"Efsane Soslar",
+      urunDetay: "Efsane Soslar",
       urunOzellikler: "Acısız",
       urunFiyat: "9.90 TL"
     },
     {
       resimUrl: "https://raw.githubusercontent.com/SDU-Bilgisayar-Muhendisligi/PieCentralPizza/zehra/photos/urunler/yanUrunler/sweet-chili-sos.jpg",
       urunAdi: "Ketçap",
-      urunDetay:"Efsane Soslar",
+      urunDetay: "Efsane Soslar",
       urunOzellikler: "Acılı",
       urunFiyat: "9.90 TL"
     },
     {
       resimUrl: "https://raw.githubusercontent.com/SDU-Bilgisayar-Muhendisligi/PieCentralPizza/zehra/photos/urunler/yanUrunler/mayonez.jpg",
       urunAdi: "Mayonez",
-      urunDetay:"Efsane Soslar",
+      urunDetay: "Efsane Soslar",
       urunOzellikler: "",
       urunFiyat: "9.90 TL"
     },
@@ -57,21 +57,21 @@ function YanUrunler() {
     {
       resimUrl: "https://raw.githubusercontent.com/SDU-Bilgisayar-Muhendisligi/PieCentralPizza/zehra/photos/urunler/yanUrunler/pepsi-33-cl.jpg",
       urunAdi: "Pepsi",
-      urunDetay:"Yanında İyi Gider",
+      urunDetay: "Yanında İyi Gider",
       urunOzellikler: "330 ml",
       urunFiyat: "15.90 TL"
     },
     {
       resimUrl: "https://raw.githubusercontent.com/SDU-Bilgisayar-Muhendisligi/PieCentralPizza/zehra/photos/urunler/yanUrunler/ice-tea-seftali.jpg",
       urunAdi: "Ice Tea Şeftali",
-      urunDetay:"Yanında İyi Gider",
+      urunDetay: "Yanında İyi Gider",
       urunOzellikler: "1 L",
       urunFiyat: "29.90 TL"
     },
     {
       resimUrl: "https://raw.githubusercontent.com/SDU-Bilgisayar-Muhendisligi/PieCentralPizza/zehra/photos/urunler/yanUrunler/icim-ayran-kutu.png",
       urunAdi: "Ayran",
-      urunDetay:"Yanında İyi Gider",
+      urunDetay: "Yanında İyi Gider",
       urunOzellikler: "330 ml",
       urunFiyat: "9.90 TL"
     },
@@ -80,21 +80,21 @@ function YanUrunler() {
     {
       resimUrl: "https://cdn.discordapp.com/attachments/1101863159070998649/1104024288857690272/image.png",
       urunAdi: "Sarımsaklı Ekmek (2 Dilim)",
-      urunDetay:"Pizzadan önce iyi gider",
+      urunDetay: "Pizzadan önce iyi gider",
       urunOzellikler: "",
       urunFiyat: "25.90 TL"
     },
     {
       resimUrl: "https://cdn.discordapp.com/attachments/1101863159070998649/1104024390284345475/image.png",
       urunAdi: "Sucuklu Mozzarellalı Sarımsaklı Ekmek (4 Dilim)",
-      urunDetay:"Pizzadan önce iyi gider",
+      urunDetay: "Pizzadan önce iyi gider",
       urunOzellikler: "",
       urunFiyat: "49.90 TL"
     },
     {
       resimUrl: "https://cdn.discordapp.com/attachments/1101863159070998649/1104024444155990076/image.png",
       urunAdi: "Sarımsaklı Ekmek (4 Dilim)",
-      urunDetay:"Pizzadan önce iyi gider",
+      urunDetay: "Pizzadan önce iyi gider",
       urunOzellikler: "",
       urunFiyat: "39.90 TL"
     },
@@ -158,7 +158,7 @@ function YanUrunler() {
           <Grid container spacing={2} sx={{ mt: 1, mb: 5 }}>
 
             {soslar.map((item) => (
-              <CardComponent resimUrl={item.resimUrl} urunAdi={item.urunAdi} urunDetay={item.urunDetay}  urunOzellikler={item.urunOzellikler} urunFiyat={item.urunFiyat} link={"yan-urunler/soslar"} />
+              <CardComponent resimUrl={item.resimUrl} urunAdi={item.urunAdi} urunDetay={item.urunDetay} urunOzellikler={item.urunOzellikler} urunFiyat={item.urunFiyat} link={"yan-urunler/soslar"} />
             ))}
           </Grid>
         </section>
@@ -169,7 +169,7 @@ function YanUrunler() {
           <Grid container spacing={2} sx={{ mt: 1, mb: 5 }}>
 
             {icecekler.map((item) => (
-              <CardComponent resimUrl={item.resimUrl} urunAdi={item.urunAdi} urunDetay={item.urunDetay}  urunOzellikler={item.urunOzellikler} urunFiyat={item.urunFiyat} link={"yan-urunler/icecekler"} />
+              <CardComponent resimUrl={item.resimUrl} urunAdi={item.urunAdi} urunDetay={item.urunDetay} urunOzellikler={item.urunOzellikler} urunFiyat={item.urunFiyat} link={"yan-urunler/icecekler"} />
             ))}
           </Grid>
         </section>
@@ -180,7 +180,7 @@ function YanUrunler() {
           <Grid container spacing={2} sx={{ mt: 1, mb: 10 }}>
 
             {baslangiclar.map((item) => (
-              <CardComponent resimUrl={item.resimUrl} urunAdi={item.urunAdi} urunDetay={item.urunDetay}  urunOzellikler={item.urunOzellikler} urunFiyat={item.urunFiyat} link={"yan-urunler/baslangiclar"} />
+              <CardComponent resimUrl={item.resimUrl} urunAdi={item.urunAdi} urunDetay={item.urunDetay} urunOzellikler={item.urunOzellikler} urunFiyat={item.urunFiyat} link={"yan-urunler/baslangiclar"} />
             ))}
           </Grid>
         </section>

@@ -6,9 +6,6 @@ import Box from '@mui/material/Box';
 import UrunDetaySagKisim from "../../../components/UrunDetayComponent/UrunDetaySagKisim";
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import IconButton from '@mui/joy/IconButton';
-import { useState } from 'react';
-import FavoriteBorderRoundedIcon from '@mui/icons-material/FavoriteBorderRounded';
 function YanUrunlerDetay() {
   const urunDetaylari = {
     urunAdi: "Çiftlik Evi (Büyük)",

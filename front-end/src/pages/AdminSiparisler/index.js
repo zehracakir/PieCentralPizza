@@ -1,8 +1,5 @@
 import * as React from 'react';
-import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
-import Collapse from '@mui/material/Collapse';
-import IconButton from '@mui/material/IconButton';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -11,11 +8,8 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import AdminSiparisListe from '../../components/AdminSiparisListe'
 import  List from '@mui/material/List'
-import TuneIcon from '@mui/icons-material/Tune';
 import { Select } from 'antd';
 
 const siparisler=[
@@ -45,7 +39,16 @@ const siparisler=[
     resimUrl:'https://raw.githubusercontent.com/SDU-Bilgisayar-Muhendisligi/PieCentralPizza/zehra/photos/urunler/pizzalar/margarita.jpg',
     siparisEden:'zehra_cakir',
     siparisAdres:'Sdü Batı Kampüsü, Mühendislik Fakültesi Bilgisayar mühendisliği bölümü'
-  }
+  },
+  {
+    id:3,
+    urunAdi:'Margarita',
+    siparisTarihi:'23 April, 19:00',
+    siparisDurum:'Hazırlanıyor',
+    resimUrl:'https://raw.githubusercontent.com/SDU-Bilgisayar-Muhendisligi/PieCentralPizza/zehra/photos/urunler/pizzalar/margarita.jpg',
+    siparisEden:'ali_veli',
+    siparisAdres:'Sdü Batı Kampüsü, Mühendislik Fakültesi Bilgisayar mühendisliği bölümü'
+  },
 ]
 const handleChange = (value) => {
   console.log(`selected ${value}`);

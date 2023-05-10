@@ -12,7 +12,7 @@ import IconButton from '@mui/joy/IconButton';
 import { Link } from 'react-router-dom';
 import './style.css'
 
-function CardComponent({ resimUrl, urunAdi,urunDetay, urunOzellikler, urunFiyat, link }) {
+function CardComponent({ resimUrl, urunAdi, urunDetay, urunOzellikler, urunFiyat, link }) {
     const [isFavorite, setIsFavorite] = useState(false);
 
     const handleFavoriteClick = () => {
@@ -27,7 +27,7 @@ function CardComponent({ resimUrl, urunAdi,urunDetay, urunOzellikler, urunFiyat,
                         size="sm"
                         variant="plain"
                         color="neutral"
-                        sx={{ ml: 'auto', justifyContent:'flex-end',display:'flex' }}>
+                        sx={{ ml: 'auto', justifyContent: 'flex-end', display: 'flex' }}>
                         {isFavorite ? <FavoriteBorderRoundedIcon style={{ color: '#dc3545' }} /> : <FavoriteBorderRoundedIcon />}
                     </IconButton>
                     <Link to={`/${link}/urun-detay`} style={{ textDecoration: 'none', color: 'black' }}>
@@ -42,7 +42,7 @@ function CardComponent({ resimUrl, urunAdi,urunDetay, urunOzellikler, urunFiyat,
                             <Typography variant="body2" >
                                 {urunDetay}
                             </Typography>
-                            <Typography variant="body2" color="text.secondary">                                
+                            <Typography variant="body2" color="text.secondary">
                                 {urunOzellikler}
                             </Typography>
                         </CardContent>

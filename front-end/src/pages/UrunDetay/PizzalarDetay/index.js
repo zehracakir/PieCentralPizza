@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Container } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import Grid from '@mui/material/Grid';
@@ -13,19 +13,19 @@ function UrunDetay() {
 
   const urunDetaylari = {
     urunAdi: "Çiftlik Evi (Büyük)",
-    urunDetay:"Yoğun Mozzarella Tadı",
+    urunDetay: "Yoğun Mozzarella Tadı",
     urunOzellikler: "Pizza sosu, mozzarella peyniri, salam, mantar",
     resimUrl: "https://raw.githubusercontent.com/SDU-Bilgisayar-Muhendisligi/PieCentralPizza/zehra/photos/urunler/pizzalar/ciftlik-evi.jpg",
-    urunFiyat:"149.90 TL"
+    urunFiyat: "149.90 TL"
   };
 
   const theme = useTheme();
   const isLgOrMd = useMediaQuery(theme.breakpoints.down('md'));
 
- 
-  
+
+
   return (
-    <Container maxWidth="lg" sx={{ mt: 15, mb:isLgOrMd ? 15 : 30  }}>
+    <Container maxWidth="lg" sx={{ mt: 15, mb: isLgOrMd ? 15 : 30 }}>
       <Box sx={{ flexGrow: 1 }}>
         <Grid container spacing={2}>
 
@@ -38,8 +38,8 @@ function UrunDetay() {
 
           </Grid>
           <Grid item xs={12} md={6} sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', height: '360px' }}>
-  <UrunDetaySagKisim resimUrl={urunDetaylari.resimUrl} urunFiyat={urunDetaylari.urunFiyat}></UrunDetaySagKisim>
-</Grid>
+            <UrunDetaySagKisim resimUrl={urunDetaylari.resimUrl} urunFiyat={urunDetaylari.urunFiyat}></UrunDetaySagKisim>
+          </Grid>
 
 
         </Grid>
