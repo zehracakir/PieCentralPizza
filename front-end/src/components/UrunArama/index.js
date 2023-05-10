@@ -1,17 +1,15 @@
 import * as React from 'react';
 import { styled } from '@mui/material/styles';
-import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
   borderRadius: theme.shape.borderRadius,
-  backgroundColor: "#404258",
+  backgroundColor: "#EEEEEE",
   '&:hover': {
-    backgroundColor: "#474E68",
+    backgroundColor: "#D8D8D8",
   },
   marginLeft: 0,
   width: '100%',
@@ -29,43 +27,39 @@ const SearchIconWrapper = styled('div')(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
+  color:"#dc3545"
 }));
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: 'inherit',
   '& .MuiInputBase-input': {
     padding: theme.spacing(1, 1, 1, 0),
+    color:"black",
     // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create('width'),
     width: '100%',
     [theme.breakpoints.up('sm')]: {
-      width: '50ch',
+      width: '20ch',
       '&:focus': {
-        width: '75ch',
+        width: '25ch',
       },
     },
   },
 }));
 function UrunArama() {
   return (
-    <Box sx={{ flexGrow: 1, display: "flex", justifyContent: "center", mt:10}}>
-      <AppBar position="static">
-        <Toolbar sx={{bgcolor:"#F6F1F1"}}>
-          <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", width: "100%" }}>
+          <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", m:"auto"}}>
             <Search>
               <SearchIconWrapper>
                 <SearchIcon />
               </SearchIconWrapper>
               <StyledInputBase
-                placeholder="Aratacağınız ürünü giriniz..."
+                placeholder="Arama"
                 inputProps={{ 'aria-label': 'search' }}
               />
             </Search>
           </Box>
-        </Toolbar>
-      </AppBar>
-    </Box>
   );
 }
 export default UrunArama;
