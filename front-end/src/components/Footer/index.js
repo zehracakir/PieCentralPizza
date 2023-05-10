@@ -42,24 +42,24 @@ function Footer() {
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
 
           <a href='https://github.com/SDU-Bilgisayar-Muhendisligi/PieCentralPizza' target='_blank'>
-          <IconButton variant="plain">
-            <FacebookRoundedIcon />
-          </IconButton>
+            <IconButton variant="plain">
+              <FacebookRoundedIcon />
+            </IconButton>
           </a>
           <a href='https://github.com/SDU-Bilgisayar-Muhendisligi/PieCentralPizza' target='_blank'>
-          <IconButton variant="plain">
-            <GitHubIcon />
-          </IconButton>
+            <IconButton variant="plain">
+              <GitHubIcon />
+            </IconButton>
           </a>
           <a href='https://github.com/SDU-Bilgisayar-Muhendisligi/PieCentralPizza' target='_blank'>
-          <IconButton variant="plain">
-            <TwitterIcon />
-          </IconButton>
+            <IconButton variant="plain">
+              <TwitterIcon />
+            </IconButton>
           </a>
           <a href='https://github.com/SDU-Bilgisayar-Muhendisligi/PieCentralPizza' target='_blank'>
-          <IconButton variant="plain">
-            <YouTubeIcon />
-          </IconButton>
+            <IconButton variant="plain">
+              <YouTubeIcon />
+            </IconButton>
           </a>
         </Box>
         <Divider sx={{ my: 2 }} />
@@ -134,17 +134,15 @@ function Footer() {
           sx={{
             display: 'flex',
             alignItems: 'center',
-            
           }}
         >
-          <Typography sx={{ml:2}}
+          <Typography sx={{ ml: 2 }}
             level="body2"
             startDecorator={<Typography textColor="text.tertiary">by</Typography>}
           >
             microlium
           </Typography>
-
-          <Typography level="body3" sx={{ ml: 'auto',mr:2 }}>
+          <Typography level="body3" sx={{ ml: 'auto', mr: 2 }}>
             Copyright 2023
           </Typography>
         </Box>

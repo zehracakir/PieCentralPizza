@@ -19,7 +19,10 @@
     "react-dom": "^18.2.0",
     "react-query": "^3.39.3",
     "react-router-dom": "^6.8.2",
+    "react-router-hash-link": "^2.4.3",
     "react-scripts": "5.0.1",
+    "react-scroll": "^1.8.9",
+    "swiper": "^9.2.4",
     "web-vitals": "^2.1.4",
     "yup": "^1.1.1"
   },

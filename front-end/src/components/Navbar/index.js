@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -14,14 +15,19 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import GirisYap from '../GirisYap';
 import KayitOl from '../KayitOl';
 import UrunArama from '../UrunArama';
-const pages = ['Pizzalar', 'Yan Ürünler', 'Hakkımızda'];
-
+import { Link } from 'react-router-dom';
 
 function Navbar() {
-  const [anchorElNav, setAnchorElNav] = useState(null);
+  const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [login, setLogin] = useState(false);
   const [register, setRegister] = useState(false);
+  const handleOpenNavMenu = (event) => {
+    setAnchorElNav(event.currentTarget);
+  };
 
+  const handleCloseNavMenu = () => {
+    setAnchorElNav(null);
+  };
   const closeLogin = () => {
     setLogin(false);
   }
@@ -39,15 +45,6 @@ function Navbar() {
     setRegister(false);
   }
 
-  const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
-  };
-
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
-
-
   return (
     <>
       <GirisYap login={login} closeDialog={closeDialog} closeLogin={closeLogin} openRegister={openRegister} />
@@ -55,7 +52,9 @@ function Navbar() {
       <AppBar position="fixed" sx={{ bgcolor: "white", mt: 0 }}>
         <Container maxWidth="lg">
           <Toolbar disableGutters>
-            <img src="https://raw.githubusercontent.com/SDU-Bilgisayar-Muhendisligi/PieCentralPizza/zehra/photos/PieCentral%20Pizza%20sonlogo3.png" alt="photo" width={204} height={"80px"}></img>
+            <Link to={'/'}>
+              <img src="https://raw.githubusercontent.com/SDU-Bilgisayar-Muhendisligi/PieCentralPizza/zehra/photos/PieCentral%20Pizza%20sonlogo3.png" alt="photo" width={"204px"} height={"80px"}></img>
+            </Link>
 
             <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' }, justifyContent: 'flex-end' }}>
               <IconButton
@@ -86,31 +85,59 @@ function Navbar() {
                   display: { xs: 'block', md: 'none' },
                 }}
               >
-                {pages.map((page) => (
-                  <MenuItem key={page} onClick={handleCloseNavMenu}>
-                    <Typography textAlign="center">{page}</Typography>
+
+                <Link to={'/pizzalar'} style={{ textDecoration: 'none', color: 'black' }}>
+                  <MenuItem onClick={handleCloseNavMenu}>
+                    <Typography textAlign="center">Pizzalar</Typography>
                   </MenuItem>
-                ))}
+                </Link>
+                <Link to={'/yan-urunler'} style={{ textDecoration: 'none', color: 'black' }}>
+                  <MenuItem onClick={handleCloseNavMenu}>
+                    <Typography textAlign="center">Yan Ürünler</Typography>
+                  </MenuItem>
+                </Link>
+                <Link to={'/hakkimizda'} style={{ textDecoration: 'none', color: 'black' }}>
+                  <MenuItem onClick={handleCloseNavMenu}>
+                    <Typography textAlign="center">Hakkımızda</Typography>
+                  </MenuItem>
+                </Link>
                 <MenuItem>
                   <UrunArama />
                 </MenuItem>
-                
-
               </Menu>
             </Box>
             <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
             <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-              {pages.map((page) => (
+              <Link to={"/pizzalar"} style={{ textDecoration: 'none' }}>
                 <Button
-                  key={page}
                   onClick={handleCloseNavMenu}
                   sx={{ my: 2, color: 'black', display: 'block', ml: 5, textTransform: 'none' }}
                 ><Typography sx={{ fontWeight: 'bold' }}>
-                    {page}
+                    Pizzalar
                   </Typography>
 
                 </Button>
-              ))}
+              </Link>
+              <Link to={"/yan-urunler"} style={{ textDecoration: 'none' }}>
+                <Button
+                  onClick={handleCloseNavMenu}
+                  sx={{ my: 2, color: 'black', display: 'block', ml: 5, textTransform: 'none' }}
+                ><Typography sx={{ fontWeight: 'bold' }}>
+                    Yan Ürünler
+                  </Typography>
+
+                </Button>
+              </Link>
+              <Link to={'/hakkimizda'} style={{ textDecoration: 'none' }}>
+                <Button
+                  onClick={handleCloseNavMenu}
+                  sx={{ my: 2, color: 'black', display: 'block', ml: 5, textTransform: 'none' }}
+                ><Typography sx={{ fontWeight: 'bold' }}>
+                    Hakkımızda
+                  </Typography>
+
+                </Button>
+              </Link>
               <UrunArama />
             </Box>
             <Button variant="text" sx={{ color: "black", fontWeight: 'bold', border: "none", textTransform: 'none' }} startIcon={<AccountCircleIcon sx={{ color: 'black' }} />} onClick={openLogin}>Giriş Yap</Button>
@@ -121,5 +148,7 @@ function Navbar() {
 
   );
 }
-
 export default Navbar
+
+
+
