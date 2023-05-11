@@ -24,7 +24,20 @@ function index() {
 
                     Tüm müşterilerimizi, sıcak ve samimi bir ortamda, en lezzetli pizzalarımızı tatmaya davet ediyoruz.
                 </div>
+                <br />
+                <Typography sx={{ fontWeight: 'bold', fontSize: "22px" }}>
+                    Yasal Uyarı
+                </Typography>
+                <br />
+                <div>
+                    Bu Piecentral Pizza isimli site bir okul projesi olarak hazırlanmıştır ve hiçbir ticari amacı bulunmamaktadır. Site, Pizza Hut Türkiye'nin resmi web sitesi olan pizzahut.com.tr adresinden referans alınarak yapılmıştır. İlgili görseller de yine pizzahut.com.tr'den alınmıştır.
+
+                    Sitedeki içerikler sadece bilgilendirme amaçlıdır ve herhangi bir satış veya ticari amaçla kullanılmamalıdır. Piecentral, herhangi bir şekilde Pizza Hut veya Pizza Hut'un yan kuruluşlarıyla ilişkili değildir. Sitenin kullanımı tamamen ziyaretçilerin kendi sorumluluğundadır.
+
+                    Bu siteye erişerek, Piecentral'in bu yasal uyarı metnini okuduğunuzu ve kabul ettiğinizi beyan etmiş sayılırsınız.
+                </div>
             </Typography>
+
             <img src="https://raw.githubusercontent.com/SDU-Bilgisayar-Muhendisligi/PieCentralPizza/zehra/photos/hakkimizda/pizza-seridi.png" alt="" width={"100%"} />
 
         </Container>

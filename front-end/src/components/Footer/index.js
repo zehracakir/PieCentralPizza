@@ -13,6 +13,7 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 import { Container } from '@mui/material';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import YouTubeIcon from '@mui/icons-material/YouTube';
+import { Link } from 'react-router-dom';
 
 function Footer() {
   const [color, setColor] = React.useState('neutral');
@@ -84,15 +85,21 @@ function Footer() {
           >
             <ListItem nested sx={{ width: { xs: '50%', md: 140 } }}>
               <List>
-                <ListItem>
-                  <ListItemButton>Pizzalar</ListItemButton>
-                </ListItem>
-                <ListItem>
-                  <ListItemButton>Yan Ürünler</ListItemButton>
-                </ListItem>
-                <ListItem>
-                  <ListItemButton>Hakkımızda</ListItemButton>
-                </ListItem>
+                <Link to={'/pizzalar'} style={{ textDecoration: 'none', color: 'black' }}>
+                  <ListItem>
+                    <ListItemButton>Pizzalar</ListItemButton>
+                  </ListItem>
+                </Link>
+                <Link to={'/yan-urunler'} style={{ textDecoration: 'none', color: 'black' }}>
+                  <ListItem>
+                    <ListItemButton>Yan Ürünler</ListItemButton>
+                  </ListItem>
+                </Link>
+                <Link to={'/hakkimizda'} style={{ textDecoration: 'none', color: 'black' }}>
+                  <ListItem>
+                    <ListItemButton>Hakkımızda</ListItemButton>
+                  </ListItem>
+                </Link>
               </List>
             </ListItem>
             <ListItem nested sx={{ width: { xs: '50%', md: 180 } }}>
