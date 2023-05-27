@@ -42,7 +42,6 @@ function KayitOl({ register, closeDialog, closeRegister, openLogin }) {
         </DialogTitle>
         <DialogContent>
           <TextField
-            autoFocus
             error={Boolean(errors.isim && touched.isim)}
             margin='dense'
             label="İsim"
@@ -56,7 +55,6 @@ function KayitOl({ register, closeDialog, closeRegister, openLogin }) {
             fullWidth
           />
           <TextField
-            autoFocus
             error={Boolean(errors.kullaniciAdi && touched.kullaniciAdi)}
             margin='dense'
             label="Kullanıcı Adı"
@@ -70,7 +68,6 @@ function KayitOl({ register, closeDialog, closeRegister, openLogin }) {
             fullWidth
           />
           <TextField
-            autoFocus
             error={Boolean(errors.email && touched.email)}
             margin="dense"
             label="E-Posta"
@@ -84,7 +81,6 @@ function KayitOl({ register, closeDialog, closeRegister, openLogin }) {
             fullWidth
           />
           <TextField
-            autoFocus
             error={Boolean(errors.password && touched.password)}
             margin="dense"
             label="Şifre"
@@ -97,8 +93,7 @@ function KayitOl({ register, closeDialog, closeRegister, openLogin }) {
             helperText={errors.password && touched.password && `${errors.password}`}
             fullWidth
           />
-          <TextField
-            autoFocus
+          <TextField 
             error={Boolean(errors.passwordConfirmation && touched.passwordConfirmation)}
             margin="dense"
             label="Şifre Onay"

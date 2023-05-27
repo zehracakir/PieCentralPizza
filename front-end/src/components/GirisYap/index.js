@@ -36,8 +36,7 @@ function GirisYap({ login, closeDialog, closeLogin, openRegister }) {
                     <Typography variant='h4' gutterBottom sx={{ fontWeight: "bold", fontFamily: "sans-serif" }}>Giriş Yap</Typography>
                 </DialogTitle>
                 <DialogContent>
-                    <TextField
-                        autoFocus
+                    <TextField  
                         error={Boolean(errors.email && touched.email)}
                         margin="dense"
                         label="E-Posta"
@@ -52,7 +51,6 @@ function GirisYap({ login, closeDialog, closeLogin, openRegister }) {
                     />
 
                     <TextField
-                        autoFocus
                         error={Boolean(errors.password && touched.password)}
                         margin="dense"
                         label="Şifre"

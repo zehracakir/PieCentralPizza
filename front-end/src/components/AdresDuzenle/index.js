@@ -38,7 +38,6 @@ function AdresDuzenle({ open, handleClose, sehir, ilce, mahalle, sokak, adresAdi
               <Grid container spacing={2}>
                 <Grid item xs={6}>
                   <TextField
-                    autoFocus
                     margin='dense'
                     label="Şehir"
                     id='sehir'
@@ -54,7 +53,6 @@ function AdresDuzenle({ open, handleClose, sehir, ilce, mahalle, sokak, adresAdi
                 </Grid>
                 <Grid item xs={6}>
                   <TextField
-                    autoFocus
                     margin='dense'
                     label="İlçe"
                     id='ilce'
@@ -70,7 +68,6 @@ function AdresDuzenle({ open, handleClose, sehir, ilce, mahalle, sokak, adresAdi
                 </Grid>
               </Grid>
               <TextField
-                autoFocus
                 margin="dense"
                 label="Mahalle"
                 id="mahalle"
@@ -84,7 +81,6 @@ function AdresDuzenle({ open, handleClose, sehir, ilce, mahalle, sokak, adresAdi
                 fullWidth
               />
               <TextField
-                autoFocus
                 margin="dense"
                 label="Sokak"
                 id="sokak"
@@ -98,7 +94,6 @@ function AdresDuzenle({ open, handleClose, sehir, ilce, mahalle, sokak, adresAdi
                 fullWidth
               />
               <TextField
-                autoFocus
                 margin="dense"
                 label="Adres Adi"
                 id="adresAdi"

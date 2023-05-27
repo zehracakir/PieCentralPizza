@@ -41,7 +41,6 @@ function AdresEkle({ open, handleClose }) {
                     <Grid container spacing={2}>
                         <Grid item xs={6}>
                             <TextField
-                                autoFocus
                                 margin='dense'
                                 label="Şehir"
                                 id='sehir'
@@ -57,7 +56,6 @@ function AdresEkle({ open, handleClose }) {
                         </Grid>
                         <Grid item xs={6}>
                             <TextField
-                                autoFocus
                                 margin='dense'
                                 label="İlçe"
                                 id='ilce'
@@ -73,7 +71,6 @@ function AdresEkle({ open, handleClose }) {
                         </Grid>
                     </Grid>
                     <TextField
-                        autoFocus
                         margin="dense"
                         label="Mahalle"
                         id="mahalle"
@@ -87,7 +84,6 @@ function AdresEkle({ open, handleClose }) {
                         fullWidth
                     />
                     <TextField
-                        autoFocus
                         margin="dense"
                         label="Sokak"
                         id="sokak"
@@ -101,7 +97,6 @@ function AdresEkle({ open, handleClose }) {
                         fullWidth
                     />
                     <TextField
-                        autoFocus
                         margin="dense"
                         label="Adres Adi"
                         id="adresAdi"
