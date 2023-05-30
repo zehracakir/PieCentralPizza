@@ -3,7 +3,7 @@ var mongoose = require("mongoose");
 var siparisSema = new mongoose.Schema({
     // siparis:[UrunSema]
     siparisEden: { type:String, required: true },
-    siparisTarihi: { type:Date, required:true },
+    siparisTarihi: { type:Date, default:Date.now },
     siparisAdres: String,
     siparisDurum: String,
 });

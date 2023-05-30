@@ -10,7 +10,7 @@ var kullaniciSema = new mongoose.Schema({
     hash: String,
     token: String,
     telefonNo: String,
-    kayitTarihi: Date,
+    kayitTarihi: {type:Date, default:Date.now},
     // favoriler:[UrunSema],
     siparisler:[SiparisSema.schema]
 });

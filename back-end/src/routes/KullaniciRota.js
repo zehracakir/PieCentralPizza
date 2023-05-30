@@ -12,19 +12,30 @@ router
 .put(ctrlKullanicilar.kullaniciGuncelle);
 
 router
+.route("/kullanici/:userid/adreslerim")
+.get(ctrlKullanicilar.kullaniciAdresleriGetir)
+.post(ctrlKullanicilar.kullaniciAdresEkle)
+.put(ctrlKullanicilar.kullaniciAdresGuncelle)
+.delete(ctrlKullanicilar.kullaniciAdresSil);
+
+router
+.route("/kullanici/:userid/siparislerim")
+.get(ctrlKullanicilar.kullaniciSiparisleriGetir)
+.delete(ctrlKullanicilar.kullaniciSiparisSil);
+
+router
 .route("/kullanici/:userid/favoriler")
 .get(ctrlKullanicilar.kullaniciFavorileriGetir)
-.post(ctrlKullanicilar.kullaniciFavoriEkle);
-
-router.delete("/kullanici/:userid/favoriler/:urunid",ctrlKullanicilar.kullaniciFavoriSil)
+.delete(ctrlKullanicilar.kullaniciFavoriSil);
 
 
-router
-.route("kullanici/:userid/siparisler")
-.get(ctrlKullanicilar.kullaniciSiparisleriGetir)
-.post(ctrlKullanicilar.kullaniciSiparisEkle)
 
-router
-.route("kullanici/:userid/siparisler/:siparisid")
-.get(ctrlKullanicilar.kullaniciSiparisGetir)
-.delete(ctrlKullanicilar.kullaniciSiparisSil);
+// router
+// .route("/kullanici/:userid/favoriler")
+// .get(ctrlKullanicilar.kullaniciFavorileriGetir)
+// .post(ctrlKullanicilar.kullaniciFavoriEkle);
+
+// router.delete("/kullanici/:userid/favoriler/:urunid",ctrlKullanicilar.kullaniciFavoriSil)
+
+
+module.exports = router;
