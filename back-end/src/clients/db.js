@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var dbURI = 'mongodb://localhost/piecentral';
+var dbURI =  process.env.DB_URI;
 mongoose.connect(dbURI);
 
 mongoose.connection.on('connected',function(){
