@@ -1,4 +1,5 @@
 const KullaniciSema = require("../models/KullaniciSema");
+var mongoose = require("mongoose");
 
 const cevapOlustur = function (res, status, content) {
     res
@@ -75,8 +76,18 @@ const kullaniciGuncelle = async function (req, res) {
 
 }
 
-const kullaniciAdresleriGetir = function (req, res) {
-    cevapOlustur(res, 200, { "durum": "basarili" })
+const kullaniciAdresleriGetir = async function (req, res) {
+    const userid = req.params.userid;
+    try {
+        const adresler = await KullaniciSema.findById(userid).select("adres");
+        if (adresler) {
+            cevapOlustur(res, 200, adresler.adres);
+        } else {
+            cevapOlustur(res, 400, { "durum": "id'ye ait kullanici bulunamadi" });
+        }
+    } catch (error) {
+        cevapOlustur(res, 400, error);
+    }
 }
 const kullaniciAdresEkle = async function (req, res) {
     //adresAdi,mahalle,sokak,ilce,sehir
@@ -88,40 +99,103 @@ const kullaniciAdresEkle = async function (req, res) {
     const ilce = req.body.ilce;
     const sehir = req.body.sehir;
 
-    const adres = [adresAdi,mahalle,sokak,ilce,sehir].join(", ");
+    const adres = [adresAdi, mahalle, sokak, ilce, sehir].join(", ");
     try {
         const kullaniciAdres = await KullaniciSema.findById(userid).select("adres");
-        if(kullaniciAdres){
-            kullaniciAdres.adres.push(adres);
+        if (kullaniciAdres) {
+            const yeniAdres = {
+                _id: new mongoose.Types.ObjectId(),
+                adres: adres
+            };
+            kullaniciAdres.adres.push(yeniAdres);
             try {
-                const icerik = await kullaniciAdres.save();
-                cevapOlustur(res,200,icerik);
+                const adres = await kullaniciAdres.save();
+                cevapOlustur(res, 200, adres);
             } catch (error) {
-                cevapOlustur(res, 400,error);
+                cevapOlustur(res, 200, error);
             }
-        }else{
-            cevapOlustur(res,404,{"durum":"id ile eslesen eleman bulunamadi"})
+        } else {
+            cevapOlustur(res, 404, { "durum": "id ile eslesen eleman bulunamadi" })
         }
     } catch (error) {
-        cevapOlustur(res, 200,error);
+        cevapOlustur(res, 200, error);
     }
 }
 const kullaniciAdresGuncelle = function (req, res) {
+    const userid = req.params.userid;
+    const adresid = req.params.adresid;
+    const adresAdi = req.body.adresAdi;
+    const mahalle = req.body.mahalle;
+    const sokak = req.body.sokak;
+    const ilce = req.body.ilce;
+    const sehir = req.body.sehir;
+    const adres = [adresAdi, mahalle, sokak, ilce, sehir].join(", ");
+
+    KullaniciSema.findById(userid)
+        .then(kullanici => {
+            if (kullanici.adres && kullanici.adres.length > 0) {
+                var gelenAdres = kullanici.adres.id(adresid);
+                if (!gelenAdres) {
+                    cevapOlustur(res, 404, { "durum": "adres bulunamadi" })
+                } else {
+                    gelenAdres.adres = adres;
+                    kullanici.save()
+                        .then(adres => {
+                            cevapOlustur(res, 200, adres);
+                        })
+                        .catch(err => {
+                            cevapOlustur(res, 400, err);
+                        })
+                }
+            }
+            else {
+                cevapOlustur(res, 404, { "durum": "kisi adresi bulunamadi" });
+            }
+        })
+        .catch(err => {
+            cevapOlustur(res, 400, err);
+        })
 
 
+}
+const kullaniciAdresSil = async function (req, res) {
+    const userid = req.params.userid;
+    const adresid = req.params.adresid;
+    if (!userid || !adresid) {
+        cevapOlustur(res, 404, { "durum": "userid ve adresid parametrelerini giriniz" });
+    } else {
+        try {
+            const kullaniciAdresleri = await KullaniciSema.findById(userid).select("adres");
+            if (!kullaniciAdresleri) {
+                cevapOlustur(res, 404, { "durum": "kullanici bulunamadi" })
+            } else {
+                kullaniciAdresleri.adres.pull(adresid);
+                try {
+                    const response = await kullaniciAdresleri.save();
+                    cevapOlustur(res, 204, response)
+                } catch (error) {
+                    cevapOlustur(res, 404, { "durum": "birhata" })
+                }
 
-    
+            }
+        } catch (error) {
+            cevapOlustur(res, 404, { "durum": "ikihata" });
+        }
+
+    }
+
+}
+const kullaniciSiparisGir = function (req,res){
     cevapOlustur(res, 200, { "durum": "basarili" });
 }
-const kullaniciAdresSil = function (req, res) {
-    cevapOlustur(res, 200, { "durum": "basarili" });
-}
-
 const kullaniciSiparisleriGetir = function (req, res) {
     cevapOlustur(res, 200, { "durum": "basarili" });
 }
 const kullaniciSiparisSil = function (req, res) {
     cevapOlustur(res, 200, { "durum": "basarili" });
+}
+const kullaniciFavoriEkle = function(req,res){
+
 }
 const kullaniciFavorileriGetir = function (req, res) {
     cevapOlustur(res, 200, { "durum": "basarili" });
@@ -141,6 +215,8 @@ module.exports = {
     kullaniciAdresSil,
     kullaniciSiparisleriGetir,
     kullaniciSiparisSil,
+    kullaniciSiparisGir,
     kullaniciFavorileriGetir,
-    kullaniciFavoriSil
+    kullaniciFavoriSil,
+    kullaniciFavoriEkle
 }
