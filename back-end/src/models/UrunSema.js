@@ -6,7 +6,8 @@ const urunSema=new mongoose.Schema({
     urunOzellikler:[String],
     resimUrl:{type:String,required:true},
     urunFiyat:{type:Number,required:true},
-    stok:{type:Number,required:true,min:0}
+    stok:{type:Number,required:true,min:0},
+    kategori:{type:String,required:true}
 });
 mongoose.model("urun", urunSema,"urunler")
 const UrunSema = mongoose.model("urun");

@@ -3,7 +3,7 @@ var dbURI =  process.env.DB_URI;
 mongoose.connect(dbURI);
 
 mongoose.connection.on('connected',function(){
-    console.log(dbURI + "adresindeki veritabanina baglanildi!\n");
+    console.log(dbURI + " adresindeki veritabanina baglanildi!\n");
 });
 mongoose.connection.on('error',function(){
     console.log("Baglanti hatasi\n");
