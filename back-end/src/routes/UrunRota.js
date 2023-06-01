@@ -5,10 +5,11 @@ var ctrlUrun = require("../controllers/Urun");
 router
 .route("/kullanici/:userid/favoriler")
 .get(ctrlUrun.kullaniciFavorileriGetir)
-.post(ctrlUrun.kullaniciFavoriEkle);
+
 
 router
 .route("/kullanici/:userid/favoriler/:urunid")
+.post(ctrlUrun.kullaniciFavoriEkle)
 .delete(ctrlUrun.kullaniciFavoriSil);
 
 

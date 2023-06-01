@@ -110,9 +110,9 @@ const kullaniciAdresEkle = async function (req, res) {
             kullaniciAdres.adres.push(yeniAdres);
             try {
                 const adres = await kullaniciAdres.save();
-                cevapOlustur(res, 200, adres);
+                cevapOlustur(res, 201, adres);
             } catch (error) {
-                cevapOlustur(res, 200, error);
+                cevapOlustur(res, 400, error);
             }
         } else {
             cevapOlustur(res, 404, { "durum": "id ile eslesen eleman bulunamadi" })
