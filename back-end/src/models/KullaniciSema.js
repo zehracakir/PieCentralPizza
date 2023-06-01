@@ -1,6 +1,6 @@
 var mongoose = require("mongoose");
 const SiparisSema = require("./SiparisSema")
-// const UrunSema = require("./UrunSema")
+const UrunSema = require("./UrunSema")
 var adresSema = new mongoose.Schema({
     adres:String
 });
@@ -14,7 +14,7 @@ var kullaniciSema = new mongoose.Schema({
     token: String,
     telefonNo: String,
     kayitTarihi: {type:Date, default:Date.now},
-    // favoriler:[UrunSema],
+    favoriler:[UrunSema.schema],
     siparisler:[SiparisSema.schema]
 });
 mongoose.model("kullanici",kullaniciSema,"kullaniciSema")

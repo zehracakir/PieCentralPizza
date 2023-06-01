@@ -185,25 +185,6 @@ const kullaniciAdresSil = async function (req, res) {
     }
 
 }
-const kullaniciSiparisGir = function (req,res){
-    cevapOlustur(res, 200, { "durum": "basarili" });
-}
-const kullaniciSiparisleriGetir = function (req, res) {
-    cevapOlustur(res, 200, { "durum": "basarili" });
-}
-const kullaniciSiparisSil = function (req, res) {
-    cevapOlustur(res, 200, { "durum": "basarili" });
-}
-const kullaniciFavoriEkle = function(req,res){
-
-}
-const kullaniciFavorileriGetir = function (req, res) {
-    cevapOlustur(res, 200, { "durum": "basarili" });
-}
-const kullaniciFavoriSil = function (req, res) {
-    cevapOlustur(res, 200, { "durum": "basarili" });
-}
-
 module.exports = {
     kayitOl,
     girisYap,
@@ -212,11 +193,5 @@ module.exports = {
     kullaniciAdresleriGetir,
     kullaniciAdresEkle,
     kullaniciAdresGuncelle,
-    kullaniciAdresSil,
-    kullaniciSiparisleriGetir,
-    kullaniciSiparisSil,
-    kullaniciSiparisGir,
-    kullaniciFavorileriGetir,
-    kullaniciFavoriSil,
-    kullaniciFavoriEkle
+    kullaniciAdresSil, 
 }

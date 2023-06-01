@@ -1,7 +1,8 @@
 var mongoose = require("mongoose");
+const UrunSema = require("./UrunSema")
 
 var siparisSema = new mongoose.Schema({
-    // siparis:[UrunSema]
+    siparis:[UrunSema.schema],
     siparisEden: { type:String, required: true },
     siparisTarihi: { type:Date, default:Date.now },
     siparisAdres: String,

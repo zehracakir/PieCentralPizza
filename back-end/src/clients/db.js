@@ -26,5 +26,6 @@ process.on("SIGINT",function(){
         process.exit(0);
     });
 });
+require("../models/UrunSema");
 require("../models/SiparisSema");
 require("../models/KullaniciSema");
