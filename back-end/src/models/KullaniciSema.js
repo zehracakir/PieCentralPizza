@@ -1,6 +1,20 @@
 var mongoose = require("mongoose");
-const SiparisSema = require("./SiparisSema")
-const UrunSema = require("./UrunSema")
+const urunSema=new mongoose.Schema({
+    urunAdi:{type:String},
+    urunDetay:{type:String},
+    urunOzellikler:[String],
+    resimUrl:{type:String},
+    urunFiyat:{type:Number},
+    stok:{type:Number},
+    kategori:{type:String}
+});
+const siparisSema = new mongoose.Schema({
+    siparis:[urunSema],
+    siparisEden: { type:String},
+    siparisTarihi: { type:Date, default:Date.now },
+    siparisAdres: String,
+    siparisDurum: String,
+});
 var adresSema = new mongoose.Schema({
     adres:String
 });
@@ -14,8 +28,8 @@ var kullaniciSema = new mongoose.Schema({
     token: String,
     telefonNo: String,
     kayitTarihi: {type:Date, default:Date.now},
-    favoriler:[UrunSema.schema],
-    siparisler:[SiparisSema.schema]
+    favoriler:[urunSema],
+    siparisler:[siparisSema]
 });
 mongoose.model("kullanici",kullaniciSema,"kullaniciSema")
 const KullaniciSema = mongoose.model("kullanici");
