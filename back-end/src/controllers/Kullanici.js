@@ -89,6 +89,7 @@ const kullaniciAdresleriGetir = async function (req, res) {
         cevapOlustur(res, 400, error);
     }
 }
+
 const kullaniciAdresEkle = async function (req, res) {
     //adresAdi,mahalle,sokak,ilce,sehir
     const userid = req.params.userid;
@@ -121,6 +122,7 @@ const kullaniciAdresEkle = async function (req, res) {
         cevapOlustur(res, 200, error);
     }
 }
+
 const kullaniciAdresGuncelle = function (req, res) {
     const userid = req.params.userid;
     const adresid = req.params.adresid;
@@ -158,6 +160,7 @@ const kullaniciAdresGuncelle = function (req, res) {
 
 
 }
+
 const kullaniciAdresSil = async function (req, res) {
     const userid = req.params.userid;
     const adresid = req.params.adresid;
@@ -185,6 +188,7 @@ const kullaniciAdresSil = async function (req, res) {
     }
 
 }
+
 module.exports = {
     kayitOl,
     girisYap,

@@ -38,12 +38,47 @@ const kullaniciFavoriEkle = function (req, res) {
             cevapOlustur(res,400,err);
         })
 }
+
 const kullaniciFavorileriGetir = function (req, res) {
-    cevapOlustur(res, 200, { "durum": "basarili" });
+    const userid = req.params.userid;
+    KullaniciSema.findById(userid).select("favoriler")
+    .then(favoriler => {
+        if(favoriler){
+            cevapOlustur(res,200,favoriler);
+        }else{
+            cevapOlustur(res,404,{"durum":"kullanici bulunamadi"});
+        }
+    })
+    .catch(err => cevapOlustur(res,400,err))
 }
+
 const kullaniciFavoriSil = function (req, res) {
-    cevapOlustur(res, 200, { "durum": "basarili" });
+    const userid = req.params.userid;
+    const urunid = req.params.urunid;
+
+    KullaniciSema.findById(userid).select("favoriler")
+    .then(async favoriliste => {
+        if(favoriliste){
+            if (!favoriliste.favoriler.some(fav => fav.equals(urunid))) {
+                cevapOlustur(res, 404, { "durum": "ilgili urun favorilerde yok" });
+            }else{
+                favoriliste.favoriler.pull(urunid)
+                try {
+                    await favoriliste.save();
+                    cevapOlustur(res,200,{"durum":`${urunid}'li urun favorilerden silindi`});
+                } catch (error) {
+                    cevapOlustur(res,400,error)
+                }
+            }
+        }else{
+            cevapOlustur(res,404,{"durum":"kullanici bulunamadi"})
+        }
+    })
+    .catch(err => {
+        cevapOlustur(res,400,err);
+    })
 }
+
 module.exports = {
     kullaniciFavoriEkle,
     kullaniciFavorileriGetir,
