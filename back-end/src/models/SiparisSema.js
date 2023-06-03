@@ -14,7 +14,7 @@ var siparisSema = new mongoose.Schema({
     siparisEden: { type:String, required: true },
     siparisTarihi: { type:Date, default:Date.now },
     siparisAdres: String,
-    siparisDurum: String,
+    siparisDurum: { type:String,default:"Siparis verildi" },
 });
 mongoose.model("siparis",siparisSema,"siparisSema")
 const SiparisSema = mongoose.model("siparis");
