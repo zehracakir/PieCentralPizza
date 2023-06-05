@@ -111,41 +111,33 @@ const urunEkle = async function(req,res){
         const stok = req.body.stok;
         const kategori = req.body.kategori;
       
-        try {
-          const urun = await UrunSema.findById(urunid).select("urunAdi urunDetay urunOzellikler resimUrl urunFiyat stok kategori");
-          
-          if (!urun) {
-            return cevapOlustur(res, 404, { "durum": "urun bulunamadi" });
-          }
-          
-          const guncellenecekAlan = {};
-          if (urunAdi) {
-            guncellenecekAlan.urunAdi = urunAdi;
-          }
-          if (urunDetay) {
-            guncellenecekAlan.urunDetay = urunDetay;
-          }
-          if (urunOzellikler.length > 0) {
-            guncellenecekAlan.urunOzellikler = urunOzellikler;
-          }
-          if (resimUrl) {
-            guncellenecekAlan.resimUrl = resimUrl;
-          }
-          if (urunFiyat) {
-            guncellenecekAlan.urunFiyat = urunFiyat;
-          }
-          if (stok) {
-            guncellenecekAlan.stok = stok;
-          }
-          if (kategori) {
-            guncellenecekAlan.kategori = kategori;
-          }
-          
-          const guncellenenUrun = await UrunSema.findByIdAndUpdate(urunid, guncellenecekAlan, { new: true });
-          cevapOlustur(res, 200, guncellenenUrun);
-        } catch (error) {
-          cevapOlustur(res, 400, error);
+        if (!urunid || !urunAdi|| !resimUrl|| !urunFiyat || !stok || !kategori) {
+            cevapOlustur(res, 400, { "durum": "butun alanlari doldur" });
+            return;
         }
+        else {
+            try {
+                const urun = await UrunSema.findById(urunid).select("urunid urunAdi urunDetay urunOzellikler resimUrl urunFiyat stok kategori");
+                urun.urunAdi = urunAdi;
+                urun.urunDetay = urunDetay;
+                urun.urunOzellikler = urunOzellikler;
+                urun.resimUrl= resimUrl;
+                urun.urunFiyat = urunFiyat;
+                urun.stok = stok;
+                urun.kategori = kategori;
+                try {
+                    const save = await urun.save();
+                    cevapOlustur(res, 400, save);
+                } catch (error) {
+                    cevapOlustur(res, 400, error);
+                }
+    
+            } catch (error) {
+                cevapOlustur(res, 400, error)
+            }
+        }
+    
+      
       }
       
  
