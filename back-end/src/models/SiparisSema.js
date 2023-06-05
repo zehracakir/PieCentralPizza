@@ -1,5 +1,4 @@
 var mongoose = require("mongoose");
-const UrunSema = require("./UrunSema")
 const urunSema=new mongoose.Schema({
     urunAdi:{type:String},
     urunDetay:{type:String},

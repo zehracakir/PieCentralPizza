@@ -63,7 +63,7 @@ const kullaniciGuncelle = async function (req, res) {
             kullanici.telefonNo = telefonNo;
             try {
                 const save = await kullanici.save();
-                cevapOlustur(res, 400, save);
+                cevapOlustur(res, 200, save);
             } catch (error) {
                 cevapOlustur(res, 400, error);
             }
