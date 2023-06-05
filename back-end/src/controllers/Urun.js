@@ -16,26 +16,9 @@ const urunEkle = async function(req,res){
     const stok=req.body.stok;
     const kategori=req.body.kategori;
 
-    const eksikBilgiler = [];
-    if (!urunAdi) {
-        eksikBilgiler.push("urunAdi");
-    }
-    if (!resimUrl) {
-        eksikBilgiler.push("resimUrl");
-    }
-    if (!urunFiyat) {
-        eksikBilgiler.push("urunFiyat");
-    }
-    if (!kategori) {
-        eksikBilgiler.push("kategori");
-    }
-    if (!stok) {
-        eksikBilgiler.push("stok");
-    }
-
-    if (eksikBilgiler.length > 0) {
-        const mesaj = "Belirtilen alanın-alanların doldurulması zorunludur: " + eksikBilgiler.join(", ");
-        return cevapOlustur(res, 400, mesaj);
+    if (!urunAdi || !resimUrl || !urunFiyat || !stok || !kategori) {
+        cevapOlustur(res, 400, { "hata": "Bütün alanlar gereklidir" })
+        return;
     }
   try {
             const mevcutUrun = await UrunSema.findOne({ urunAdi: urunAdi });
@@ -75,7 +58,7 @@ const urunEkle = async function(req,res){
     const kategoriyeGoreUrunGetir = async (req, res) => {
         const kategori =req.params.kategori;
         try {
-            const urunler = await UrunSema.find({ kategori: kategori });
+            const urunler = await UrunSema.find({ kategori: kategori }).select("-stok");
             if (urunler.length > 0) {
                 cevapOlustur(res, 200, urunler);
             } else {
@@ -117,7 +100,7 @@ const urunEkle = async function(req,res){
         }
         else {
             try {
-                const urun = await UrunSema.findById(urunid).select("urunid urunAdi urunDetay urunOzellikler resimUrl urunFiyat stok kategori");
+                const urun = await UrunSema.findById(urunid);
                 urun.urunAdi = urunAdi;
                 urun.urunDetay = urunDetay;
                 urun.urunOzellikler = urunOzellikler;
@@ -127,7 +110,7 @@ const urunEkle = async function(req,res){
                 urun.kategori = kategori;
                 try {
                     const save = await urun.save();
-                    cevapOlustur(res, 400, save);
+                    cevapOlustur(res, 200, save);
                 } catch (error) {
                     cevapOlustur(res, 400, error);
                 }

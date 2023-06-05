@@ -25,3 +25,5 @@ process.on("SIGINT",function(){
 });
 
 require("../models/UrunSema")
+require("../models/KullaniciSema")
+require("../models/SiparisSema")
