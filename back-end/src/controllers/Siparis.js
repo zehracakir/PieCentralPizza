@@ -84,7 +84,31 @@ const kullaniciSiparisEkle = function(req,res){
     .catch(err => cevapOlustur(res,400,err))
 }
 const kullaniciSiparisSil = function (req, res) {
-    cevapOlustur(res, 200, { "durum": "basarili" });
+    const userid = req.params.userid;
+    const siparisid = req.params.siparisid;
+    KullaniciSema.findById(userid).select("siparisler")
+    .then(siparisler => {
+        if(siparisler){
+            siparisler.siparisler.pull(siparisid)
+            siparisler.save()
+            .then(response => {
+                console.log(response);
+                SiparisSema.findByIdAndDelete(siparisid)
+                .then(response1 => {
+                    if(response1){
+                        cevapOlustur(res,200,response1)
+                    }else{
+                        cevapOlustur(res,404,{"durum":"kullaniciya ait siparis bulunamadi"});
+                    }
+                })
+                .catch(err => cevapOlustur(res,400,err))
+            })
+            .catch(err => cevapOlustur(res,400,err))
+        }else{
+            cevapOlustur(res,404,{"durum":"id ile eslesen kullanici bulunamadi"});
+        }
+    })
+    .catch(err => cevapOlustur(res,400,err))
 }
 module.exports = {
     kullaniciSiparisleriGetir,
