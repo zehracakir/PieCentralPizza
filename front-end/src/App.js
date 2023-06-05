@@ -6,6 +6,7 @@ import Profil from './pages/Profil';
 import Hesabim from './pages/Hesabim';
 import Favorilerim from './pages/Favorilerim';
 import Siparislerim from './pages/Siparislerim';
+import Sepetim from './pages/Sepetim';
 import NoMatch from './pages/NoMatch';
 import Adreslerim from './pages/Adreslerim';
 import UrunArama from './components/UrunArama';
@@ -38,6 +39,8 @@ function App() {
         <Route path='/yan-urunler/soslar/urun-detay' element={<YanUrunlerDetay />} />
         <Route path='/yan-urunler/icecekler/urun-detay' element={<YanUrunlerDetay />} />
         <Route path='/yan-urunler/baslangiclar/urun-detay' element={<YanUrunlerDetay />} />
+        <Route path="/profil/sepetim" element={<Sepetim />}/>
+
         <Route path='/profil' element={<Profil />}>
           <Route index element={<Hesabim />} />
           <Route path='hesabim' element={<Hesabim />} />
@@ -46,6 +49,9 @@ function App() {
           <Route path='adreslerim' element={<Adreslerim />} />
           <Route path="*" element={<NoMatch />} />
         </Route>
+       
+        
+
         <Route path='/admin' element={<Admin />}>
           <Route index element={<AdminYeniUrun />} />
           <Route path='admin-yeni-urun' element={<AdminYeniUrun />} />
@@ -55,6 +61,9 @@ function App() {
           <Route path="*" element={<NoMatch />} />
         </Route>
         <Route path="*" element={<NoMatch />} />
+
+       
+
       </Routes>
       <Footer />
     </div>
