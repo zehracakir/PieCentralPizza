@@ -20,12 +20,8 @@ router
 .get(ctrlUrun.urunDetayGetir); //urun detayi getirme (tum kullanicilar icin)
 
 
-// router
-// .route('/pizzalar/:kategori')
-// .get(ctrlUrun.kategoriyeGoreUrunGetir) //kategoriye gore urun getirme (tum kullanicilar icin)
-
-// router
-// .route('/yan-urunler/:kategori')
-// .get(ctrlUrun.kategoriyeGoreUrunGetir) //kategoriye gore urun getirme (tum kullanicilar icin)
+router
+.route('/kategoriler/:kategori')
+.get(ctrlUrun.kategoriyeGoreUrunGetir) //kategoriye gore urun getirme (tum kullanicilar icin)
 
 module.exports = router;

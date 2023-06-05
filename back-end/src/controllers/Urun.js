@@ -72,25 +72,25 @@ const urunEkle = async function(req,res){
         }
     }
     
-    // const kategoriyeGoreUrunGetir = async (req, res) => {
-    //     const kategori = req.params.kategori;
-    //     try {
-    //         const urunler = await UrunSema.find({ kategori: kategori });
-    //         if (urunler.length > 0) {
-    //             cevapOlustur(res, 200, urunler);
-    //         } else {
-    //             cevapOlustur(res, 404, { "hata": "kategoriye ait ürün bulunamadı" });
-    //         }
-    //     } catch (error) {
-    //         cevapOlustur(res, 500, error);
-    //     }
-    // }
+    const kategoriyeGoreUrunGetir = async (req, res) => {
+        const kategori =req.params.kategori;
+        try {
+            const urunler = await UrunSema.find({ kategori: kategori });
+            if (urunler.length > 0) {
+                cevapOlustur(res, 200, urunler);
+            } else {
+                cevapOlustur(res, 404, { "hata": "kategoriye ait ürün bulunamadı" });
+            }
+        } catch (error) {
+            cevapOlustur(res, 500, error);
+        }
+    }
     
      
     const urunDetayGetir = async function (req, res) {
         const urunid = req.params.urunid;
         try {
-            const urun = await UrunSema.findById(urunid)
+            const urun = await UrunSema.findById(urunid).select("-stok -kategori")
             if (urun) {
                 cevapOlustur(res, 200, urun)
             } else {
@@ -164,7 +164,7 @@ module.exports = {
    urunEkle,
    urunGetir,
    urunDetayGetir,
-//    kategoriyeGoreUrunGetir,
+   kategoriyeGoreUrunGetir,
    urunGuncelle,
    urunSil
 }
