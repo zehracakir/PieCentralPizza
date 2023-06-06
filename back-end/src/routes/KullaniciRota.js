@@ -11,19 +11,12 @@ router
 .delete(ctrlKullanicilar.kullaniciSil); // kullanici sil (admin icin)
 
 router
-.route('/buyukten-kucuge')
-.get(ctrlKullanicilar.buyuktenKucugeSirala)   //tum kullanicilari z den a ya siralama
+.route('/admin/kullanici-getir/:kayitTarihi')
+.get(ctrlKullanicilar.kayitOlmaTarihineGoreKullaniciGetir)   //tum kullanicilari en yeniden en eskiye ya da en eskiden en yeniye dogru siralama. en-eski/en-yeni (admin icin)
 
 router
-.route('/kucukten-buyuge')
-.get(ctrlKullanicilar.kucuktenBuyugeSirala)   //tum kullanicilari a dan z ye siralama
+.route('/admin/kullanici-sirala/:isim')
+.get(ctrlKullanicilar.kullaniciAdinaGoreKullaniciGetir)   //tum kullanicilari a dan z ye ve z den a ya dogru siralama. buyukten-kucuge-sirala/kucukten-buyuge-sirala (admin icin)
 
-router
-.route('/en-yeni-kayittan-sirala')
-.get(ctrlKullanicilar.enYeniKayittanSirala)   //tum kullanicilari en yeni kayit olandan en eski kayit olana dogru siralama
-
-router
-.route('/en-eski-kayittan-sirala')
-.get(ctrlKullanicilar.enEskiKayittanSirala)   //tum kullanicilari en eski kayit olandan en yeni kayit olana dogru siralama
 
 module.exports = router;
