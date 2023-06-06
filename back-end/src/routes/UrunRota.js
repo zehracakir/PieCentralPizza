@@ -1,16 +1,22 @@
 var express = require('express');
 var router = express.Router();
+const jwt = require('express-jwt')
+const auth = jwt.expressjwt({
+    secret: process.env.JWT_SECRET,
+    userProperty: 'payload',
+    algorithms: ['sha1', 'RS256', 'HS256']
+});
 var ctrlUrun = require("../controllers/Urun");
 
 router
-.route("/kullanici/:userid/favoriler")
-.get(ctrlUrun.kullaniciFavorileriGetir)
+    .route("/kullanici/:userid/favoriler")
+    .get(auth, ctrlUrun.kullaniciFavorileriGetir)
 
 
 router
-.route("/kullanici/:userid/favoriler/:urunid")
-.post(ctrlUrun.kullaniciFavoriEkle)
-.delete(ctrlUrun.kullaniciFavoriSil);
+    .route("/kullanici/:userid/favoriler/:urunid")
+    .post(auth, ctrlUrun.kullaniciFavoriEkle)
+    .delete(auth, ctrlUrun.kullaniciFavoriSil);
 
 
 
