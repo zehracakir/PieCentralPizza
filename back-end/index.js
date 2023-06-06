@@ -8,7 +8,7 @@ require("./src/clients/db")
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-// app.use('/api',siparisRota);
+app.use('/api',siparisRota);
 app.use('/api',urunRota);
 app.use('/api',kullaniciRota);
 
