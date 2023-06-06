@@ -1,5 +1,6 @@
+const passport = require("passport");
+const mongoose = require("mongoose");
 const KullaniciSema = require("../models/KullaniciSema");
-var mongoose = require("mongoose");
 
 const cevapOlustur = function (res, status, content) {
     res
@@ -10,24 +11,69 @@ const kayitOl = async function (req, res) {
     const isim = req.body.isim;
     const kullaniciAdi = req.body.kullaniciAdi;
     const email = req.body.email;
-    if (!isim || !kullaniciAdi || !email) {
+    const sifre = req.body.sifre;
+    if (!isim || !kullaniciAdi || !email || !sifre) {
         cevapOlustur(res, 400, { "hata": "Bütün alanlar gereklidir" })
         return;
     }
-    try {
-        const kullanici = await KullaniciSema.create({
-            isim: isim,
-            kullaniciAdi: kullaniciAdi,
-            email: email
-        });
-        cevapOlustur(res, 201, kullanici);
-    } catch (error) {
-        cevapOlustur(res, 400, error);
-    }
+    KullaniciSema.create({
+        kullaniciAdi: kullaniciAdi,
+        isim: isim,
+        email: email
+    })
+        .then(kullanici => {
+            kullanici.sifreAyarla(sifre);
+            kullanici.save()
+                .then(response => {
+                    const token = kullanici.tokenUret();
+                    cevapOlustur(res, 201, { "token": token });
+                })
+                .catch(err => cevapOlustur(res, 400, err))
+        })
+        .catch(err => { cevapOlustur(res, 400, err) });
 }
 
 const girisYap = function (req, res) {
-    cevapOlustur(res, 200, { "durum": "basarili" })
+    const email = req.body.email;
+    const sifre = req.body.sifre;
+    if (!email || !sifre) {
+        cevapOlustur(res, 400, { "hata": "email ve sifre gereklidir" });
+        return;
+    }
+    else {
+        passport.authenticate("local", (error, kullanici, info) => {
+            let token;
+            if (error) {
+                cevapOlustur(res, 404, error)
+                return;
+            }
+            if (kullanici) {
+                token = kullanici.tokenUret();
+                cevapOlustur(res, 200, { "token": token })
+            } else {
+                cevapOlustur(res, 401, info)
+                return;
+            }
+        })(req, res);
+    }
+}
+
+const benKimim = function (req, res) {
+    const userId = req.auth._id;
+    if (userId) {
+        KullaniciSema.findById(userId).select("_id otorite")
+            .then(kullanici => {
+                if (!kullanici) {
+                    cevapOlustur(res, 404, { "hata": "kullanici bulunamadi" })
+                } else {
+                    cevapOlustur(res, 200, kullanici)
+                }
+            })
+            .catch(err => cevapOlustur(res, 404, err))
+    }
+    else {
+        cevapOlustur(res, 401, { "hata": "kullanici bulunamadi" })
+    }
 }
 
 const kullaniciGetir = async function (req, res) {
@@ -197,5 +243,6 @@ module.exports = {
     kullaniciAdresleriGetir,
     kullaniciAdresEkle,
     kullaniciAdresGuncelle,
-    kullaniciAdresSil, 
+    kullaniciAdresSil,
+    benKimim
 }
