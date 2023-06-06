@@ -14,8 +14,8 @@ router
 .route('/en-yeni-kayittan-sirala')
 .get(ctrlKullanicilar.enYeniKayittanSirala)   //tum kullanicilari en yeni kayit olandan en eski kayit olana dogru siralama
 
-// router
-// .route('/en-eski-kayittan-sirala')
-// .get(ctrlKullanicilar.enEskiKayittanSirala)   //tum kullanicilari en eski kayit olandan en yeni kayit olana dogru siralama
+router
+.route('/en-eski-kayittan-sirala')
+.get(ctrlKullanicilar.enEskiKayittanSirala)   //tum kullanicilari en eski kayit olandan en yeni kayit olana dogru siralama
 
 module.exports = router;
