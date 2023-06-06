@@ -15,6 +15,22 @@ const tumKullanicilariGetir = async function (req, res) {
     }
     };
 
+    const kullaniciSil = async function (req, res) {
+        const kullaniciId = req.params.kullaniciId;
+       
+    
+        try {
+            const kullanici = await KullaniciSema.findByIdAndRemove(kullaniciId);
+            if (!kullanici) {
+                return cevapOlustur(res, 404, { "durum": "kullanici bulunamadi" });
+            }
+    
+            return cevapOlustur(res, 200, { "durum": "kullanici basariyla silindi" });
+        } catch (error) {
+            return cevapOlustur(res, 500, { "durum": "bir hata olustu" });
+        }
+    }
+
 const buyuktenKucugeSirala = async function (req, res) {
     try {
     const kullaniciListesi = await KullaniciSema.find();
@@ -63,6 +79,7 @@ const buyuktenKucugeSirala = async function (req, res) {
 
 module.exports = {
     tumKullanicilariGetir,
+    kullaniciSil,
   buyuktenKucugeSirala,
   kucuktenBuyugeSirala,
   enYeniKayittanSirala,

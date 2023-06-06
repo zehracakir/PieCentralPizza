@@ -7,6 +7,10 @@ router
 .get(ctrlKullanicilar.tumKullanicilariGetir)   //admin tarafindan tum kullanicilar listelenir
 
 router
+.route('/admin/kullanicilar/:kullaniciId')
+.delete(ctrlKullanicilar.kullaniciSil); // kullanici sil (admin icin)
+
+router
 .route('/buyukten-kucuge')
 .get(ctrlKullanicilar.buyuktenKucugeSirala)   //tum kullanicilari z den a ya siralama
 
