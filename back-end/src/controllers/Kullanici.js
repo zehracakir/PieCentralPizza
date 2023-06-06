@@ -78,141 +78,164 @@ const benKimim = function (req, res) {
 
 const kullaniciGetir = async function (req, res) {
     const userid = req.params.userid;
-    try {
-        const kullanici = await KullaniciSema.findById(userid)
-            .select("-kayitTarihi -otorite");
-        if (kullanici) {
-            cevapOlustur(res, 200, kullanici)
-        } else {
-            cevapOlustur(res, 404, { "hata": "kullanici bulunamadi" })
+    if (userid == req.auth._id || req.auth.otorite == "admin") {
+        try {
+            const kullanici = await KullaniciSema.findById(userid)
+                .select("-kayitTarihi -otorite");
+            if (kullanici) {
+                cevapOlustur(res, 200, kullanici)
+            } else {
+                cevapOlustur(res, 404, { "hata": "kullanici bulunamadi" })
+            }
+        } catch (error) {
+            cevapOlustur(res, 404, error)
         }
-    } catch (error) {
-        cevapOlustur(res, 404, error)
+    } else {
+        cevapOlustur(res, 401, { "hata": "yetkiniz yok" });
     }
 }
 
 const kullaniciGuncelle = async function (req, res) {
     const userid = req.params.userid;
-    const kullaniciAdi = req.body.kullaniciAdi;
-    const email = req.body.email;
-    const telefonNo = req.body.telefonNo;
-    // const sifre = req.body.sifre
-    if (!userid || !kullaniciAdi || !email || !telefonNo) {
-        cevapOlustur(res, 400, { "durum": "butun alanlari doldur" });
-        return;
-    }
-    else {
-        try {
-            const kullanici = await KullaniciSema.findById(userid).select("kullaniciAdi email telefonNo");
-            kullanici.kullaniciAdi = kullaniciAdi;
-            kullanici.email = email;
-            kullanici.telefonNo = telefonNo;
-            try {
-                const save = await kullanici.save();
-                cevapOlustur(res, 200, save);
-            } catch (error) {
-                cevapOlustur(res, 400, error);
-            }
 
-        } catch (error) {
-            cevapOlustur(res, 400, error)
+    if (userid == req.auth._id || req.auth.otorite == "admin") {
+        const kullaniciAdi = req.body.kullaniciAdi;
+        const email = req.body.email;
+        const telefonNo = req.body.telefonNo;
+        if (!kullaniciAdi || !email || !telefonNo) {
+            cevapOlustur(res, 400, { "durum": "butun alanlari doldur" });
+            return;
+        }
+        else {
+            try {
+                const kullanici = await KullaniciSema.findById(userid).select("kullaniciAdi email telefonNo");
+                kullanici.kullaniciAdi = kullaniciAdi;
+                kullanici.email = email;
+                kullanici.telefonNo = telefonNo;
+                try {
+                    const save = await kullanici.save();
+                    cevapOlustur(res, 200, save);
+                } catch (error) {
+                    cevapOlustur(res, 400, error);
+                }
+
+            } catch (error) {
+                cevapOlustur(res, 400, error)
+            }
         }
     }
-
-
+    else {
+        cevapOlustur(res, 401, { "hata": "yetkiniz yok" });
+    }
 }
 
 const kullaniciAdresleriGetir = async function (req, res) {
     const userid = req.params.userid;
-    try {
-        const adresler = await KullaniciSema.findById(userid).select("adres");
-        if (adresler) {
-            cevapOlustur(res, 200, adresler.adres);
-        } else {
-            cevapOlustur(res, 400, { "durum": "id'ye ait kullanici bulunamadi" });
+
+    if (userid == req.auth._id || req.auth.otorite == "admin") {
+        try {
+            const adresler = await KullaniciSema.findById(userid).select("adres");
+            if (adresler) {
+                cevapOlustur(res, 200, adresler.adres);
+            } else {
+                cevapOlustur(res, 400, { "durum": "id'ye ait kullanici bulunamadi" });
+            }
+        } catch (error) {
+            cevapOlustur(res, 400, error);
         }
-    } catch (error) {
-        cevapOlustur(res, 400, error);
     }
+    else {
+        cevapOlustur(res, 401, { "hata": "yetkiniz yok" });
+    }
+
+
 }
 
 const kullaniciAdresEkle = async function (req, res) {
     //adresAdi,mahalle,sokak,ilce,sehir
     const userid = req.params.userid;
+    if (userid == req.auth._id || req.auth.otorite == "admin") {
+        const adresAdi = req.body.adresAdi;
+        const mahalle = req.body.mahalle;
+        const sokak = req.body.sokak;
+        const ilce = req.body.ilce;
+        const sehir = req.body.sehir;
 
-    const adresAdi = req.body.adresAdi;
-    const mahalle = req.body.mahalle;
-    const sokak = req.body.sokak;
-    const ilce = req.body.ilce;
-    const sehir = req.body.sehir;
-
-    const adres = [adresAdi, mahalle, sokak, ilce, sehir].join(", ");
-    try {
-        const kullaniciAdres = await KullaniciSema.findById(userid).select("adres");
-        if (kullaniciAdres) {
-            const yeniAdres = {
-                _id: new mongoose.Types.ObjectId(),
-                adres: adres
-            };
-            kullaniciAdres.adres.push(yeniAdres);
-            try {
-                const adres = await kullaniciAdres.save();
-                cevapOlustur(res, 201, adres);
-            } catch (error) {
-                cevapOlustur(res, 400, error);
+        const adres = [adresAdi, mahalle, sokak, ilce, sehir].join(", ");
+        try {
+            const kullaniciAdres = await KullaniciSema.findById(userid).select("adres");
+            if (kullaniciAdres) {
+                const yeniAdres = {
+                    _id: new mongoose.Types.ObjectId(),
+                    adres: adres
+                };
+                kullaniciAdres.adres.push(yeniAdres);
+                try {
+                    const adres = await kullaniciAdres.save();
+                    cevapOlustur(res, 201, adres);
+                } catch (error) {
+                    cevapOlustur(res, 400, error);
+                }
+            } else {
+                cevapOlustur(res, 404, { "durum": "id ile eslesen eleman bulunamadi" })
             }
-        } else {
-            cevapOlustur(res, 404, { "durum": "id ile eslesen eleman bulunamadi" })
+        } catch (error) {
+            cevapOlustur(res, 200, error);
         }
-    } catch (error) {
-        cevapOlustur(res, 200, error);
+    } else {
+        cevapOlustur(res, 401, { "hata": "yetkiniz yok" });
     }
+
 }
 
 const kullaniciAdresGuncelle = function (req, res) {
     const userid = req.params.userid;
-    const adresid = req.params.adresid;
-    const adresAdi = req.body.adresAdi;
-    const mahalle = req.body.mahalle;
-    const sokak = req.body.sokak;
-    const ilce = req.body.ilce;
-    const sehir = req.body.sehir;
-    const adres = [adresAdi, mahalle, sokak, ilce, sehir].join(", ");
+    if (userid == req.auth._id || req.auth.otorite == "admin") {
+        const adresid = req.params.adresid;
+        const adresAdi = req.body.adresAdi;
+        const mahalle = req.body.mahalle;
+        const sokak = req.body.sokak;
+        const ilce = req.body.ilce;
+        const sehir = req.body.sehir;
+        const adres = [adresAdi, mahalle, sokak, ilce, sehir].join(", ");
 
-    KullaniciSema.findById(userid)
-        .then(kullanici => {
-            if (kullanici.adres && kullanici.adres.length > 0) {
-                var gelenAdres = kullanici.adres.id(adresid);
-                if (!gelenAdres) {
-                    cevapOlustur(res, 404, { "durum": "adres bulunamadi" })
-                } else {
-                    gelenAdres.adres = adres;
-                    kullanici.save()
-                        .then(adres => {
-                            cevapOlustur(res, 200, adres);
-                        })
-                        .catch(err => {
-                            cevapOlustur(res, 400, err);
-                        })
+        KullaniciSema.findById(userid)
+            .then(kullanici => {
+                if (kullanici.adres && kullanici.adres.length > 0) {
+                    var gelenAdres = kullanici.adres.id(adresid);
+                    if (!gelenAdres) {
+                        cevapOlustur(res, 404, { "durum": "adres bulunamadi" })
+                    } else {
+                        gelenAdres.adres = adres;
+                        kullanici.save()
+                            .then(adres => {
+                                cevapOlustur(res, 200, adres);
+                            })
+                            .catch(err => {
+                                cevapOlustur(res, 400, err);
+                            })
+                    }
                 }
-            }
-            else {
-                cevapOlustur(res, 404, { "durum": "kisi adresi bulunamadi" });
-            }
-        })
-        .catch(err => {
-            cevapOlustur(res, 400, err);
-        })
+                else {
+                    cevapOlustur(res, 404, { "durum": "kisi adresi bulunamadi" });
+                }
+            })
+            .catch(err => {
+                cevapOlustur(res, 400, err);
+            })
+    }
+    else {
+        cevapOlustur(res, 401, { "hata": "yetkiniz yok" });
+    }
+
 
 
 }
 
 const kullaniciAdresSil = async function (req, res) {
     const userid = req.params.userid;
-    const adresid = req.params.adresid;
-    if (!userid || !adresid) {
-        cevapOlustur(res, 404, { "durum": "userid ve adresid parametrelerini giriniz" });
-    } else {
+    if (userid == req.auth._id || req.auth.otorite == "admin") {
+        const adresid = req.params.adresid;
         try {
             const kullaniciAdresleri = await KullaniciSema.findById(userid).select("adres");
             if (!kullaniciAdresleri) {
@@ -228,11 +251,12 @@ const kullaniciAdresSil = async function (req, res) {
 
             }
         } catch (error) {
-            cevapOlustur(res, 404, { "durum": "ikihata" });
+            cevapOlustur(res, 404, error);
         }
-
     }
-
+    else {
+        cevapOlustur(res, 401, { "hata": "yetkiniz yok" });
+    }
 }
 
 module.exports = {

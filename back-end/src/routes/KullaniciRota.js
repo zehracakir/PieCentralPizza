@@ -15,18 +15,18 @@ router.get("/benkimim", auth, ctrlKullanicilar.benKimim);
 
 router
     .route("/kullanici/:userid")
-    .get(ctrlKullanicilar.kullaniciGetir)
-    .put(ctrlKullanicilar.kullaniciGuncelle);
+    .get(auth, ctrlKullanicilar.kullaniciGetir)
+    .put(auth, ctrlKullanicilar.kullaniciGuncelle);
 
 router
     .route("/kullanici/:userid/adreslerim")
-    .get(ctrlKullanicilar.kullaniciAdresleriGetir)
-    .post(ctrlKullanicilar.kullaniciAdresEkle)
+    .get(auth, ctrlKullanicilar.kullaniciAdresleriGetir)
+    .post(auth, ctrlKullanicilar.kullaniciAdresEkle)
 
 router
     .route("/kullanici/:userid/adreslerim/:adresid")
-    .put(ctrlKullanicilar.kullaniciAdresGuncelle)
-    .delete(ctrlKullanicilar.kullaniciAdresSil);
+    .put(auth, ctrlKullanicilar.kullaniciAdresGuncelle)
+    .delete(auth, ctrlKullanicilar.kullaniciAdresSil);
 
 
 
