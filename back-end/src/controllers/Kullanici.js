@@ -19,6 +19,19 @@ const buyuktenKucugeSirala = async function (req, res) {
     }
     };
 
+    const kucuktenBuyugeSirala = async function (req, res) {
+        try {
+          const kullaniciListesi = await KullaniciSema.find();
+          const siralanmisKullanicilar = kullaniciListesi.map(kullanici => kullanici.toObject());
+          siralanmisKullanicilar.sort((a, b) => a.isim.toLowerCase().localeCompare(b.isim.toLowerCase()));
+          cevapOlustur(res, 200, siralanmisKullanicilar);
+        } catch (err) {
+          cevapOlustur(res, 500, { error: 'Bir hata oluştu' });
+        }
+      };
+      
+
 module.exports = {
   buyuktenKucugeSirala,
+  kucuktenBuyugeSirala
  }
