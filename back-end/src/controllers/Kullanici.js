@@ -6,7 +6,14 @@ const cevapOlustur = function (res, status, content) {
         .json(content);
 }
 
-
+const tumKullanicilariGetir = async function (req, res) {
+    try {
+    const kullaniciListesi = await KullaniciSema.find().select("kullaniciAdi kayitTarihi email adres telefonNo");//adres array, duzenleme yapilabilir
+    cevapOlustur(res, 200, kullaniciListesi);
+    } catch (err) {
+    cevapOlustur(res, 500, { error: 'Bir hata oluştu' });
+    }
+    };
 
 const buyuktenKucugeSirala = async function (req, res) {
     try {
@@ -55,6 +62,7 @@ const buyuktenKucugeSirala = async function (req, res) {
       
 
 module.exports = {
+    tumKullanicilariGetir,
   buyuktenKucugeSirala,
   kucuktenBuyugeSirala,
   enYeniKayittanSirala,

@@ -3,6 +3,10 @@ var router = express.Router();
 var ctrlKullanicilar = require("../controllers/Kullanici");
 
 router
+.route('/tum-kullanicilari-getir')
+.get(ctrlKullanicilar.tumKullanicilariGetir)   //admin tarafindan tum kullanicilar listelenir
+
+router
 .route('/buyukten-kucuge')
 .get(ctrlKullanicilar.buyuktenKucugeSirala)   //tum kullanicilari z den a ya siralama
 
