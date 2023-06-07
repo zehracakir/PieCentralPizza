@@ -12,6 +12,7 @@ var ctrlKullanicilar = require("../controllers/Kullanici");
 router.post("/kayitol", ctrlKullanicilar.kayitOl);
 router.post("/girisyap", ctrlKullanicilar.girisYap);
 router.get("/benkimim", auth, ctrlKullanicilar.benKimim);
+router.put("/kullanici/:userid/sifredegistir", auth, ctrlKullanicilar.kullaniciSifreGuncelle);
 
 router
     .route("/kullanici/:userid")
