@@ -12,13 +12,16 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import { Avatar } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Popconfirm } from 'antd';
+import { Select } from 'antd';
 
 const confirm = () => {
   console.log("silindi")
 };
 function AdminSiparisListe({ urunAdi, siparisTarihi, siparisDurum, resimUrl, siparisEden, id, siparisAdres }) {
   const [open, setOpen] = React.useState(false);
-
+  const handleChange = (value) => {
+    console.log(`selected ${value}`);
+  };
 
   return (
     <React.Fragment >
@@ -39,7 +42,20 @@ function AdminSiparisListe({ urunAdi, siparisTarihi, siparisDurum, resimUrl, sip
           {siparisEden}
         </TableCell>
         <TableCell >
-          {siparisDurum}
+          {/* {siparisDurum} */}
+<Select
+      defaultValue="Hazırlanıyor"
+      style={{ width: 150, backgroundColor: '#efefef', borderRadius: '6px' }}
+      onChange={handleChange}
+      bordered={false}
+      className="custom-select"
+     
+      options={[
+        { value: 'hazirlaniyor', label: 'Hazırlanıyor' },
+        { value: 'yolda', label: 'Yolda' },
+        { value: 'teslim-edildi', label: 'Teslim Edildi' },
+      ]}
+    />
         </TableCell>
         <TableCell>
           <Popconfirm

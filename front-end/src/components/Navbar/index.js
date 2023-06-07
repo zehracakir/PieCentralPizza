@@ -16,6 +16,17 @@ import GirisYap from '../GirisYap';
 import KayitOl from '../KayitOl';
 import UrunArama from '../UrunArama';
 import { Link } from 'react-router-dom';
+import Badge from '@mui/material/Badge';
+import { styled } from '@mui/material/styles';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+const StyledBadge = styled(Badge)(({ theme }) => ({
+  '& .MuiBadge-badge': {
+    right: -3,
+    top: 13,
+    border: `2px solid ${theme.palette.background.paper}`,
+    padding: '0 4px',
+  },
+}));
 
 function Navbar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -140,6 +151,13 @@ function Navbar() {
               </Link>
               <UrunArama />
             </Box>
+           <Link to='/profil/sepetim'>
+           <IconButton aria-label="cart" sx={{color:'black',mr:1}} size='sm'>
+      <StyledBadge badgeContent={4} color="error">
+        <ShoppingCartIcon />
+      </StyledBadge>
+    </IconButton>
+    </Link>
             <Button variant="text" sx={{ color: "black", fontWeight: 'bold', border: "none", textTransform: 'none' }} startIcon={<AccountCircleIcon sx={{ color: 'black' }} />} onClick={openLogin}>Giriş Yap</Button>
           </Toolbar>
         </Container>

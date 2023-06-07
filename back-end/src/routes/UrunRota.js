@@ -20,6 +20,27 @@ router
     .post(auth, ctrlUrun.kullaniciFavoriEkle)
     .delete(auth, ctrlUrun.kullaniciFavoriSil);
 
+router
+    .route('/admin/urunler')
+    .post(ctrlUrun.urunEkle) //urun ekleme (admin icin)
+
+router
+    .route('/admin/urunler/:urunid')
+    .put(ctrlUrun.urunGuncelle) // urun guncelle (admin icin)
+    .delete(ctrlUrun.urunSil); // urun sil (admin icin)
+
+router
+    .route('/urunler')
+    .get(ctrlUrun.urunGetir)   //tum urunleri getirme (tum kullanicilar icin)
+
+router
+    .route('/urunler/:urunid')
+    .get(ctrlUrun.urunDetayGetir); //urun detayi getirme (tum kullanicilar icin)
+
+
+router
+    .route('/kategoriler/:kategori')
+    .get(ctrlUrun.kategoriyeGoreUrunGetir) //kategoriye gore urun getirme (tum kullanicilar icin)
 
 
 module.exports = router;

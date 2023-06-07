@@ -1,4 +1,5 @@
 var mongoose = require("mongoose");
+
 const urunSema = new mongoose.Schema({
     urunAdi: { type: String },
     urunDetay: { type: String },
@@ -16,5 +17,6 @@ var siparisSema = new mongoose.Schema({
     siparisDurum: { type: String, default: "Hazirlaniyor" },
 });
 mongoose.model("siparis", siparisSema, "siparisSema")
+
 const SiparisSema = mongoose.model("siparis");
 module.exports = SiparisSema;
