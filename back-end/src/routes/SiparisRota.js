@@ -22,5 +22,5 @@ router
     .route("/kullanici/:userid/siparisler/:siparisid")
     .get(auth, ctrlSiparisler.kullaniciSiparisGetir)
     .delete(auth, ctrlSiparisler.kullaniciSiparisSil);
-    
+
 module.exports = router;

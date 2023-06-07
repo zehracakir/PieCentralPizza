@@ -132,33 +132,33 @@ const kullaniciGuncelle = async function (req, res) {
 const kullaniciSifreGuncelle = async function (req, res) {
     const userid = req.params.userid;
 
-    if(userid == req.auth._id || req.auth.otorite == "admin"){
+    if (userid == req.auth._id || req.auth.otorite == "admin") {
         const eskiSifre = req.body.eskiSifre;
         const yeniSifre = req.body.yeniSifre;
-        if(!eskiSifre || !yeniSifre){
+        if (!eskiSifre || !yeniSifre) {
             cevapOlustur(res, 400, { "hata": "butun alanlari doldur" });
             return;
-        }else if (eskiSifre == yeniSifre){
+        } else if (eskiSifre == yeniSifre) {
             cevapOlustur(res, 400, { "hata": "eski sifre ile yeni sifre ayni olamaz" });
-        }else{
+        } else {
             KullaniciSema.findById(userid).select("hash salt")
-            .then(kullanici => {
-                if(kullanici){
-                    if(kullanici.sifreDogrumu(eskiSifre)){
-                        kullanici.sifreAyarla(yeniSifre);
-                        kullanici.save()
-                        .then(response => cevapOlustur(res, 200, response))
-                        .catch(err => cevapOlustur(res, 400, err))
-                    }else{
-                        cevapOlustur(res, 400, { "hata": "eski sifre yanlis" });
+                .then(kullanici => {
+                    if (kullanici) {
+                        if (kullanici.sifreDogrumu(eskiSifre)) {
+                            kullanici.sifreAyarla(yeniSifre);
+                            kullanici.save()
+                                .then(response => cevapOlustur(res, 200, response))
+                                .catch(err => cevapOlustur(res, 400, err))
+                        } else {
+                            cevapOlustur(res, 400, { "hata": "eski sifre yanlis" });
+                        }
+                    } else {
+                        cevapOlustur(res, 400, { "hata": "kullanici bulunamadi" });
                     }
-                }else{
-                    cevapOlustur(res, 400, { "hata": "kullanici bulunamadi" });
-                }
-            })
-            .catch(err => cevapOlustur(res, 400, err))
+                })
+                .catch(err => cevapOlustur(res, 400, err))
         }
-    }else{
+    } else {
         cevapOlustur(res, 401, { "hata": "yetkiniz yok" });
     }
 }
