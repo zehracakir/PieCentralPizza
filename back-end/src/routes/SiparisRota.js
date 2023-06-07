@@ -8,6 +8,8 @@ const auth = jwt.expressjwt({
 });
 var ctrlSiparisler = require("../controllers/Siparis");
 
+router.put("/admin/:userid/siparisler/:siparisid", auth, ctrlSiparisler.adminSiparisDurumGuncelle);
+
 router
     .route("/kullanici/:userid/siparisler")
     .get(auth, ctrlSiparisler.kullaniciSiparisleriGetir);
@@ -20,5 +22,5 @@ router
     .route("/kullanici/:userid/siparisler/:siparisid")
     .get(auth, ctrlSiparisler.kullaniciSiparisGetir)
     .delete(auth, ctrlSiparisler.kullaniciSiparisSil);
-
+    
 module.exports = router;
