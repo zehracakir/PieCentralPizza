@@ -8,6 +8,8 @@ const auth = jwt.expressjwt({
 });
 var ctrlUrun = require("../controllers/Urun");
 
+router.get("/urunler/urunara", ctrlUrun.urunAra);
+
 router
     .route("/kullanici/:userid/favoriler")
     .get(auth, ctrlUrun.kullaniciFavorileriGetir)

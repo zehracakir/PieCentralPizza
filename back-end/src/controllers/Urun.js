@@ -93,8 +93,27 @@ const kullaniciFavoriSil = function (req, res) {
 
 }
 
+const urunAra = function (req, res) {
+    const urun = req.body.urun;
+    UrunSema.find({ "urunAdi": { "$regex": urun, "$options": "i" } })  // i: case insensitive
+        .then(urunler => {
+            if (urunler.length == 0) {
+                cevapOlustur(res, 404, { "durum": "Aradiginz kelime ile eslesen urun bulunamadi" });
+            }else if(urunler){
+                cevapOlustur(res, 200, urunler);
+            } 
+            else {
+                cevapOlustur(res, 404, { "durum": "urun bulunamadi" });
+            }
+        })
+        .catch(err => {
+            cevapOlustur(res, 400, err);
+        })
+}
+
 module.exports = {
     kullaniciFavoriEkle,
     kullaniciFavorileriGetir,
-    kullaniciFavoriSil
+    kullaniciFavoriSil,
+    urunAra
 }
