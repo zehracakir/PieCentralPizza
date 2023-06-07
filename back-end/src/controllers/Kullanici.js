@@ -292,6 +292,7 @@ const kullaniciAdresSil = async function (req, res) {
         cevapOlustur(res, 401, { "hata": "yetkiniz yok" });
     }
 }
+
 const tumKullanicilariGetir = async function (req, res) {
     try {
         const kullaniciListesi = await KullaniciSema.find().select("kullaniciAdi kayitTarihi email adres telefonNo");//adres array, duzenleme yapilabilir
@@ -332,7 +333,7 @@ const kullaniciAdinaGoreKullaniciGetir = async (req, res) => {
             return cevapOlustur(res, 400, { "hata": "Böyle bir sıralama seçeneği yok" });
         }
 
-        kullanicilar = await KullaniciSema.find().collation({ locale: "en" }).sort({ kullaniciAdi: durum }).select("kullaniciAdi");
+        kullanicilar = await KullaniciSema.find().collation({ locale: "en" }).sort({ kullaniciAdi: durum }).select("kullaniciAdi kayitTarihi email adres telefonNo");
 
         if (kullanicilar.length > 0) {
             cevapOlustur(res, 200, kullanicilar);
@@ -343,7 +344,6 @@ const kullaniciAdinaGoreKullaniciGetir = async (req, res) => {
         cevapOlustur(res, 500, error);
     }
 };
-
 
 const kayitOlmaTarihineGoreKullaniciGetir = async (req, res) => {
     const kayitTarihi = req.params.kayitTarihi;
