@@ -46,7 +46,7 @@ const kullaniciAdinaGoreKullaniciGetir = async (req, res) => {
       return cevapOlustur(res, 400, { "hata": "Böyle bir sıralama seçeneği yok" });
     }
 
-    kullanicilar = await KullaniciSema.find().collation({ locale: "en" }).sort({ isim: durum }).select("isim");
+    kullanicilar = await KullaniciSema.find().collation({ locale: "en" }).sort({ kullaniciAdi: durum }).select("kullaniciAdi");
 
     if (kullanicilar.length > 0) {
       cevapOlustur(res, 200, kullanicilar);
