@@ -97,21 +97,27 @@ const kullaniciFavoriSil = function (req, res) {
 
 const urunAra = function (req, res) {
     const urun = req.body.urun;
-    UrunSema.find({ "urunAdi": { "$regex": urun, "$options": "i" } })  // i: case insensitive
-        .then(urunler => {
-            if (urunler.length == 0) {
-                cevapOlustur(res, 404, { "hata": "Aradiginz kelime ile eslesen urun bulunamadi" });
-            } else if (urunler) {
-                cevapOlustur(res, 200, urunler);
-            }
-            else {
-                cevapOlustur(res, 404, { "hata": "urun bulunamadi" });
-            }
-        })
-        .catch(err => {
-            cevapOlustur(res, 400, err);
-        })
+    if (urun.toString().length == 0) {
+        cevapOlustur(res, 400, { "hata": "Aranacak kelime bos olamaz" });
+    } else {
+        UrunSema.find({ "urunAdi": { "$regex": urun, "$options": "i" } })  // i: case insensitive
+            .then(urunler => {
+                if (urunler.length == 0) {
+                    cevapOlustur(res, 404, { "hata": "Aradiginz kelime ile eslesen urun bulunamadi" });
+                } else if (urunler) {
+                    cevapOlustur(res, 200, urunler);
+                }
+                else {
+                    cevapOlustur(res, 404, { "hata": "urun bulunamadi" });
+                }
+            })
+            .catch(err => {
+                cevapOlustur(res, 400, err);
+            })
+    }
+
 }
+
 const urunEkle = async function (req, res) {
     if (req.auth.otorite == "admin") {
         const urunAdi = req.body.urunAdi;
@@ -130,7 +136,7 @@ const urunEkle = async function (req, res) {
             const mevcutUrun = await UrunSema.findOne({ urunAdi: urunAdi });
 
             if (mevcutUrun) {
-                cevapOlustur(res, 400, {"hata":"Bu isimde bir ürün zaten bulunmakta!"});
+                cevapOlustur(res, 400, { "hata": "Bu isimde bir ürün zaten bulunmakta!" });
             } else {
                 const urun = await UrunSema.create({
                     urunAdi: urunAdi,
@@ -178,7 +184,6 @@ const kategoriyeGoreUrunGetir = async (req, res) => {
         cevapOlustur(res, 500, error);
     }
 }
-
 
 const urunDetayGetir = async function (req, res) {
     const urunid = req.params.urunid;
@@ -238,7 +243,6 @@ const urunGuncelle = async function (req, res) {
 
 }
 
-
 const urunSil = async function (req, res) {
     const urunid = req.params.urunid;
     if (req.auth.otorite == "admin") {
@@ -248,7 +252,7 @@ const urunSil = async function (req, res) {
                 return cevapOlustur(res, 404, { "hata": "urun bulunamadi" });
             }
 
-            return cevapOlustur(res, 200, { "hata": "urun basariyla silindi" });
+            return cevapOlustur(res, 200, { "durum": "urun basariyla silindi" });
         } catch (error) {
             return cevapOlustur(res, 500, { "hata": "bir hata olustu" });
         }
@@ -258,6 +262,7 @@ const urunSil = async function (req, res) {
 
 
 }
+
 module.exports = {
     kullaniciFavoriEkle,
     kullaniciFavorileriGetir,

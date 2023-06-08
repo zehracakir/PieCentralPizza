@@ -2,11 +2,13 @@ const passport = require("passport");
 const mongoose = require("mongoose");
 const KullaniciSema = require("../models/KullaniciSema");
 
+
 const cevapOlustur = function (res, status, content) {
     res
         .status(status)
         .json(content);
 }
+
 const kayitOl = async function (req, res) {
     const isim = req.body.isim;
     const kullaniciAdi = req.body.kullaniciAdi;
@@ -300,13 +302,13 @@ const tumKullanicilariGetir = async function (req, res) {
             const kullaniciListesi = await KullaniciSema.find().select("kullaniciAdi kayitTarihi email adres telefonNo");//adres array, duzenleme yapilabilir
             cevapOlustur(res, 200, kullaniciListesi);
         } catch (err) {
-            cevapOlustur(res, 500, { error: 'Bir hata oluştu' });
+            cevapOlustur(res, 500, { "hata": 'Bir hata oluştu' });
         }
     } else {
         cevapOlustur(res, 401, { "hata": "yetkiniz yok" });
     }
 
-};
+}
 
 const kullaniciSil = async function (req, res) {
     const kullaniciId = req.params.kullaniciId;
@@ -317,7 +319,7 @@ const kullaniciSil = async function (req, res) {
                 return cevapOlustur(res, 404, { "hata": "kullanici bulunamadi" });
             }
 
-            return cevapOlustur(res, 200, { "hata": "kullanici basariyla silindi" });
+            return cevapOlustur(res, 200, { "durum": "kullanici basariyla silindi" });
         } catch (error) {
             return cevapOlustur(res, 500, { "hata": "bir hata olustu" });
         }
@@ -386,6 +388,7 @@ const kayitOlmaTarihineGoreKullaniciGetir = async (req, res) => {
     }
 
 };
+
 module.exports = {
     kayitOl,
     girisYap,

@@ -1,8 +1,6 @@
-
 const KullaniciSema = require("../models/KullaniciSema");
 const UrunSema = require("../models/UrunSema");
 const SiparisSema = require("../models/SiparisSema");
-
 
 
 const cevapOlustur = function (res, status, content) {
@@ -10,7 +8,6 @@ const cevapOlustur = function (res, status, content) {
         .status(status)
         .json(content);
 }
-
 
 const kullaniciSiparisleriGetir = function (req, res) {
     const userid = req.params.userid;
@@ -33,6 +30,7 @@ const kullaniciSiparisleriGetir = function (req, res) {
     }
 
 }
+
 const kullaniciSiparisGetir = function (req, res) {
     const userid = req.params.userid;
     if (req.auth._id == userid || req.auth.otorite == "admin") {
@@ -56,6 +54,7 @@ const kullaniciSiparisGetir = function (req, res) {
     }
 
 }
+
 const kullaniciSiparisEkle = function (req, res) {
     const userid = req.params.userid;
     if (req.auth._id == userid || req.auth.otorite == "admin") {
@@ -103,6 +102,7 @@ const kullaniciSiparisEkle = function (req, res) {
     }
 
 }
+
 const kullaniciSiparisSil = function (req, res) {
     const userid = req.params.userid;
     if (req.auth._id == userid || req.auth.otorite == "admin") {
@@ -134,6 +134,7 @@ const kullaniciSiparisSil = function (req, res) {
     }
 
 }
+
 const adminSiparisDurumGuncelle = function (req, res) {
     if (req.auth.otorite == "admin") {
         const userid = req.params.userid;
@@ -178,13 +179,14 @@ const adminSiparisDurumGuncelle = function (req, res) {
         cevapOlustur(res, 403, { "hata": "yetkiniz yok" });
     }
 }
+
 const tumSiparisleriGetir = async function (req, res) {
     if (req.auth.otorite == "admin") {
         try {
             const siparisListesi = await SiparisSema.find().select("siparis.resimUrl siparisEden siparisDurum siparisTarihi siparis.urunAdi siparisAdres");  //adres array, duzenleme yapilabilir
             cevapOlustur(res, 200, siparisListesi);
         } catch (err) {
-            cevapOlustur(res, 500, { error: 'Bir hata oluştu' });
+            cevapOlustur(res, 500, { "hata": 'Bir hata oluştu' });
         }
     } else {
         cevapOlustur(res, 403, { "hata": "yetkiniz yok" });
@@ -222,7 +224,6 @@ const durumaGoreSiparisGetir = async (req, res) => {
 
 };
 
-
 const tariheGoreSiparisGetir = async (req, res) => {
     const siparisTarihi = req.params.siparisTarihi;
     if (req.auth.otorite == "admin") {
@@ -256,6 +257,7 @@ const tariheGoreSiparisGetir = async (req, res) => {
     }
 
 };
+
 module.exports = {
     kullaniciSiparisleriGetir,
     kullaniciSiparisSil,
