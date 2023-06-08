@@ -26,15 +26,15 @@ router
 
 router
     .route('/admin/siparisler')
-    .get(ctrlSiparisler.tumSiparisleriGetir); //tum siparisleri listeleme (admin icin)
+    .get(auth, ctrlSiparisler.tumSiparisleriGetir); //tum siparisleri listeleme (admin icin)
 
 router
     .route('/admin/siparisler/:siparisDurum')
-    .get(ctrlSiparisler.durumaGoreSiparisGetir); //siparisleri durumlarina göre listeleme. hazirlaniyor/yolda/teslim-edildi (admin icin)
+    .get(auth, ctrlSiparisler.durumaGoreSiparisGetir); //siparisleri durumlarina göre listeleme. hazirlaniyor/yolda/teslim-edildi (admin icin)
 
 router
     .route('/admin/:siparisTarihi')
-    .get(ctrlSiparisler.tariheGoreSiparisGetir); //siparisleri tarihlerine göre listeleme. son-bir-gun/son-bir-hafta/son-bir-ay (admin icin)
+    .get(auth, ctrlSiparisler.tariheGoreSiparisGetir); //siparisleri tarihlerine göre listeleme. son-bir-gun/son-bir-hafta/son-bir-ay (admin icin)
 
 
 module.exports = router;

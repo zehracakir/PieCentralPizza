@@ -103,7 +103,7 @@ const kullaniciGuncelle = async function (req, res) {
         const email = req.body.email;
         const telefonNo = req.body.telefonNo;
         if (!kullaniciAdi || !email || !telefonNo) {
-            cevapOlustur(res, 400, { "durum": "butun alanlari doldur" });
+            cevapOlustur(res, 400, { "hata": "butun alanlari doldur" });
             return;
         }
         else {
@@ -172,7 +172,7 @@ const kullaniciAdresleriGetir = async function (req, res) {
             if (adresler) {
                 cevapOlustur(res, 200, adresler.adres);
             } else {
-                cevapOlustur(res, 400, { "durum": "id'ye ait kullanici bulunamadi" });
+                cevapOlustur(res, 400, { "hata": "id'ye ait kullanici bulunamadi" });
             }
         } catch (error) {
             cevapOlustur(res, 400, error);
@@ -211,7 +211,7 @@ const kullaniciAdresEkle = async function (req, res) {
                     cevapOlustur(res, 400, error);
                 }
             } else {
-                cevapOlustur(res, 404, { "durum": "id ile eslesen eleman bulunamadi" })
+                cevapOlustur(res, 404, { "hata": "id ile eslesen eleman bulunamadi" })
             }
         } catch (error) {
             cevapOlustur(res, 200, error);
@@ -238,7 +238,7 @@ const kullaniciAdresGuncelle = function (req, res) {
                 if (kullanici.adres && kullanici.adres.length > 0) {
                     var gelenAdres = kullanici.adres.id(adresid);
                     if (!gelenAdres) {
-                        cevapOlustur(res, 404, { "durum": "adres bulunamadi" })
+                        cevapOlustur(res, 404, { "hata": "adres bulunamadi" })
                     } else {
                         gelenAdres.adres = adres;
                         kullanici.save()
@@ -251,7 +251,7 @@ const kullaniciAdresGuncelle = function (req, res) {
                     }
                 }
                 else {
-                    cevapOlustur(res, 404, { "durum": "kisi adresi bulunamadi" });
+                    cevapOlustur(res, 404, { "hata": "kisi adresi bulunamadi" });
                 }
             })
             .catch(err => {
@@ -273,14 +273,14 @@ const kullaniciAdresSil = async function (req, res) {
         try {
             const kullaniciAdresleri = await KullaniciSema.findById(userid).select("adres");
             if (!kullaniciAdresleri) {
-                cevapOlustur(res, 404, { "durum": "kullanici bulunamadi" })
+                cevapOlustur(res, 404, { "hata": "kullanici bulunamadi" })
             } else {
                 kullaniciAdresleri.adres.pull(adresid);
                 try {
                     const response = await kullaniciAdresleri.save();
                     cevapOlustur(res, 204, response)
                 } catch (error) {
-                    cevapOlustur(res, 404, { "durum": "birhata" })
+                    cevapOlustur(res, 404, { "hata": "birhata" })
                 }
 
             }
@@ -314,12 +314,12 @@ const kullaniciSil = async function (req, res) {
         try {
             const kullanici = await KullaniciSema.findByIdAndRemove(kullaniciId);
             if (!kullanici) {
-                return cevapOlustur(res, 404, { "durum": "kullanici bulunamadi" });
+                return cevapOlustur(res, 404, { "hata": "kullanici bulunamadi" });
             }
 
-            return cevapOlustur(res, 200, { "durum": "kullanici basariyla silindi" });
+            return cevapOlustur(res, 200, { "hata": "kullanici basariyla silindi" });
         } catch (error) {
-            return cevapOlustur(res, 500, { "durum": "bir hata olustu" });
+            return cevapOlustur(res, 500, { "hata": "bir hata olustu" });
         }
     } else {
         cevapOlustur(res, 401, { "hata": "yetkiniz yok" });
