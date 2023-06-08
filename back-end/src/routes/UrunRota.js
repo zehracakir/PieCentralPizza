@@ -22,12 +22,12 @@ router
 
 router
     .route('/admin/urunler')
-    .post(ctrlUrun.urunEkle) //urun ekleme (admin icin)
+    .post(auth, ctrlUrun.urunEkle) //urun ekleme (admin icin)
 
 router
     .route('/admin/urunler/:urunid')
-    .put(ctrlUrun.urunGuncelle) // urun guncelle (admin icin)
-    .delete(ctrlUrun.urunSil); // urun sil (admin icin)
+    .put(auth, ctrlUrun.urunGuncelle) // urun guncelle (admin icin)
+    .delete(auth, ctrlUrun.urunSil); // urun sil (admin icin)
 
 router
     .route('/urunler')
