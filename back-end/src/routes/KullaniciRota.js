@@ -32,19 +32,19 @@ router
 
 router
     .route('/tum-kullanicilari-getir')
-    .get(ctrlKullanicilar.tumKullanicilariGetir)   //admin tarafindan tum kullanicilar listelenir
+    .get(auth, ctrlKullanicilar.tumKullanicilariGetir)   //admin tarafindan tum kullanicilar listelenir
 
 router
     .route('/admin/kullanicilar/:kullaniciId')
-    .delete(ctrlKullanicilar.kullaniciSil); // kullanici sil (admin icin)
+    .delete(auth, ctrlKullanicilar.kullaniciSil); // kullanici sil (admin icin)
 
 router
     .route('/admin/kullanici-getir/:kayitTarihi')
-    .get(ctrlKullanicilar.kayitOlmaTarihineGoreKullaniciGetir)   //tum kullanicilari en yeniden en eskiye ya da en eskiden en yeniye dogru siralama. en-eski/en-yeni (admin icin)
+    .get(auth, ctrlKullanicilar.kayitOlmaTarihineGoreKullaniciGetir)   //tum kullanicilari en yeniden en eskiye ya da en eskiden en yeniye dogru siralama. en-eski/en-yeni (admin icin)
 
 router
     .route('/admin/kullanici-sirala/:isim')
-    .get(ctrlKullanicilar.kullaniciAdinaGoreKullaniciGetir)   //tum kullanicilari a dan z ye ve z den a ya dogru siralama. buyukten-kucuge-sirala/kucukten-buyuge-sirala (admin icin)
+    .get(auth, ctrlKullanicilar.kullaniciAdinaGoreKullaniciGetir)   //tum kullanicilari a dan z ye ve z den a ya dogru siralama. buyukten-kucuge-sirala/kucukten-buyuge-sirala (admin icin)
 
 
 
