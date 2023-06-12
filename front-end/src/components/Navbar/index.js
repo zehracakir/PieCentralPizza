@@ -19,6 +19,7 @@ import { Link } from 'react-router-dom';
 import Badge from '@mui/material/Badge';
 import { styled } from '@mui/material/styles';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 const StyledBadge = styled(Badge)(({ theme }) => ({
   '& .MuiBadge-badge': {
     right: -3,
@@ -159,6 +160,10 @@ function Navbar() {
     </IconButton>
     </Link>
             <Button variant="text" sx={{ color: "black", fontWeight: 'bold', border: "none", textTransform: 'none' }} startIcon={<AccountCircleIcon sx={{ color: 'black' }} />} onClick={openLogin}>Giriş Yap</Button>
+            <Link to='/admin'>
+            <AdminPanelSettingsIcon sx={{ color: 'black'}}/>
+            </Link>
+            
           </Toolbar>
         </Container>
       </AppBar>
