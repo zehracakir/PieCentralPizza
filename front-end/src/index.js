@@ -11,7 +11,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 const queryClient = new QueryClient()
-
+//bf yusuf test commit
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <QueryClientProvider client={queryClient}>
