@@ -13,9 +13,13 @@ import {
   FormGroup,
   FormControlLabel
 } from '@mui/material'
+import Uyari from '../Uyari'
 import { useFormik } from 'formik'
 import validations from './Validation'
+import { kayitOl } from '../../api/KullaniciApi/api'
+import { useAuth } from '../../contexts/AuthContext'
 function KayitOl({ register, closeDialog, closeRegister, openLogin }) {
+  const { Login } = useAuth();
   const handleLogin = () => {
     closeRegister();
     openLogin();
@@ -25,12 +29,17 @@ function KayitOl({ register, closeDialog, closeRegister, openLogin }) {
       isim: "",
       kullaniciAdi: "",
       email: "",
-      password: "",
-      passwordConfirmation:""
+      sifre: "",
+      sifreTekrar:""
     },
-    onSubmit: async (values) => {
-      console.log(values, " bilgileri veritabanına gönderilecek");
-      closeDialog();
+    onSubmit: async (values, bag) => {
+      try {
+        const kayitOlResponse = await kayitOl({isim:values.isim, kullaniciAdi:values.kullaniciAdi, email:values.email, sifre:values.sifre});
+        Login(kayitOlResponse.data);
+        closeDialog();
+      } catch (error) {
+        bag.setErrors({ general: error });
+      }
     },
     validationSchema: validations
   })
@@ -41,6 +50,7 @@ function KayitOl({ register, closeDialog, closeRegister, openLogin }) {
           <Typography variant='h4' gutterBottom sx={{ fontWeight: "bold", fontFamily: "sans-serif" }}>Kayıt Ol</Typography>
         </DialogTitle>
         <DialogContent>
+          {errors.general && <Uyari mesaj={"Bu kullanıcı daha önceden kayıtlı"} />}
           <TextField
             error={Boolean(errors.isim && touched.isim)}
             margin='dense'
@@ -81,29 +91,29 @@ function KayitOl({ register, closeDialog, closeRegister, openLogin }) {
             fullWidth
           />
           <TextField
-            error={Boolean(errors.password && touched.password)}
+            error={Boolean(errors.sifre && touched.sifre)}
             margin="dense"
             label="Şifre"
-            id="password"
-            name='password'
-            type="password"
+            id="sifre"
+            name='sifre'
+            type="sifre"
             onChange={handleChange}
             onBlur={handleBlur}
-            value={values.password}
-            helperText={errors.password && touched.password && `${errors.password}`}
+            value={values.sifre}
+            helperText={errors.sifre && touched.sifre && `${errors.sifre}`}
             fullWidth
           />
           <TextField 
-            error={Boolean(errors.passwordConfirmation && touched.passwordConfirmation)}
+            error={Boolean(errors.sifreTekrar && touched.sifreTekrar)}
             margin="dense"
             label="Şifre Onay"
-            id="passwordConfirmation"
-            name='passwordConfirmation'
+            id="sifreTekrar"
+            name='sifreTekrar'
             type="password"
             onChange={handleChange}
             onBlur={handleBlur}
-            value={values.passwordConfirmation}
-            helperText={errors.passwordConfirmation && touched.passwordConfirmation && `${errors.passwordConfirmation}`}
+            value={values.sifreTekrar}
+            helperText={errors.sifreTekrar && touched.sifreTekrar && `${errors.sifreTekrar}`}
             fullWidth
           />
           <FormGroup>

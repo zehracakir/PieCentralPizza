@@ -12,7 +12,11 @@ import {
 } from '@mui/material'
 import { useFormik } from 'formik'
 import validations from './Validation'
+import { girisYap } from '../../api/KullaniciApi/api'
+import { useAuth } from '../../contexts/AuthContext'
+import Uyari from '../Uyari'
 function GirisYap({ login, closeDialog, closeLogin, openRegister }) {
+    const { Login } = useAuth();
     const handleRegister = () => {
         closeLogin();
         openRegister();
@@ -20,11 +24,16 @@ function GirisYap({ login, closeDialog, closeLogin, openRegister }) {
     const { handleSubmit, handleChange, values, handleBlur, errors, touched } = useFormik({
         initialValues: {
             email: "",
-            password: ""
+            sifre: ""
         },
-        onSubmit: async (values) => {
-            console.log(values, " bilgileri veritabanına gönderilecek");
-            closeDialog();
+        onSubmit: async (values, bag) => {
+            try {
+                const girisYapResponse = await girisYap({ email: values.email, sifre: values.sifre });
+                Login(girisYapResponse.data);
+                closeDialog();
+            } catch (error) {
+                bag.setErrors({ general: error.response.data.mesaj });
+            }
         },
         validationSchema: validations
     })
@@ -36,6 +45,7 @@ function GirisYap({ login, closeDialog, closeLogin, openRegister }) {
                     <Typography variant='h4' gutterBottom sx={{ fontWeight: "bold", fontFamily: "sans-serif" }}>Giriş Yap</Typography>
                 </DialogTitle>
                 <DialogContent>
+                {errors.general && <Uyari mesaj={errors.general} />}
                     <TextField  
                         error={Boolean(errors.email && touched.email)}
                         margin="dense"
@@ -51,16 +61,16 @@ function GirisYap({ login, closeDialog, closeLogin, openRegister }) {
                     />
 
                     <TextField
-                        error={Boolean(errors.password && touched.password)}
+                        error={Boolean(errors.sifre && touched.sifre)}
                         margin="dense"
                         label="Şifre"
-                        id="password"
-                        name='password'
-                        type="password"
+                        id="sifre"
+                        name='sifre'
+                        type="sifre"
                         onChange={handleChange}
                         onBlur={handleBlur}
-                        value={values.password}
-                        helperText={errors.password && touched.password && `${errors.password}`}
+                        value={values.sifre}
+                        helperText={errors.sifre && touched.sifre && `${errors.sifre}`}
                         fullWidth
                     />
                 </DialogContent>
