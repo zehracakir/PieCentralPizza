@@ -41,8 +41,8 @@ function SipariseBasla() {
     <Container sx={{ mt: 5 }} maxWidth={'lg'}>
       <Typography sx={{ fontWeight: "bold", fontSize: '20px' }}>Siparişe Başla</Typography>
       <Grid container spacing={2}>
-        {cards.map((item) => (
-          <CardList resimUrl={item.resimUrl} baslik={item.baslik} link={item.link} />
+        {cards.map((item,index) => (
+          <CardList resimUrl={item.resimUrl} baslik={item.baslik} link={item.link} key={index}/>
         ))}
       </Grid>
 

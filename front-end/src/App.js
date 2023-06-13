@@ -1,7 +1,7 @@
 import './Reset.css'
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Outlet, Navigate } from 'react-router-dom';
 import Profil from './pages/Profil';
 import Hesabim from './pages/Hesabim';
 import Favorilerim from './pages/Favorilerim';
@@ -22,7 +22,7 @@ import AdminSiparisler from './pages/AdminSiparisler';
 import AdminUrunler from './pages/AdminUrunler';
 import AdminYeniUrun from './pages/AdminYeniUrun';
 import AdminKullanicilar from './pages/AdminKullanicilar';
-
+import { useAuth } from './contexts/AuthContext';
 function App() {
   return (
     <div >
@@ -40,7 +40,7 @@ function App() {
         <Route path='/yan-urunler/icecekler/urun-detay' element={<YanUrunlerDetay />} />
         <Route path='/yan-urunler/baslangiclar/urun-detay' element={<YanUrunlerDetay />} />
         <Route path="/profil/sepetim" element={<Sepetim />}/>
-
+        
         <Route path='/profil' element={<Profil />}>
           <Route index element={<Hesabim />} />
           <Route path='hesabim' element={<Hesabim />} />
@@ -69,5 +69,12 @@ function App() {
     </div>
   );
 }
-
+const ProtectedRoutes = () => {
+  const { loggedIn } = useAuth();
+  return loggedIn ? <Outlet/> : <Navigate to="/"/>
+}
+const ProtectedAdminRoutes = () => {
+  const { loggedIn, user } = useAuth();
+  return loggedIn && user.otorite === "admin" ? <Outlet/> : <Navigate to="/"/>
+}
 export default App;

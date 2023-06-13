@@ -20,6 +20,9 @@ import Badge from '@mui/material/Badge';
 import { styled } from '@mui/material/styles';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import LogoutIcon from '@mui/icons-material/Logout';
+import { useAuth } from '../../contexts/AuthContext';
+import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
+
 const StyledBadge = styled(Badge)(({ theme }) => ({
   '& .MuiBadge-badge': {
     right: -3,
@@ -30,6 +33,7 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 }));
 
 function Navbar() {
+  const { user, Logout, loggedIn } = useAuth();
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [login, setLogin] = useState(false);
   const [register, setRegister] = useState(false);
@@ -159,11 +163,28 @@ function Navbar() {
                 </StyledBadge>
               </IconButton>
             </Link>
-            <IconButton aria-label="cart" sx={{ color: 'black', mr: 1 }} size='sm'>
-                  <LogoutIcon />
-            </IconButton>
-            <Button variant="text" sx={{ color: "black", fontWeight: 'bold', border: "none", textTransform: 'none' }} startIcon={<AccountCircleIcon sx={{ color: 'black' }} />} onClick={openLogin}>Giriş Yap
-            </Button>
+
+            {!loggedIn &&
+              <Button variant="text" sx={{ color: "black", fontWeight: 'bold', border: "none", textTransform: 'none' }} startIcon={<AccountCircleIcon sx={{ color: 'black' }} />} onClick={openLogin}>Giriş Yap
+              </Button>
+            }
+            {loggedIn && 
+              <Link to='/profil'>
+                <IconButton aria-label="cart" sx={{ color: 'black', mr: 1 }} size='sm'>
+                  <AccountCircleIcon sx={{ color: 'black' }} />
+                </IconButton>
+              </Link>}
+            { loggedIn && user.otorite === "admin" &&
+              <Link to='/admin'>
+                <IconButton aria-label="cart" sx={{ color: 'black', mr: 1 }} size='sm'>
+                  <AdminPanelSettingsIcon sx={{ color: 'black' }} />
+                </IconButton>
+              </Link>
+            }
+            {loggedIn &&
+              <IconButton aria-label="cart" sx={{ color: 'black', mr: 1 }} size='sm' onClick={Logout}>
+                <LogoutIcon />
+              </IconButton>}
           </Toolbar>
         </Container>
       </AppBar>

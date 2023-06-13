@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import { LinearProgress, Box } from '@mui/material';
-
+import { benKimim } from '../api/KullaniciApi/api';
 const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
@@ -13,8 +13,10 @@ const AuthProvider = ({ children }) => {
     useEffect(() => {
         (async () => {
             try {
-                // const benKimim = await benKimim();
-                // setUser(benKimim)
+                if(loggedIn){
+                    const kullanici = await benKimim();
+                    setUser(kullanici.data)
+                }
                 setToken(localStorage.getItem("token"));
                 setLoggedIn(token ? true : false);
                 setLoading(false);
@@ -23,14 +25,18 @@ const AuthProvider = ({ children }) => {
             }
         })()
     }, [])
-    const Login = (response) => {
+
+    const Login = async (response) => {
         setToken(response.token);
         localStorage.setItem("token", response.token);
+        const kullanici = await benKimim();
+        setUser(kullanici.data);
         setLoggedIn(true);
     }
     const Logout = () => {
         setLoggedIn(false);
         localStorage.removeItem("token");
+        setUser(null);
         window.location.href = "/";
     }
 
