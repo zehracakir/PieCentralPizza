@@ -39,30 +39,35 @@ function App() {
         <Route path='/yan-urunler/soslar/urun-detay' element={<YanUrunlerDetay />} />
         <Route path='/yan-urunler/icecekler/urun-detay' element={<YanUrunlerDetay />} />
         <Route path='/yan-urunler/baslangiclar/urun-detay' element={<YanUrunlerDetay />} />
-        <Route path="/profil/sepetim" element={<Sepetim />}/>
-        
-        <Route path='/profil' element={<Profil />}>
-          <Route index element={<Hesabim />} />
-          <Route path='hesabim' element={<Hesabim />} />
-          <Route path='siparislerim' element={<Siparislerim />} />
-          <Route path='favorilerim' element={<Favorilerim />} />
-          <Route path='adreslerim' element={<Adreslerim />} />
-          <Route path="*" element={<NoMatch />} />
-        </Route>
-       
-        
+        <Route path="/profil/sepetim" element={<Sepetim />} />
 
-        <Route path='/admin' element={<Admin />}>
-          <Route index element={<AdminYeniUrun />} />
-          <Route path='admin-yeni-urun' element={<AdminYeniUrun />} />
-          <Route path='admin-siparisler' element={<AdminSiparisler />} />
-          <Route path='admin-urunler' element={<AdminUrunler />} />
-          <Route path='admin-kullanicilar' element={<AdminKullanicilar />} />
-          <Route path="*" element={<NoMatch />} />
+        <Route path='/' element={<ProtectedRoutes />}>
+          <Route path='/profil' element={<Profil />}>
+            <Route index element={<Hesabim />} />
+            <Route path='hesabim' element={<Hesabim />} />
+            <Route path='siparislerim' element={<Siparislerim />} />
+            <Route path='favorilerim' element={<Favorilerim />} />
+            <Route path='adreslerim' element={<Adreslerim />} />
+            <Route path="*" element={<NoMatch />} />
+          </Route>
         </Route>
+
+
+
+        <Route path='/' element={<ProtectedAdminRoutes />}>
+          <Route path='/admin' element={<Admin />}>
+            <Route index element={<AdminYeniUrun />} />
+            <Route path='admin-yeni-urun' element={<AdminYeniUrun />} />
+            <Route path='admin-siparisler' element={<AdminSiparisler />} />
+            <Route path='admin-urunler' element={<AdminUrunler />} />
+            <Route path='admin-kullanicilar' element={<AdminKullanicilar />} />
+            <Route path="*" element={<NoMatch />} />
+          </Route>
+        </Route>
+
         <Route path="*" element={<NoMatch />} />
 
-       
+
 
       </Routes>
       <Footer />
@@ -71,10 +76,10 @@ function App() {
 }
 const ProtectedRoutes = () => {
   const { loggedIn } = useAuth();
-  return loggedIn ? <Outlet/> : <Navigate to="/"/>
+  return loggedIn ? <Outlet /> : <Navigate to="/" />
 }
 const ProtectedAdminRoutes = () => {
   const { loggedIn, user } = useAuth();
-  return loggedIn && user.otorite === "admin" ? <Outlet/> : <Navigate to="/"/>
+  return loggedIn && user.otorite === "admin" ? <Outlet /> : <Navigate to="/" />
 }
 export default App;

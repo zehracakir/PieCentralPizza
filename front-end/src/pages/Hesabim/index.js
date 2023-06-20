@@ -8,38 +8,61 @@ import {
 import { useState } from 'react';
 import UpdateIcon from '@mui/icons-material/Update';
 import LockResetIcon from '@mui/icons-material/LockReset';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import validations from './Validation';
 import { Formik } from 'formik'
 import SifreDegistir from '../../components/SifreDegistir';
+import { useQuery, useQueryClient } from 'react-query'
+import { useAuth } from '../../contexts/AuthContext';
+import { kullaniciGetir } from '../../api/KullaniciApi/api';
+import { kullaniciGuncelle } from '../../api/KullaniciApi/api';
+import Uyari from '../../components/Uyari';
+import Basarili from '../../components/Basarili';
 function Hesabim() {
+  const { user } = useAuth();
   const [open, setOpen] = useState(false);
+  const [guncelleme,setGuncelleme] = useState(false);
   const handleOpen = () => {
     setOpen(true);
   };
   const handleClose = () => {
     setOpen(false);
   }
+  const queryClient = useQueryClient();
+  const { isLoading, error, data } = useQuery(['kullanici', user._id], () => kullaniciGetir(user._id));
+  if (isLoading) {
+    return <div> Loading...
+    </div>
+  }
 
+  if (error) {
+    return <div>{error.message}</div>
+  }
   return (
     <>
       <Formik
         initialValues={{
-          kullaniciAdi: '',
-          email: '',
-          telefonNo: '',
-          eskiSifre: '',
-          sifre: '',
-          sifreOnayla: '',
+          kullaniciAdi: data.data.kullaniciAdi,
+          email: data.data.email,
+          telefonNo: data.data.telefonNo,
         }}
-        onSubmit={(values) => {
-          console.log(values, " --> veri tabanına iletildi");
+        onSubmit={async (values, bag) => {
+          try {
+            const kullaniciGuncelleResponse = await kullaniciGuncelle(user._id, values);
+            queryClient.invalidateQueries('kullanici');
+            setGuncelleme(true);
+          } catch (error) {
+            bag.setErrors({ general: error});
+            setGuncelleme(false);
+          }
+
         }}
         validationSchema={validations}
       >
         {({ handleSubmit, handleBlur, handleChange, values, errors, touched }) => (
           <form onSubmit={handleSubmit}>
             <Box sx={{ width: 500, maxWidth: '100%' }}>
+            {guncelleme && <Basarili mesaj={"Güncelleme başarılı"} />}
+            {errors.general && <Uyari mesaj={"Bu kullanıcı adı alınmış"} />}
               <Typography variant='h5' mb={2} sx={{ fontWeight: 'bold' }}>Hesabım</Typography>
               <TextField
                 id="isim"
@@ -48,7 +71,7 @@ function Hesabim() {
                 variant="outlined"
                 fullWidth margin='normal'
                 InputProps={{ readOnly: true }}
-                defaultValue={"Profil İsmi"}
+                defaultValue={data.data.isim}
               />
               <TextField
                 id="kullaniciAdi"
@@ -87,7 +110,7 @@ function Hesabim() {
                 value={values.telefonNo}
                 helperText={errors.telefonNo && touched.telefonNo && `${errors.telefonNo}`}
               />
-              <Box sx={{display:"flex", justifyContent:"space-between"}}>
+              <Box sx={{ display: "flex", justifyContent: "space-between" }}>
                 <Button variant="outlined" color='success' endIcon={<LockResetIcon />} sx={{ textTransform: "none" }} onClick={handleOpen}>
                   <Typography variant='p'>Şifre Değiştir</Typography>
                 </Button>

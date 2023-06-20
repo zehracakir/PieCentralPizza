@@ -20,8 +20,23 @@ const benKimim = async () => {
     const response = await axios.get(`${process.env.REACT_APP_BASE_ENDPOINT}/benkimim`, setAuth());
     return response;
 }
+const kullaniciGetir = async (id) => {
+    const response = await axios.get(`${process.env.REACT_APP_BASE_ENDPOINT}/kullanici/${id}`, setAuth());
+    return  response;
+}
+const kullaniciGuncelle = async (id, input) => {
+    const response = await axios.put(`${process.env.REACT_APP_BASE_ENDPOINT}/kullanici/${id}`, input, setAuth());
+    return response;
+}
+const kullaniciSifreGuncelle = async (id, input) => {
+    const response = await axios.put(`${process.env.REACT_APP_BASE_ENDPOINT}/kullanici/${id}/sifredegistir`, input, setAuth());
+    return response;
+}
 export{
     kayitOl,
     girisYap,
-    benKimim
+    benKimim,
+    kullaniciGetir,
+    kullaniciGuncelle,
+    kullaniciSifreGuncelle
 }

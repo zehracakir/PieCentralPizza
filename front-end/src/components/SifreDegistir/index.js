@@ -12,18 +12,28 @@ import {
 import validations from './Validation'
 import { useFormik } from 'formik'
 import LockResetIcon from '@mui/icons-material/LockReset';
-
-
+import { useAuth } from '../../contexts/AuthContext';
+import { kullaniciSifreGuncelle } from '../../api/KullaniciApi/api';
+import Uyari from '../Uyari';
 function SifreDegistir({ open, handleClose }) {
+    const { user, Logout } = useAuth();
     const { handleSubmit, handleBlur, handleChange, values, errors, touched } = useFormik({
         initialValues: {
             eskiSifre: '',
             sifre: '',
             sifreOnayla: ''
         },
-        onSubmit: (values) => {
-            console.log(values, "--> değerleri veritabanına yazılacak");
-            handleClose();
+        onSubmit: async (values, bag) => {
+            try {
+                const response = await kullaniciSifreGuncelle(user._id,{
+                    eskiSifre: values.eskiSifre,
+                    yeniSifre: values.sifre
+                });
+                handleClose();
+                Logout();
+            } catch (error) {
+                bag.setErrors({ general: error });
+            }
         },
         validationSchema: validations
     })
@@ -38,6 +48,8 @@ function SifreDegistir({ open, handleClose }) {
                     <Typography variant='h4' gutterBottom sx={{ fontWeight: "bold", fontFamily: "sans-serif" }}>Sifre Degistir</Typography>
                 </DialogTitle>
                 <DialogContent>
+                {errors.general && <Uyari mesaj={errors.general.response.data.hata} />}
+
                     <TextField
                         id="eskiSifre"
                         name='eskiSifre'
