@@ -15,7 +15,9 @@ import EventNoteIcon from '@mui/icons-material/EventNote';
 import LogoutIcon from '@mui/icons-material/Logout';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import { Link, useLocation } from 'react-router-dom';
+import { useAuth } from '../../contexts/AuthContext';
 function ProfilListe() {
+    const { Logout } = useAuth();
     const location = useLocation();
     const currentPath = location.pathname; 
     return (
@@ -88,8 +90,7 @@ function ProfilListe() {
 
                 </ListItem>
                 <ListItem sx={{ display: "block", width: "90%" }}>
-                <Link to="/" style={{ textDecoration: "none", color: "black" }}>
-                    <ListItemButton>
+                    <ListItemButton onClick={Logout}>
                         <ListItemIcon>
                             <LogoutIcon fontSize='large' />
                         </ListItemIcon>
@@ -99,7 +100,6 @@ function ProfilListe() {
                             </Typography>
                         </ListItemText>
                     </ListItemButton>
-                    </Link>
                 </ListItem>
             </List>
         </Box>

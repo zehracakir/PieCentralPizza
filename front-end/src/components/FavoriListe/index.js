@@ -11,8 +11,16 @@ import StarIcon from '@mui/icons-material/Star';
 
 import { Popconfirm } from 'antd';
 import { StarOutlined } from '@ant-design/icons';
-
-function FavoriListe({ urun, ozellikler, fiyat, link }) {
+import { useAuth } from '../../contexts/AuthContext';
+import { useQueryClient } from 'react-query';
+import { kullaniciFavoriSil } from '../../api/UrunApi/api';
+function FavoriListe({ urun, ozellikler, fiyat, link, urunId }) {
+    const { user } = useAuth();
+    const queryClient = useQueryClient();
+    const favoriSil = async () => {
+        await kullaniciFavoriSil(user._id, urunId);
+        queryClient.invalidateQueries(['kullaniciFavorileri', user._id]);
+    }
     return (
         <ListItem disablePadding sx={{ maxWidth: "100%" }}>
             <ListItemAvatar>
@@ -24,7 +32,7 @@ function FavoriListe({ urun, ozellikler, fiyat, link }) {
                 placement='right'
                 title="Favori Sil"
                 description="Ürünü favorilerden kaldırmak istiyor musunuz ?"
-                onConfirm={() => console.log("Sipariş silindi")}
+                onConfirm={() => favoriSil()}
                 okText="Evet"
                 cancelText="Hayır"
                 icon={<StarOutlined style={{ color: '#dc3545' }} />}

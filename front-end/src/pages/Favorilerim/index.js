@@ -1,4 +1,4 @@
-import React from 'react'
+import { useState } from 'react';
 import {
   Typography,
   Box,
@@ -7,10 +7,26 @@ import {
 } from '@mui/material'
 import { Select } from 'antd';
 import FavoriListe from '../../components/FavoriListe'
+import { useAuth } from '../../contexts/AuthContext';
+import { kullaniciFavorileriGetir } from '../../api/UrunApi/api';
+import { useQuery } from 'react-query';
+
 function Favorilerim() {
+  const { user } = useAuth();
+  const { isLoading, error, data } = useQuery(['kullaniciFavorileri', user._id], () => kullaniciFavorileriGetir(user._id));
+  const [filtre, setFiltre] = useState("tumu");
   const handleChange = (value) => {
-    console.log(`selected ${value}`);
+    setFiltre(value);
   };
+  if (isLoading) {
+    return <div> Loading...
+    </div>
+  }
+
+  if (error) {
+    return <div>{error.message}</div>
+  }
+  console.log(data.data);
   return (
     <Box sx={{ display: "flex", flexDirection: "column" }}>
       <Typography variant='h5' sx={{ fontWeight: 'bold', display: "flex", justifyContent: "flex-start" }}>Favorilerim</Typography>
@@ -63,20 +79,19 @@ function Favorilerim() {
       <Box sx={{ width: '100%', bgcolor: 'background.paper' }}>
         <List sx={{ maxWidth: "100%" }}>
           <Divider />
-          <FavoriListe urun={"Çiftlik Evi (Büyük)"} ozellikler={"Pizza sosu, mozzarella peyniri, salam, mantar"} fiyat={"149.90 TL"} link={"https://raw.githubusercontent.com/SDU-Bilgisayar-Muhendisligi/PieCentralPizza/zehra/photos/urunler/pizzalar/ciftlik-evi.jpg"} />
           <Divider />
-          <Divider />
-          <FavoriListe urun={"Sucuk Mısır (Büyük)"} ozellikler={"Pizza sosu, mozzarella peyniri, sucuk, mısır"} fiyat={"149.90 TL"} link={"https://raw.githubusercontent.com/SDU-Bilgisayar-Muhendisligi/PieCentralPizza/zehra/photos/urunler/pizzalar/sucuk-misir.jpg"} />
-          <Divider />
-          <Divider />
-          <FavoriListe urun={"Çokomania"} ozellikler={"Bitter ve beyaz çikolatalı"} fiyat={"19.90 TL"} link={"https://raw.githubusercontent.com/SDU-Bilgisayar-Muhendisligi/PieCentralPizza/zehra/photos/urunler/yanUrunler/cokomania.jpg"} />
-          <Divider />
-          <Divider />
-          <FavoriListe urun={"Sufle"} ozellikler={"Eriyen Çikolata ve yumuşak kek"} fiyat={"34.90 TL"} link={"https://raw.githubusercontent.com/SDU-Bilgisayar-Muhendisligi/PieCentralPizza/zehra/photos/urunler/yanUrunler/sufle.jpg"} />
-          <Divider />
-          <Divider />
-          <FavoriListe urun={"Lezzet 3'lüsü (Büyük)"} ozellikler={"Pizza sosu, mozzarella peyniri, sosis, mısır, mantar"} fiyat={"149.90 TL"} link={"https://raw.githubusercontent.com/SDU-Bilgisayar-Muhendisligi/PieCentralPizza/zehra/photos/urunler/pizzalar/lezzet-3lusu.jpg"} />
-          <Divider />
+          {data.data.favoriler.map((favori, index) => {
+            if (filtre === "tumu" || favori.kategori === filtre) {
+              return (
+                <div key={index}>
+                  <FavoriListe urun={favori.urunAdi} ozellikler={favori.urunOzellikler.join(", ")} fiyat={`${favori.urunFiyat} TL`} link={favori.resimUrl} urunId={favori._id} />
+                  <Divider />
+                  <Divider />
+                </div>
+              )
+            }
+
+          })}
         </List>
       </Box>
     </Box>
