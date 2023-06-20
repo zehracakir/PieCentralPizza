@@ -156,25 +156,26 @@ function Navbar() {
               </Link>
               <UrunArama />
             </Box>
-            <Link to='/profil/sepetim'>
-              <IconButton aria-label="cart" sx={{ color: 'black', mr: 1 }} size='sm'>
-                <StyledBadge badgeContent={4} color="error">
-                  <ShoppingCartIcon />
-                </StyledBadge>
-              </IconButton>
-            </Link>
-
+            {loggedIn &&
+              <Link to='/profil/sepetim'>
+                <IconButton aria-label="cart" sx={{ color: 'black', mr: 1 }} size='sm'>
+                  <StyledBadge badgeContent={4} color="error">
+                    <ShoppingCartIcon />
+                  </StyledBadge>
+                </IconButton>
+              </Link>
+            }
             {!loggedIn &&
               <Button variant="text" sx={{ color: "black", fontWeight: 'bold', border: "none", textTransform: 'none' }} startIcon={<AccountCircleIcon sx={{ color: 'black' }} />} onClick={openLogin}>Giriş Yap
               </Button>
             }
-            {loggedIn && 
+            {loggedIn &&
               <Link to='/profil'>
                 <IconButton aria-label="cart" sx={{ color: 'black', mr: 1 }} size='sm'>
                   <AccountCircleIcon sx={{ color: 'black' }} />
                 </IconButton>
               </Link>}
-            { loggedIn && user.otorite === "admin" &&
+            {loggedIn && user.otorite === "admin" &&
               <Link to='/admin'>
                 <IconButton aria-label="cart" sx={{ color: 'black', mr: 1 }} size='sm'>
                   <AdminPanelSettingsIcon sx={{ color: 'black' }} />

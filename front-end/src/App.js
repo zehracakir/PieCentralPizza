@@ -39,9 +39,11 @@ function App() {
         <Route path='/yan-urunler/soslar/urun-detay' element={<YanUrunlerDetay />} />
         <Route path='/yan-urunler/icecekler/urun-detay' element={<YanUrunlerDetay />} />
         <Route path='/yan-urunler/baslangiclar/urun-detay' element={<YanUrunlerDetay />} />
-        <Route path="/profil/sepetim" element={<Sepetim />} />
+
+        
 
         <Route path='/' element={<ProtectedRoutes />}>
+        <Route path="/profil/sepetim" element={<Sepetim />} />
           <Route path='/profil' element={<Profil />}>
             <Route index element={<Hesabim />} />
             <Route path='hesabim' element={<Hesabim />} />
