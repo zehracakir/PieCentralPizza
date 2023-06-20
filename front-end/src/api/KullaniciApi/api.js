@@ -32,11 +32,31 @@ const kullaniciSifreGuncelle = async (id, input) => {
     const response = await axios.put(`${process.env.REACT_APP_BASE_ENDPOINT}/kullanici/${id}/sifredegistir`, input, setAuth());
     return response;
 }
+const kullaniciAdresGetir = async (id) => {
+    const response = await axios.get(`${process.env.REACT_APP_BASE_ENDPOINT}/kullanici/${id}/adreslerim`, setAuth());
+    return response;    
+}
+const kullaniciAdresSil = async (id, adresId) => {
+    const response = await axios.delete(`${process.env.REACT_APP_BASE_ENDPOINT}/kullanici/${id}/adreslerim/${adresId}`, setAuth());
+    return response;
+}
+const kullaniciAdresEkle = async (id, input) => {
+    const response = await axios.post(`${process.env.REACT_APP_BASE_ENDPOINT}/kullanici/${id}/adreslerim`, input, setAuth());
+    return response;
+}
+const kullaniciAdresGuncelle = async (id, adresId, input) => {
+    const response = await axios.put(`${process.env.REACT_APP_BASE_ENDPOINT}/kullanici/${id}/adreslerim/${adresId}`, input, setAuth());
+    return response;
+}
 export{
     kayitOl,
     girisYap,
     benKimim,
     kullaniciGetir,
     kullaniciGuncelle,
-    kullaniciSifreGuncelle
+    kullaniciSifreGuncelle,
+    kullaniciAdresGetir,
+    kullaniciAdresSil,
+    kullaniciAdresEkle,
+    kullaniciAdresGuncelle
 }

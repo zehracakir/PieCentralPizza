@@ -12,7 +12,18 @@ import {
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Formik } from 'formik'
 import validations from './Validation';
-function AdresDuzenle({ open, handleClose, sehir, ilce, mahalle, sokak, adresAdi }) {
+import { useAuth } from '../../contexts/AuthContext';
+import { kullaniciAdresGuncelle } from '../../api/KullaniciApi/api';
+import { kullaniciAdresSil } from '../../api/KullaniciApi/api';
+import { useQueryClient } from 'react-query';
+function AdresDuzenle({ open, handleClose, sehir, ilce, mahalle, sokak, adresAdi, adresId }) {
+  const { user } = useAuth();
+  const queryClient = useQueryClient();
+  const adresimiSil = async () => {
+    const response = await kullaniciAdresSil(user._id,adresId);
+    queryClient.invalidateQueries(['kullaniciAdres', user._id]);
+    handleClose();
+  }
   return (
     <Dialog open={open} onClose={handleClose} fullWidth maxWidth={"sm"}>
       <Formik
@@ -23,7 +34,14 @@ function AdresDuzenle({ open, handleClose, sehir, ilce, mahalle, sokak, adresAdi
           sokak: sokak,
           adresAdi: adresAdi
         }}
-        onSubmit={(values) => {
+        onSubmit={ async (values,bag) => {
+          try {
+            const response = await kullaniciAdresGuncelle(user._id,adresId,values);
+            queryClient.invalidateQueries(['kullaniciAdres', user._id]);
+            handleClose();
+          } catch (error) {
+            bag.setErrors({ general: error});  
+          }
           console.log(values, "--> değerleri veritabanına yazılacak");
           handleClose();
         }}
@@ -119,7 +137,7 @@ function AdresDuzenle({ open, handleClose, sehir, ilce, mahalle, sokak, adresAdi
                   >
                     <Typography sx={{ fontWeight: "bold" }}>Adresimi Kaydet</Typography>
                   </Button>
-                  <Button variant="text" startIcon={<DeleteIcon />} sx={{ width: "100%", textTransform: 'none', color: "#616161" }} onClick={handleClose}>
+                  <Button variant="text" startIcon={<DeleteIcon />} sx={{ width: "100%", textTransform: 'none', color: "#616161" }} onClick={adresimiSil}>
                     <Typography variant='p' sx={{ fontWeight: "bold" }}>Adresimi Sil</Typography>
                   </Button>
                 </Grid>

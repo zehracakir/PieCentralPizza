@@ -12,7 +12,14 @@ import {
 
 import validations from './Validation'
 import { useFormik } from 'formik'
+import { useAuth } from '../../contexts/AuthContext'
+import { kullaniciAdresEkle } from '../../api/KullaniciApi/api'
+import { useQueryClient } from 'react-query';
+
 function AdresEkle({ open, handleClose }) {
+    const { user } = useAuth();
+    const queryClient = useQueryClient();
+
     const { handleSubmit, handleBlur, handleChange, values, errors, touched } = useFormik({
         initialValues: {
             sehir: '',
@@ -21,7 +28,13 @@ function AdresEkle({ open, handleClose }) {
             sokak: '',
             adresAdi: ''
         },
-        onSubmit: (values) => {
+        onSubmit: async (values, bag) => {
+            try {
+              const response = await kullaniciAdresEkle(user._id, values);
+              queryClient.invalidateQueries(['kullaniciAdres', user._id]);
+            } catch (error) {
+                bag.setErrors({ general: error});  
+            }
             console.log(values, "--> değerleri veritabanına yazılacak");
             handleClose();
         },

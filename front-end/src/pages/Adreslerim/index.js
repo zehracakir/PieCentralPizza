@@ -9,6 +9,9 @@ import {
 import AddLocationIcon from '@mui/icons-material/AddLocation';
 import AdresEkle from '../../components/AdresEkle';
 import AdresListe from '../../components/AdresListe';
+import { useAuth } from '../../contexts/AuthContext';
+import { useQuery } from 'react-query'
+import { kullaniciAdresGetir } from '../../api/KullaniciApi/api';
 function Adreslerim() {
     const [yeniAdres, setYeniAdres] = useState(false)
     const handleYeniAdresClose = () => {
@@ -17,8 +20,16 @@ function Adreslerim() {
     const handleYeniAdresOpen = () => {
         setYeniAdres(true)
     }
+    const { user } = useAuth();
+    const { isLoading, error, data } = useQuery(['kullaniciAdres', user._id], () => kullaniciAdresGetir(user._id));
+    if (isLoading) {
+        return <div> Loading...
+        </div>
+      }
     
-   
+      if (error) {
+        return <div>{error.message}</div>
+      }
     return (
         <Box sx={{ display: "flex", flexDirection: "column" }}>
             <Typography variant='h5' mb={2} sx={{ fontWeight: 'bold' }}>Adreslerim</Typography>
@@ -26,10 +37,14 @@ function Adreslerim() {
             <Box sx={{ width: '100%', bgcolor: 'background.paper' }}>
                 <List sx={{ maxWidth: "100%" }}>
                     <Divider />
-                    <AdresListe  adresIsmi={"Ev"} adres={"Soğucak Mh, 2, Kuşadası, Aydın"} />
-                    <Divider />
-                    <AdresListe adresIsmi={"İş Yeri"} adres={"Yukarı dikmen mh, 664, Çankaya, Ankara"} />
-                    <Divider />
+                    {data.data.map((adres,index) => {
+                        return (
+                            <div key={index}>
+                                <AdresListe adres={adres.adres} adresId={adres._id} />
+                                <Divider />
+                            </div>
+                        )
+                    })}
                 </List>
             </Box>
             <Box sx={{ display: 'flex', justifyContent: 'flex-start' }}>
