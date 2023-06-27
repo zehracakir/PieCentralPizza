@@ -8,8 +8,10 @@ import {
 import AddIcon from '@mui/icons-material/Add';
 import validations from './Validation';
 import { Formik } from 'formik'
+import Uyari from '../../components/Uyari';
 
 function AdminYeniUrun() {
+  
   return (
     <Formik
       initialValues={{
@@ -29,6 +31,7 @@ function AdminYeniUrun() {
         <form onSubmit={handleSubmit}>
           <Box sx={{ width: 500, maxWidth: '100%' }}>
             <Typography variant='h5' mb={2} sx={{ fontWeight: 'bold' }}>Yeni Ürün</Typography>
+            {errors.general && <Uyari mesaj={"Bu kullanıcı daha önceden kayıtlı"} />}
             <TextField
               id="urunAdi"
               label="Ürün Adı"

@@ -85,14 +85,23 @@ function AdminUrunListe({ urunAdi, urunOzellikler, urunFiyat, resimUrl, urunDeta
                 </TableHead>
                 <TableBody>
                   <TableRow key={id}>
-                    <TableCell >
-                      {urunFiyat}
+                    <TableCell  >
+                      {urunFiyat} TL
                     </TableCell>
                     <TableCell >
                       {urunDetay}
                     </TableCell>
                     <TableCell >
                       {urunOzellikler}
+                    {/* {urunOzellikler.length > 0 ? urunOzellikler.map((ozellik, index) => {
+                                    return (
+                                        <React.Fragment key={index}>
+                                            {ozellik}
+                                            {index !== urunOzellikler.length - 1 && ','}
+                                            &nbsp;
+                                        </React.Fragment>
+                                    );
+                                }) : null} */}
                     </TableCell>
                   </TableRow>
 

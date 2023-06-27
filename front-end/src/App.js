@@ -34,11 +34,11 @@ function App() {
         <Route path='/pizzalar' element={<Pizzalar />} />
         <Route path='/yan-urunler' element={<YanUrunler />} />
         <Route path='/hakkimizda' element={<Hakkimizda />} />
-        <Route path='/pizzalar/urun-detay' element={<PizzalarDetay />} />
-        <Route path='/yan-urunler/tatlilar/urun-detay' element={<YanUrunlerDetay />} />
-        <Route path='/yan-urunler/soslar/urun-detay' element={<YanUrunlerDetay />} />
-        <Route path='/yan-urunler/icecekler/urun-detay' element={<YanUrunlerDetay />} />
-        <Route path='/yan-urunler/baslangiclar/urun-detay' element={<YanUrunlerDetay />} />
+        <Route path='/pizzalar/urun-detay/:urunid' element={<PizzalarDetay />} />
+        <Route path='/yan-urunler/tatlilar/urun-detay/:urunid' element={<YanUrunlerDetay />} />
+        <Route path='/yan-urunler/soslar/urun-detay/:urunid' element={<YanUrunlerDetay />} />
+        <Route path='/yan-urunler/icecekler/urun-detay/:urunid' element={<YanUrunlerDetay />} />
+        <Route path='/yan-urunler/baslangiclar/urun-detay/:urunid' element={<YanUrunlerDetay />} />
         <Route path="/profil/sepetim" element={<Sepetim />}/>
 
         <Route path='/profil' element={<Profil />}>
