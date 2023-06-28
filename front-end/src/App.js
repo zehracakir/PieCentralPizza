@@ -34,13 +34,12 @@ function App() {
         <Route path='/pizzalar' element={<Pizzalar />} />
         <Route path='/yan-urunler' element={<YanUrunler />} />
         <Route path='/hakkimizda' element={<Hakkimizda />} />
-        <Route path='/pizzalar/urun-detay' element={<PizzalarDetay />} />
-        <Route path='/yan-urunler/tatlilar/urun-detay' element={<YanUrunlerDetay />} />
-        <Route path='/yan-urunler/soslar/urun-detay' element={<YanUrunlerDetay />} />
-        <Route path='/yan-urunler/icecekler/urun-detay' element={<YanUrunlerDetay />} />
-        <Route path='/yan-urunler/baslangiclar/urun-detay' element={<YanUrunlerDetay />} />
 
-        
+        <Route path='/pizzalar/urun-detay/:urunid' element={<PizzalarDetay />} />
+        <Route path='/yan-urunler/tatlilar/urun-detay/:urunid' element={<YanUrunlerDetay />} />
+        <Route path='/yan-urunler/soslar/urun-detay/:urunid' element={<YanUrunlerDetay />} />
+        <Route path='/yan-urunler/icecekler/urun-detay/:urunid' element={<YanUrunlerDetay />} />
+        <Route path='/yan-urunler/baslangiclar/urun-detay/:urunid' element={<YanUrunlerDetay />} />
 
         <Route path='/' element={<ProtectedRoutes />}>
         <Route path="/profil/sepetim" element={<Sepetim />} />
@@ -54,8 +53,6 @@ function App() {
           </Route>
         </Route>
 
-
-
         <Route path='/' element={<ProtectedAdminRoutes />}>
           <Route path='/admin' element={<Admin />}>
             <Route index element={<AdminYeniUrun />} />
@@ -66,11 +63,7 @@ function App() {
             <Route path="*" element={<NoMatch />} />
           </Route>
         </Route>
-
         <Route path="*" element={<NoMatch />} />
-
-
-
       </Routes>
       <Footer />
     </div>

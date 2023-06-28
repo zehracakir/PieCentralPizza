@@ -6,7 +6,7 @@ function SepeteEkle({urunFiyat}) {
     <Container>
       <Button variant="contained" color="error"
         sx={{ textTransform: 'none', width: '100%' }}>
-        Sepete Ekle {urunFiyat}
+        Sepete Ekle {urunFiyat} TL
       
       </Button>
     

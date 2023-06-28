@@ -8,20 +8,22 @@ import SelectHamurSecimi from "../../../components/UrunDetayComponent/SelectHamu
 import UrunDetaySagKisim from "../../../components/UrunDetayComponent/UrunDetaySagKisim";
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
-
+import {useQuery } from 'react-query';
+import { urunDetayGetir } from '../../../api/UrunApi/api';
+import { useParams } from 'react-router-dom';
 function UrunDetay() {
-
-  const urunDetaylari = {
-    urunAdi: "Çiftlik Evi (Büyük)",
-    urunDetay: "Yoğun Mozzarella Tadı",
-    urunOzellikler: "Pizza sosu, mozzarella peyniri, salam, mantar",
-    resimUrl: "https://raw.githubusercontent.com/SDU-Bilgisayar-Muhendisligi/PieCentralPizza/zehra/photos/urunler/pizzalar/ciftlik-evi.jpg",
-    urunFiyat: "149.90 TL"
-  };
-
   const theme = useTheme();
   const isLgOrMd = useMediaQuery(theme.breakpoints.down('md'));
+  const { urunid } = useParams();
+  const { data, isLoading, isError } = useQuery(["urunDetaylari", urunid], () => urunDetayGetir(urunid));
+  console.log(data);
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
+  if (isError) {
+    return <div>Error fetching data</div>;
+  }
 
 
   return (
@@ -30,15 +32,25 @@ function UrunDetay() {
         <Grid container spacing={2}>
 
           <Grid item xs={12} md={6}>
-            <Typography sx={{ fontWeight: "bold", fontSize: '30px' }}>{urunDetaylari.urunAdi}</Typography>
-            <Typography variant="body2" color="text.secondary">{urunDetaylari.urunDetay}</Typography>
+            <Typography sx={{ fontWeight: "bold", fontSize: '30px' }}>{data.urunAdi}</Typography>
+            <Typography variant="body2" color="text.secondary">{data.urunDetay}</Typography>
             <Typography sx={{ fontWeight: "bold", mt: 2 }}>İçindekiler</Typography>
-            <Typography variant="body2" color="text.secondary" sx={{ mb: 3 }}>{urunDetaylari.urunOzellikler}</Typography>
+            <Typography variant="body2" color="text.secondary" sx={{ mb: 3 }}>
+            {data.urunOzellikler.length > 0 ? data.urunOzellikler.map((ozellik, index) => {
+                                    return (
+                                        <React.Fragment key={index}>
+                                            {ozellik}
+                                            {index !== data.urunOzellikler.length - 1 && ','}
+                                            &nbsp;
+                                        </React.Fragment>
+                                    );
+                                }) : null}
+            </Typography>
             <SelectHamurSecimi />
 
           </Grid>
           <Grid item xs={12} md={6} sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', height: '360px' }}>
-            <UrunDetaySagKisim resimUrl={urunDetaylari.resimUrl} urunFiyat={urunDetaylari.urunFiyat}></UrunDetaySagKisim>
+            <UrunDetaySagKisim resimUrl={data.resimUrl} urunFiyat={data.urunFiyat} TL></UrunDetaySagKisim>
           </Grid>
 
 
