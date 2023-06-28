@@ -26,7 +26,6 @@ function Favorilerim() {
   if (error) {
     return <div>{error.message}</div>
   }
-  console.log(data.data);
   return (
     <Box sx={{ display: "flex", flexDirection: "column" }}>
       <Typography variant='h5' sx={{ fontWeight: 'bold', display: "flex", justifyContent: "flex-start" }}>Favorilerim</Typography>

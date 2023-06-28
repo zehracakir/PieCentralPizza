@@ -6,7 +6,7 @@ import Box from '@mui/material/Box';
 import UrunDetaySagKisim from "../../../components/UrunDetayComponent/UrunDetaySagKisim";
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import {useQuery } from 'react-query';
+import { useQuery } from 'react-query';
 import { urunDetayGetir } from '../../../api/UrunApi/api';
 import { useParams } from 'react-router-dom';
 
@@ -16,7 +16,6 @@ function YanUrunlerDetay() {
   const isLgOrMd = useMediaQuery(theme.breakpoints.down('md'));
   const { urunid } = useParams();
   const { data, isLoading, isError } = useQuery(["urunDetaylari", urunid], () => urunDetayGetir(urunid));
-  console.log(data);
   if (isLoading) {
     return <div>Loading...</div>;
   }
@@ -48,7 +47,7 @@ function YanUrunlerDetay() {
 
           </Grid>
           <Grid item xs={12} md={6} sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center',height: '360px'}} maxWidth={'100%'}>
-          <UrunDetaySagKisim resimUrl={data.resimUrl} urunFiyat={data.urunFiyat} TL></UrunDetaySagKisim>
+          <UrunDetaySagKisim urunId = {urunid} urunAdi = {data.urunAdi} resimUrl={data.resimUrl} urunFiyat={data.urunFiyat} TL></UrunDetaySagKisim>
             
           </Grid>
 

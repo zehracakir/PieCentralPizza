@@ -16,6 +16,10 @@ const kullaniciFavoriSil = async (userid, urunid) => {
     return response;
 }
 
+const kullaniciFavoriEkle = async (userid, urunid) => {
+    const response = await axios.post(`${process.env.REACT_APP_BASE_ENDPOINT}/kullanici/${userid}/favoriler/${urunid}`, {}, setAuth());
+    return response;
+}
 
 const kategoriyeGoreUrunGetir = async (kategori) => {
     const { data } = await axios.get(`${process.env.REACT_APP_BASE_ENDPOINT}/kategoriler/${kategori}`);
@@ -42,6 +46,7 @@ export {
     kategoriyeGoreUrunGetir,
     urunDetayGetir,
     yeniUrunEkle,
-    adminTumUrunleriGetir
+    adminTumUrunleriGetir,
+    kullaniciFavoriEkle
 }
 

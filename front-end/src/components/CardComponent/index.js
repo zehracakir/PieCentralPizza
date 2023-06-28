@@ -6,30 +6,54 @@ import Button from '@mui/joy/Button';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import { CardActionArea, CardActions } from '@mui/material';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import FavoriteBorderRoundedIcon from '@mui/icons-material/FavoriteBorderRounded';
 import IconButton from '@mui/joy/IconButton';
 import { Link } from 'react-router-dom';
 import './style.css'
+import { useAuth } from '../../contexts/AuthContext';
+import { kullaniciFavoriEkle } from '../../api/UrunApi/api';
+import { kullaniciFavorileriGetir } from '../../api/UrunApi/api';
+import { kullaniciFavoriSil } from '../../api/UrunApi/api';
+import { useQueryClient } from 'react-query';
 
 function CardComponent({ resimUrl, urunAdi, urunDetay, urunOzellikler, urunFiyat, link, urunid }) {
+    const queryClient = useQueryClient();
+    const { user } = useAuth();
     const [isFavorite, setIsFavorite] = useState(false);
+    useEffect(() => {
+        const fetchData = async () => {
+            const favoriler = await kullaniciFavorileriGetir(user._id);
+            setIsFavorite(favoriler.data.favoriler.some((urun) => urun.urunAdi === urunAdi));
+        };
+        fetchData();
+    }, [isFavorite]);
+    const handleFavoriteClick = async () => {
+        if(!isFavorite){
+            await kullaniciFavoriEkle(user._id, urunid);
+            setIsFavorite(!isFavorite);
+            queryClient.invalidateQueries(['kullaniciFavorileri', user._id]);
 
-    const handleFavoriteClick = () => {
-        setIsFavorite(!isFavorite);
+        }else{
+            await kullaniciFavoriSil(user._id, urunid);
+            setIsFavorite(!isFavorite);
+            queryClient.invalidateQueries(['kullaniciFavorileri', user._id]);
+
+        }
+
     };
     return (
         <Grid item xs={12} sm={6} md={4} lg={3} sx={{ mb: 2 }}>
 
             <Card sx={{ maxWidth: 280, height: 'auto' }} className="card-image">
-                <CardActionArea>
-                    <IconButton onClick={handleFavoriteClick}
+            <IconButton onClick={handleFavoriteClick}
                         size="sm"
                         variant="plain"
                         color="neutral"
                         sx={{ ml: 'auto', justifyContent: 'flex-end', display: 'flex' }}>
                         {isFavorite ? <FavoriteBorderRoundedIcon style={{ color: '#dc3545' }} /> : <FavoriteBorderRoundedIcon />}
                     </IconButton>
+                <CardActionArea>
                     <Link to={`/${link}/urun-detay/${urunid}`} style={{ textDecoration: 'none', color: 'black' }}>
                         <CardMedia
                             sx={{ height: 180 }}
