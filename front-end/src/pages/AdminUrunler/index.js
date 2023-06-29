@@ -13,10 +13,12 @@ import {
 } from '@mui/material'
 import AdminUrunListe from '../../components/AdminUrunListe'
 import { adminTumUrunleriGetir } from '../../api/UrunApi/api';
-import {useQuery } from 'react-query';
+import { useQuery } from 'react-query';
 function AdminUrunler() {
   const {isLoading,error,data}=useQuery(["urunler"],()=>adminTumUrunleriGetir());
-  if(isLoading) return "Loading..."
+  if(isLoading){
+  return "Loading..."
+  } 
 
 if(error) return "Error! "+ error.message;
 

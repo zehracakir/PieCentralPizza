@@ -33,8 +33,9 @@ function AdminUrunListe({ urunAdi, urunOzellikler, urunFiyat, resimUrl, urunDeta
   }
   const urunSil = async () => {
     const response = await adminUrunSil(urunid);
-    queryClient.invalidateQueries(['urunler', urunid]);
+    queryClient.invalidateQueries(['urunler']);
 }
+
   return (
     <React.Fragment >
       <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
@@ -54,7 +55,7 @@ function AdminUrunListe({ urunAdi, urunOzellikler, urunFiyat, resimUrl, urunDeta
           {urunAdi}
         </TableCell>
         <TableCell >
-          <AdminUrunGuncelle open={open2} handleClose={handleClose} urunid={urunid} urunAdi={urunAdi} urunDetay={urunDetay} urunFiyat={urunFiyat} urunOzellikler={urunOzellikler} resimUrl={resimUrl} stok={stok} kategori={kategori}/>
+          <AdminUrunGuncelle open={open2} handleClose={handleClose} urunid={urunid} urunAdi={urunAdi} urunDetay={urunDetay} urunFiyat={urunFiyat} urunOzellikler={String(urunOzellikler)} resimUrl={resimUrl} stok={stok} kategori={kategori}/>
           <IconButton edge="end" aria-label="comments" onClick={clickOpen}>
             <ModeEditIcon />
           </IconButton>

@@ -11,44 +11,21 @@ import Paper from '@mui/material/Paper';
 import AdminKullaniciListe from '../../components/AdminKullaniciListe'
 import List from '@mui/material/List'
 import { Select } from 'antd';
-
-const kullanicilar = [
-  {
-    id: 1,
-    email: 'zehracakir@email.com',
-    kayitTarihi: '5 May, 18:05',
-    telefonNo: '05558741212',
-    kullaniciAdi: 'zehracakir',
-    adres: 'Sdü Batı Kampüsü, Mühendislik Fakültesi Bilgisayar mühendisliği bölümü'
-  },
-  {
-    id: 2,
-    email: 'yusufdd@gmail.com',
-    kayitTarihi: '15 May, 18:05',
-    telefonNo: '05558741212',
-    kullaniciAdi: 'yusufdd',
-    adres: 'Sdü Batı Kampüsü, Mühendislik Fakültesi Bilgisayar mühendisliği bölümü'
-  },
-  {
-    id: 3,
-    email: 'zehra_cakir@hotmail.com',
-    kayitTarihi: '23 April, 19:00',
-    telefonNo: '05558741212',
-    kullaniciAdi: 'zehra_cakir',
-    adres: 'Sdü Batı Kampüsü, Mühendislik Fakültesi Bilgisayar mühendisliği bölümü'
-  }, {
-    id: 4,
-    email: 'aliveli@hotmail.com',
-    kayitTarihi: '2 June, 19:00',
-    telefonNo: '05558741212',
-    kullaniciAdi: 'ali_veli',
-    adres: 'Sdü Batı Kampüsü, Mühendislik Fakültesi Bilgisayar mühendisliği bölümü'
-  }
-]
+import { adminTumKullanicilariGetir } from '../../api/KullaniciApi/api';
+import { useQuery } from 'react-query';
 const handleChange = (value) => {
   console.log(`selected ${value}`);
 };
 function AdminKullanicilar() {
+  const {isLoading,error,data}=useQuery(["kullanicilar"],()=>adminTumKullanicilariGetir());
+  if(isLoading){
+  return "Loading..."
+  } 
+
+if(error) return "Error! "+ error.message;
+
+  const kullanicilar = data.data;
+  console.log(kullanicilar);
   return (
     <Box sx={{ display: "flex", flexDirection: "column" }}>
 
@@ -137,7 +114,7 @@ function AdminKullanicilar() {
               </TableHead>
               <TableBody>
                 {kullanicilar.map((item) => (
-                  <AdminKullaniciListe id={item.id} email={item.email} kullaniciAdi={item.kullaniciAdi} kayitTarihi={item.kayitTarihi} telefonNo={item.telefonNo} adres={item.adres} />
+                  <AdminKullaniciListe userid={item._id} email={item.email} kullaniciAdi={item.kullaniciAdi} kayitTarihi={item.kayitTarihi} telefonNo={item.telefonNo} adres={item.adres} />
                 ))}
 
               </TableBody>

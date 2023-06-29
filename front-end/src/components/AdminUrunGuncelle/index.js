@@ -30,10 +30,11 @@ function AdminUrunGuncelle({ open, handleClose,urunid,urunAdi,urunDetay,urunOzel
         onSubmit={ async (values,bag) => {
           try {
             const response = await adminUrunGuncelle(urunid,values);
-            queryClient.invalidateQueries(['urunler', urunid]);
+            queryClient.invalidateQueries(['urunler']);
             handleClose();
           } catch (error) {
-            bag.setErrors({ general: error});  
+            bag.setErrors({ general: error}); 
+            console.log(error); 
           }
           console.log(values, "--> değerleri veritabanına yazılacak");
           handleClose();
