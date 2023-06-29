@@ -9,11 +9,11 @@ const AuthProvider = ({ children }) => {
     const [token, setToken] = useState(localStorage.getItem('token') ? localStorage.getItem('token') : null);
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
-
+    const [sepet, setSepet] = useState([]);
     useEffect(() => {
         (async () => {
             try {
-                if(loggedIn){
+                if (loggedIn) {
                     const kullanici = await benKimim();
                     setUser(kullanici.data)
                 }
@@ -25,7 +25,15 @@ const AuthProvider = ({ children }) => {
             }
         })()
     }, [])
-
+    useEffect(() => {
+        console.log(sepet);
+    }, [sepet])
+    const SepeteEkle = (urun) => {
+        setSepet([...sepet, urun]);
+    }
+    const SepettenSil = (urun) => {
+        setSepet(sepet.filter((u) => u.urunId !== urun.urunId));
+    }
     const Login = async (response) => {
         setToken(response.token);
         localStorage.setItem("token", response.token);
@@ -46,6 +54,9 @@ const AuthProvider = ({ children }) => {
         Login,
         Logout,
         user,
+        sepet,
+        SepeteEkle,
+        SepettenSil
     };
     if (loading) {
         return (

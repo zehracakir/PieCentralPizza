@@ -34,7 +34,7 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 }));
 
 function Navbar() {
-  const { user, Logout, loggedIn } = useAuth();
+  const { user, Logout, loggedIn, sepet } = useAuth();
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [login, setLogin] = useState(false);
   const [register, setRegister] = useState(false);
@@ -160,7 +160,7 @@ function Navbar() {
             {loggedIn &&
               <Link to='/profil/sepetim'>
                 <IconButton aria-label="cart" sx={{ color: 'black', mr: 1 }} size='sm'>
-                  <StyledBadge badgeContent={4} color="error">
+                  <StyledBadge badgeContent={sepet.length} color="error">
                     <ShoppingCartIcon />
                   </StyledBadge>
                 </IconButton>

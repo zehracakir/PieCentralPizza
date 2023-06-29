@@ -1,19 +1,22 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
-function UrunAdeti() {
-  const [count, setCount] = useState(1);
-
+function UrunAdeti({ urunFiyat, fiyatBelirle, count, setCount }) {
   const handleIncrement = () => {
-    setCount(count + 1);
+    fiyatBelirle(urunFiyat + urunFiyat / count);
+    setCount(count += 1);
+
+
   };
 
   const handleDecrement = () => {
     if (count > 1) {
-      setCount(count - 1);
+      fiyatBelirle(urunFiyat - urunFiyat / count);
+      setCount(count -= 1);
+
     }
   };
 

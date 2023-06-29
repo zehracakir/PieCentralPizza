@@ -3,19 +3,19 @@ import { Accordion, AccordionSummary, AccordionDetails, Typography } from '@mui/
 import CheckboxEkstraMalzeme from './CheckboxEkstraMalzeme';
 import ChipCikarilacakMalzeme from './ChipCikarilacakMalzeme';
 
-function AccordionMalzemeEkleCikar({ header }) {
+function AccordionMalzemeEkleCikar({ header, urunFiyat, fiyatBelirle }) {
   const items = [
-    { ekstraMalzemeAdi: "Beyaz Peynir + 6,00 TL" },
-    { ekstraMalzemeAdi: "Domates + 6,00 TL" },
-    { ekstraMalzemeAdi: "Jalapeno Biber + 6,00 TL" },
-    { ekstraMalzemeAdi: "Kırmızı Köz Biber + 6,00 TL" },
-    { ekstraMalzemeAdi: "Extra Mozarella + 6,00 TL" },
-    { ekstraMalzemeAdi: "Siyah Zeytin + 6,00 TL" },
-    { ekstraMalzemeAdi: "Kekik + 0,25 TL" },
-    { ekstraMalzemeAdi: "Parmesan Peyniri + 6,00 TL" },
-    { ekstraMalzemeAdi: "Tavuk Parçaları + 6,00 TL" },
-    { ekstraMalzemeAdi: "Soğan + 6,00 TL" },
-    { ekstraMalzemeAdi: "Pul Biber + 0,25 TL" },
+    { ekstraMalzemeAdi: "Beyaz Peynir ", ekstraMalzemeFiyati: 6.00 },
+    { ekstraMalzemeAdi: "Domates ", ekstraMalzemeFiyati: 6.00 },
+    { ekstraMalzemeAdi: "Jalapeno Biber ", ekstraMalzemeFiyati: 6.00 },
+    { ekstraMalzemeAdi: "Kırmızı Köz Biber ", ekstraMalzemeFiyati: 6.00 },
+    { ekstraMalzemeAdi: "Extra Mozarella ", ekstraMalzemeFiyati: 6.00 },
+    { ekstraMalzemeAdi: "Siyah Zeytin ", ekstraMalzemeFiyati: 6.00 },
+    { ekstraMalzemeAdi: "Kekik ", ekstraMalzemeFiyati: 0.25 },
+    { ekstraMalzemeAdi: "Parmesan Peyniri ", ekstraMalzemeFiyati: 6.00 },
+    { ekstraMalzemeAdi: "Tavuk Parçaları ", ekstraMalzemeFiyati: 6.00 },
+    { ekstraMalzemeAdi: "Soğan ", ekstraMalzemeFiyati: 6.00 },
+    { ekstraMalzemeAdi: "Pul Biber ", ekstraMalzemeFiyati: 0.25 },
 
   ];
 
@@ -36,7 +36,7 @@ function AccordionMalzemeEkleCikar({ header }) {
         <Typography>
           <Typography variant="body2" sx={{ fontWeight: 'bold' }}>Ekstra Malzemeler </Typography>
           {items.map((item) => (
-            <CheckboxEkstraMalzeme ekstraMalzemeAdi={item.ekstraMalzemeAdi} />
+            <CheckboxEkstraMalzeme ekstraMalzemeAdi={item.ekstraMalzemeAdi} ekstraMalzemeFiyati={item.ekstraMalzemeFiyati} urunFiyat={urunFiyat} fiyatBelirle={fiyatBelirle} />
           ))}
           <Typography variant="body2" sx={{ fontWeight: 'bold', mt: 2 }}>Çıkarmak İstediğiniz Malzemeler </Typography>
           <ChipCikarilacakMalzeme chipData={chipData} setChipData={setChipData} />

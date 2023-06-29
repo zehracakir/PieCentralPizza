@@ -11,11 +11,12 @@ import { kullaniciFavorileriGetir } from '../../../api/UrunApi/api';
 import { kullaniciFavoriSil } from '../../../api/UrunApi/api';
 import { useQueryClient } from 'react-query';
 
-function UrunDetaySagKisim({ resimUrl, urunFiyat, urunId, urunAdi }) {
+function UrunDetaySagKisim({ resimUrl, urunFiyat, urunId, urunAdi, fiyatBelirle, urunOzellikler }) {
   const queryClient = useQueryClient();
 
   const { user } = useAuth();
   const [isFavorite, setIsFavorite] = useState(false);
+  const [count, setCount] = useState(1);
   useEffect(() => {
     const fetchData = async () => {
       const favoriler = await kullaniciFavorileriGetir(user._id);
@@ -46,9 +47,9 @@ function UrunDetaySagKisim({ resimUrl, urunFiyat, urunId, urunAdi }) {
       </IconButton>
       <img src={resimUrl} alt="yanUrunResmi" width="50%" />
       <Box sx={{ mt: 3, mb: 3 }}>
-        <UrunAdeti />
+        <UrunAdeti urunFiyat={urunFiyat} fiyatBelirle={fiyatBelirle} count={count} setCount={setCount} />
       </Box>
-      <SepeteEkle urunFiyat={urunFiyat} />
+      <SepeteEkle urunAdi={urunAdi} urunFiyat={urunFiyat} urunId={urunId} urunOzellikler={urunOzellikler} resimUrl={resimUrl} count={count} />
     </Box>
   )
 }
