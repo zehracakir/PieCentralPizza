@@ -76,7 +76,8 @@ const kullaniciSiparisEkle = function (req, res) {
                                     const siparis = await SiparisSema.create({
                                         siparis: urun,
                                         siparisEden: kullanici.kullaniciAdi,
-                                        siparisAdres: siparisAdres
+                                        siparisAdres: siparisAdres,
+                                        siparisEdenId: userid
                                     })
                                     kullanici.siparisler.push(siparis)
                                     kullanici.save()
@@ -183,7 +184,7 @@ const adminSiparisDurumGuncelle = function (req, res) {
 const tumSiparisleriGetir = async function (req, res) {
     if (req.auth.otorite == "admin") {
         try {
-            const siparisListesi = await SiparisSema.find().select("siparis.resimUrl siparisEden siparisDurum siparisTarihi siparis.urunAdi siparisAdres");  //adres array, duzenleme yapilabilir
+            const siparisListesi = await SiparisSema.find().select("siparis.resimUrl siparisEden siparisDurum siparisTarihi siparis.urunAdi siparisAdres siparisEdenId");  //adres array, duzenleme yapilabilir
             cevapOlustur(res, 200, siparisListesi);
         } catch (err) {
             cevapOlustur(res, 500, { "hata": 'Bir hata oluştu' });
@@ -209,7 +210,7 @@ const durumaGoreSiparisGetir = async (req, res) => {
             } else {
                 return cevapOlustur(res, 400, { "hata": "Böyle bir durum parametresi yok" });
             }
-            siparisler = await SiparisSema.find({ siparisDurum: durum }).select("siparis.resimUrl siparisEden siparisDurum siparisTarihi siparis.urunAdi siparisAdres");
+            siparisler = await SiparisSema.find({ siparisDurum: durum }).select("siparis.resimUrl siparisEden siparisDurum siparisTarihi siparis.urunAdi siparisAdres siparisEdenId");
             if (siparisler.length > 0) {
                 cevapOlustur(res, 200, siparisler);
             } else {
@@ -242,7 +243,7 @@ const tariheGoreSiparisGetir = async (req, res) => {
                 return cevapOlustur(res, 400, { "hata": "Böyle bir tarih parametresi yok" });
             }
 
-            siparisler = await SiparisSema.find({ siparisTarihi: { $gte: tarih } }).select("siparis.resimUrl siparisEden siparisDurum siparisTarihi siparis.urunAdi siparisAdres");
+            siparisler = await SiparisSema.find({ siparisTarihi: { $gte: tarih } }).select("siparis.resimUrl siparisEden siparisDurum siparisTarihi siparis.urunAdi siparisAdres siparisEdenId");
 
             if (siparisler.length > 0) {
                 cevapOlustur(res, 200, siparisler);

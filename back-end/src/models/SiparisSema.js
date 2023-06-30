@@ -12,6 +12,7 @@ const urunSema = new mongoose.Schema({
 var siparisSema = new mongoose.Schema({
     siparis: [urunSema],
     siparisEden: { type: String, required: true },
+    siparisEdenId: {type:String, required: true},
     siparisTarihi: { type: Date, default: Date.now },
     siparisAdres: String,
     siparisDurum: { type: String, default: "Hazirlaniyor" },

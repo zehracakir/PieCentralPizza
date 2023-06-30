@@ -85,7 +85,7 @@ function Sepetim({ link }) {
             
             return(
             
-            <MenuItem key={index} value={item._id}>{adresIsmi} : {adres}</MenuItem>
+            <MenuItem key={index} value={adres}>{adresIsmi} : {adres}</MenuItem>
           )})}
         </Select>
       </FormControl>

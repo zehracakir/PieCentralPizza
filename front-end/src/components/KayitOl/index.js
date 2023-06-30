@@ -96,7 +96,7 @@ function KayitOl({ register, closeDialog, closeRegister, openLogin }) {
             label="Şifre"
             id="sifre"
             name='sifre'
-            type="sifre"
+            type="password"
             onChange={handleChange}
             onBlur={handleBlur}
             value={values.sifre}
