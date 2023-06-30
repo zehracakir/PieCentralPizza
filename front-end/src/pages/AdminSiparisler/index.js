@@ -12,48 +12,55 @@ import AdminSiparisListe from '../../components/AdminSiparisListe'
 import  List from '@mui/material/List'
 import { Select } from 'antd';
 import { useQuery} from 'react-query';
-const siparisler=[
-  {
-    id:1,
-    urunAdi:'Festival (Büyük)',
-    siparisTarihi:'5 May, 18:05',
-    siparisDurum: 'Hazırlanıyor',
-    resimUrl:'https://raw.githubusercontent.com/SDU-Bilgisayar-Muhendisligi/PieCentralPizza/zehra/photos/urunler/pizzalar/festival.jpg',
-    siparisEden:'zehracakir',
-    siparisAdres:'Sdü Batı Kampüsü, Mühendislik Fakültesi Bilgisayar mühendisliği bölümü'
-  },
-  {
-    id:2,
-    urunAdi:'Çiftlik Evi',
-    siparisTarihi:'1 May, 17:04',
-    siparisDurum: 'Yolda',
-    resimUrl:'https://raw.githubusercontent.com/SDU-Bilgisayar-Muhendisligi/PieCentralPizza/zehra/photos/urunler/pizzalar/ciftlik-evi.jpg',
-    siparisEden:'yusufdd',
-    siparisAdres:'Sdü Batı Kampüsü, Mühendislik Fakültesi Bilgisayar mühendisliği bölümü'
-  },
-  {
-    id:3,
-    urunAdi:'Margarita',
-    siparisTarihi:'23 April, 19:00',
-    siparisDurum:'Teslim edildi',
-    resimUrl:'https://raw.githubusercontent.com/SDU-Bilgisayar-Muhendisligi/PieCentralPizza/zehra/photos/urunler/pizzalar/margarita.jpg',
-    siparisEden:'zehra_cakir',
-    siparisAdres:'Sdü Batı Kampüsü, Mühendislik Fakültesi Bilgisayar mühendisliği bölümü'
-  },
-  {
-    id:3,
-    urunAdi:'Margarita',
-    siparisTarihi:'23 April, 19:00',
-    siparisDurum:'Hazırlanıyor',
-    resimUrl:'https://raw.githubusercontent.com/SDU-Bilgisayar-Muhendisligi/PieCentralPizza/zehra/photos/urunler/pizzalar/margarita.jpg',
-    siparisEden:'ali_veli',
-    siparisAdres:'Sdü Batı Kampüsü, Mühendislik Fakültesi Bilgisayar mühendisliği bölümü'
-  },
-]
-const handleChange = (value) => {
-  console.log(`selected ${value}`);
-};
+import { adminTumSiparisleriGetir,adminDurumaGoreSiparisGetir,adminTariheGoreSiparisGetir } from '../../api/SiparisApi/api';
+import { useState,useEffect } from 'react';
+import Uyari from '../../components/Uyari'
+
 function AdminSiparisler() {
+  const { isLoading, error, data } = useQuery(["siparisler"], () => adminTumSiparisleriGetir());
+  const [siparisler, setSiparisler] = useState([]);
+  const [fetchError, setFetchError] = useState(null);
+  useEffect(() => {
+    if (data) {
+      setSiparisler(data.data);
+    }
+  }, [data]);
+  const handleFilterChange = async (value) => {
+    try {
+      let filteredSiparisler;
+      if (!value || value === 'tumu') {
+        filteredSiparisler = await adminTumSiparisleriGetir();
+      } else if (value === 'son-bir-gun' || value === 'son-bir-hafta' || value === 'son-bir-ay') {
+        filteredSiparisler = await adminTariheGoreSiparisGetir(value);
+      } else if (value === 'hazirlaniyor' || value === 'yolda' || value === 'teslim-edildi') {
+        filteredSiparisler = await adminDurumaGoreSiparisGetir(value);
+      }
+      setSiparisler(filteredSiparisler.data);
+      setFetchError(null); // Hata durumunda hatayı sıfırla
+    } catch (error) {
+      console.error(error);
+      setFetchError(error.message); // Hata durumunda hatayı set et
+    }
+  };
+  if (isLoading) {
+    return "Loading...";
+  }
+
+  if (error) {
+    return "Error! " + error.message;
+  }
+  if (isLoading) {
+    return "Loading...";
+  }
+
+  if (error) {
+    return "Error! " + error.message;
+  }
+
+  
+
+  console.log(siparisler);
+  
   return (
     <Box sx={{ display: "flex", flexDirection: "column" }}>
     
@@ -67,7 +74,7 @@ function AdminSiparisler() {
       <Select
         suffixIcon={<div style={{ color: '#dc3545' }}>☲</div>}
         style={{width:150 ,backgroundColor:'#D3D3D3', borderRadius:'6px'}}
-        onChange={handleChange}
+        onChange={handleFilterChange}
         bordered={false}
         className="custom-select"
       
@@ -84,7 +91,7 @@ function AdminSiparisler() {
         options: [
           {
             label: 'Teslim edildi',
-            value:'teslimEdildi'
+            value:'teslim-edildi'
           },
           {
             label: 'Hazırlanıyor',
@@ -101,15 +108,15 @@ function AdminSiparisler() {
         options: [
           {
             label: 'Son 1 gün',
-            value:'sonBirGun'
+            value:'son-bir-gun'
           },
           {
             label: 'Son 1 hafta',
-            value:'sonBirHafta'
+            value:'son-bir-hafta'
           },
           {
             label: 'Son 1 ay',
-            value:'sonBirAy'
+            value:'son-bir-ay'
           },
         ],
       },
@@ -120,7 +127,7 @@ function AdminSiparisler() {
     
      
    
-    <Box sx={{ width: '100%', bgcolor: 'background.paper' }}>
+    {fetchError ? <Uyari mesaj="Bu filtreye uygun sonuç yok"/> : <Box sx={{ width: '100%', bgcolor: 'background.paper' }}>
       <List sx={{ maxWidth: "100%" }}>
       <TableContainer component={Paper} >
      <Table aria-label="collapsible table" sx={{ overflowX: 'auto',
@@ -146,8 +153,9 @@ function AdminSiparisler() {
          </TableRow>
        </TableHead>
        <TableBody>
-       {siparisler.map((item) => (
-            <AdminSiparisListe  id={item.id} urunAdi={item.urunAdi} siparisTarihi={item.siparisTarihi} siparisDurum={item.siparisDurum} resimUrl={item.resimUrl} siparisEden={item.siparisEden} siparisAdres={item.siparisAdres}/>
+      
+          {siparisler.map((item) => (
+            <AdminSiparisListe  id={item._id} siparis={item.siparis} siparisId={item._id} siparisTarihi={item.siparisTarihi} siparisDurum={item.siparisDurum}  siparisEden={item.siparisEden} siparisAdres={item.siparisAdres} siparisEdenId={item.siparisEdenId}/>
           ))}
           
        </TableBody>
@@ -157,7 +165,7 @@ function AdminSiparisler() {
       </List>
       
     </Box>
-    
+}
   </Box>
     
   )

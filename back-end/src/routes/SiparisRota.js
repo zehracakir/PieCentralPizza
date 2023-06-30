@@ -8,7 +8,9 @@ const auth = jwt.expressjwt({
 });
 var ctrlSiparisler = require("../controllers/Siparis");
 
-router.put("/admin/:userid/siparisler/:siparisid", auth, ctrlSiparisler.adminSiparisDurumGuncelle);
+router
+    .route("/admin/:userid/siparisler/:siparisid")
+    .put(auth, ctrlSiparisler.adminSiparisDurumGuncelle);
 
 router
     .route("/kullanici/:userid/siparisler")
@@ -27,6 +29,7 @@ router
 router
     .route('/admin/siparisler')
     .get(auth, ctrlSiparisler.tumSiparisleriGetir); //tum siparisleri listeleme (admin icin)
+
 
 router
     .route('/admin/siparisler/:siparisDurum')

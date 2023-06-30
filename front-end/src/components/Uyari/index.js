@@ -5,7 +5,7 @@ import CloseIcon from '@mui/icons-material/Close';
 function Uyari({mesaj}) {
     const [open,setOpen] = useState(true);
   return (
-    <Box sx={{ mb: 2, width:"100%"}}>
+    <Box sx={{ mb: 2,mt:2, width:"100%"}}>
     <Collapse in={open}>
       <Alert
         severity='error'

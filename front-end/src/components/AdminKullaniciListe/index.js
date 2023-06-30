@@ -14,9 +14,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { Popconfirm } from 'antd';
 import { adminKullaniciSil } from '../../api/KullaniciApi/api';
 import { useQueryClient } from 'react-query';
-const confirm = () => {
-  console.log("silindi")
-};
+
 function AdminKullaniciListe({ kullaniciAdi, userid, adres, email, telefonNo, kayitTarihi}) {
   const [open, setOpen] = React.useState(false);
 

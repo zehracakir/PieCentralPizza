@@ -12,13 +12,11 @@ import AdminKullaniciListe from '../../components/AdminKullaniciListe'
 import List from '@mui/material/List'
 import { Select } from 'antd';
 import { adminTumKullanicilariGetir,adminTariheGoreKullaniciGetir, adminKullaniciAdinaGoreKullaniciGetir } from '../../api/KullaniciApi/api';
-import { useQuery,useQueryClient} from 'react-query';
+import { useQuery} from 'react-query';
 import { useState,useEffect } from 'react';
-const handleChange = (value) => {
-  console.log(`selected ${value}`);
-};
+
 function AdminKullanicilar() {
-  const { isLoading, error, data } = useQuery("kullanicilar", adminTumKullanicilariGetir);
+  const { isLoading, error, data } = useQuery(["kullanicilar"],()=>adminTumKullanicilariGetir());
   const [kullanicilar, setKullanicilar] = useState([]);
 
   useEffect(() => {

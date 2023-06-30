@@ -138,48 +138,49 @@ const kullaniciSiparisSil = function (req, res) {
 
 const adminSiparisDurumGuncelle = function (req, res) {
     if (req.auth.otorite == "admin") {
-        const userid = req.params.userid;
-        const siparisid = req.params.siparisid;
-        if (userid || siparisid) {
-            KullaniciSema.findById(userid).select("siparisler")
-                .then(siparisler => {
-                    if (siparisler) {
-                        const siparis = siparisler.siparisler.filter(siparis => siparis._id == siparisid);
-                        if (siparis.length == 0) {
+      const userid = req.params.userid;
+      const siparisid = req.params.siparisid;
+      if (userid || siparisid) {
+        KullaniciSema.findById(userid).select("siparisler")
+          .then(siparisler => {
+            if (siparisler) {
+              const siparis = siparisler.siparisler.filter(siparis => siparis._id == siparisid);
+              if (siparis.length == 0) {
+                cevapOlustur(res, 404, { "hata": "siparis bulunamadi" });
+              } else {
+                const siparisDurum = req.body.siparisDurum;
+                if (!siparisDurum) {
+                  cevapOlustur(res, 400, { "hata": "siparis durumu zorunlu alandir" });
+                } else {
+                  siparis.siparisDurum = siparisDurum;
+                  siparisler.save()
+                    .then(() => {
+                      SiparisSema.findOneAndUpdate({ _id: siparisid }, { siparisDurum: siparisDurum }, { new: true })
+                        .then(response => {
+                          if (response) {
+                            cevapOlustur(res, 200, response);
+                          } else {
                             cevapOlustur(res, 404, { "hata": "siparis bulunamadi" });
-                        } else {
-                            const siparisDurum = req.body.siparisDurum;
-                            if (!siparisDurum) {
-                                cevapOlustur(res, 400, { "hata": "siparis durumu zorunlu alandir" });
-                            } else {
-                                siparis[0].siparisDurum = siparisDurum;
-                                siparisler.save()
-                                    .then(response => {
-                                        SiparisSema.findByIdAndUpdate(siparisid, { siparisDurum: siparisDurum })
-                                            .then(response1 => {
-                                                if (response1) {
-                                                    cevapOlustur(res, 200, response1);
-                                                } else {
-                                                    cevapOlustur(res, 404, { "hata": "siparis bulunamadi" });
-                                                }
-                                            })
-                                            .catch(err => cevapOlustur(res, 400, err))
-                                    })
-                                    .catch(err => cevapOlustur(res, 400, err))
-                            }
-                        }
-                    } else {
-                        cevapOlustur(res, 404, { "hata": "kullanici bulunamadi" });
-                    }
-                })
-                .catch(err => cevapOlustur(res, 400, err))
-        } else {
-            cevapOlustur(res, 400, { "hata": "kullanici veya siparis id zorunlu alanlardır" });
-        }
+                          }
+                        })
+                        .catch(err => cevapOlustur(res, 400, err));
+                    })
+                    .catch(err => cevapOlustur(res, 400, err));
+                }
+              }
+            } else {
+              cevapOlustur(res, 404, { "hata": "kullanici bulunamadi" });
+            }
+          })
+          .catch(err => cevapOlustur(res, 400, err));
+      } else {
+        cevapOlustur(res, 400, { "hata": "kullanici veya siparis id zorunlu alanlardır" });
+      }
     } else {
-        cevapOlustur(res, 403, { "hata": "yetkiniz yok" });
+      cevapOlustur(res, 403, { "hata": "yetkiniz yok" });
     }
-}
+  }
+  
 
 const tumSiparisleriGetir = async function (req, res) {
     if (req.auth.otorite == "admin") {

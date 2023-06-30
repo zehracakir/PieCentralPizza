@@ -16,11 +16,32 @@ const kullaniciSiparisSil = async (id, siparisId)  => {
     return response;
 }
 const adminTumSiparisleriGetir = async ()  => {
-    const response = await axios.delete(`${process.env.REACT_APP_BASE_ENDPOINT}/admin/siparisler`, setAuth());
+    const response = await axios.get(`${process.env.REACT_APP_BASE_ENDPOINT}/admin/siparisler`, setAuth());
     return response;
 }
+ 
+const adminDurumaGoreSiparisGetir= async (siparisDurum)  => {
+    const response = await axios.get(`${process.env.REACT_APP_BASE_ENDPOINT}/admin/siparisler/${siparisDurum}`, setAuth());
+    return response;
+}
+const adminTariheGoreSiparisGetir= async (siparisTarihi)  => {
+    const response = await axios.get(`${process.env.REACT_APP_BASE_ENDPOINT}/admin/${siparisTarihi}`, setAuth());
+    return response;
+}
+
+
+const adminSiparisDurumuGuncelle= async (userid,siparisid,siparisDurum)  => {
+    const response = await axios.put(`${process.env.REACT_APP_BASE_ENDPOINT}/admin/${userid}/siparisler/${siparisid}`,siparisDurum, setAuth());
+    return response;
+}
+
+
+
 export{
     kullaniciSiparisleriGetir,
     kullaniciSiparisSil,
-    adminTumSiparisleriGetir
+    adminTumSiparisleriGetir,
+    adminDurumaGoreSiparisGetir,
+    adminTariheGoreSiparisGetir,
+    adminSiparisDurumuGuncelle
 }
