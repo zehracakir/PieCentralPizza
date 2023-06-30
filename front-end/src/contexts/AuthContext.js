@@ -9,7 +9,7 @@ const AuthProvider = ({ children }) => {
     const [token, setToken] = useState(localStorage.getItem('token') ? localStorage.getItem('token') : null);
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
-    const [sepet, setSepet] = useState([]);
+    const [sepet, setSepet] = useState(localStorage.getItem("sepet") ? JSON.parse(localStorage.getItem("sepet")) : []);
     useEffect(() => {
         (async () => {
             try {
@@ -25,6 +25,9 @@ const AuthProvider = ({ children }) => {
             }
         })()
     }, [])
+    useEffect(() => {
+        localStorage.setItem("sepet", JSON.stringify(sepet));
+    }, [sepet])
     const SepeteEkle = (urun) => {
         setSepet([...sepet, urun]);
     }
@@ -45,6 +48,7 @@ const AuthProvider = ({ children }) => {
         setLoggedIn(false);
         localStorage.removeItem("token");
         setUser(null);
+        setSepet([]);
         window.location.href = "/";
     }
 

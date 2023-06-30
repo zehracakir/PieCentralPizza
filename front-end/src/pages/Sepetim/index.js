@@ -65,7 +65,7 @@ function Sepetim({ link }) {
   }
   return (
     <Container maxWidth="lg" sx={{ mt: 15, mb: 15 }}>
-      {hata && <Uyari mesaj={sepet.length>0 ? "Lütfen Adres Seçiniz":"Sepetiniz boş"} />}
+      {hata && <Uyari mesaj={sepet.length>0 && !siparisVerildi ? "Lütfen Adres Seçiniz":"Sepetiniz boş"} />}
 
       {siparisVerildi && <Basarili mesaj="Siparişiniz başarıyla verildi." />}
       <Typography variant='h5' sx={{ fontWeight: 'bold', display: "flex", justifyContent: "flex-start", mb: 3 }}>Sepetim</Typography>
