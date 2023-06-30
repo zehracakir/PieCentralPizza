@@ -25,14 +25,14 @@ const AuthProvider = ({ children }) => {
             }
         })()
     }, [])
-    useEffect(() => {
-        console.log(sepet);
-    }, [sepet])
     const SepeteEkle = (urun) => {
         setSepet([...sepet, urun]);
     }
     const SepettenSil = (urun) => {
         setSepet(sepet.filter((u) => u.urunId !== urun.urunId));
+    }
+    const SepetSifirla = () => {
+        setSepet([]);
     }
     const Login = async (response) => {
         setToken(response.token);
@@ -56,7 +56,8 @@ const AuthProvider = ({ children }) => {
         user,
         sepet,
         SepeteEkle,
-        SepettenSil
+        SepettenSil,
+        SepetSifirla
     };
     if (loading) {
         return (
