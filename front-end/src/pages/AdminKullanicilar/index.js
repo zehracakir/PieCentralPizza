@@ -11,21 +11,46 @@ import Paper from '@mui/material/Paper';
 import AdminKullaniciListe from '../../components/AdminKullaniciListe'
 import List from '@mui/material/List'
 import { Select } from 'antd';
-import { adminTumKullanicilariGetir } from '../../api/KullaniciApi/api';
-import { useQuery } from 'react-query';
+import { adminTumKullanicilariGetir,adminTariheGoreKullaniciGetir, adminKullaniciAdinaGoreKullaniciGetir } from '../../api/KullaniciApi/api';
+import { useQuery,useQueryClient} from 'react-query';
+import { useState,useEffect } from 'react';
 const handleChange = (value) => {
   console.log(`selected ${value}`);
 };
 function AdminKullanicilar() {
-  const {isLoading,error,data}=useQuery(["kullanicilar"],()=>adminTumKullanicilariGetir());
-  if(isLoading){
-  return "Loading..."
-  } 
+  const { isLoading, error, data } = useQuery("kullanicilar", adminTumKullanicilariGetir);
+  const [kullanicilar, setKullanicilar] = useState([]);
 
-if(error) return "Error! "+ error.message;
+  useEffect(() => {
+    if (data) {
+      setKullanicilar(data);
+    }
+  }, [data]);
+  const handleFilterChange = async (value) => {
+    try {
+      var kullanicilar;
+      if (!value || value === 'tumu') {
+        kullanicilar = await adminTumKullanicilariGetir();
+      } else if (value === "en-yeni" || value === "en-eski") {
+        kullanicilar = await adminTariheGoreKullaniciGetir(value);
+      }
+      else if(value === "buyukten-kucuge-sirala" || value === "kucukten-buyuge-sirala"){
+        kullanicilar = await adminKullaniciAdinaGoreKullaniciGetir(value);
+      }
+      setKullanicilar(kullanicilar);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
-  const kullanicilar = data.data;
-  console.log(kullanicilar);
+  if (isLoading) {
+    return "Loading...";
+  }
+
+  if (error) {
+    return "Error! " + error.message;
+  }
+  
   return (
     <Box sx={{ display: "flex", flexDirection: "column" }}>
 
@@ -39,7 +64,7 @@ if(error) return "Error! "+ error.message;
         <Select
           suffixIcon={<div style={{ color: '#dc3545' }}>☲</div>}
           style={{ width: 150, backgroundColor: '#D3D3D3', borderRadius: '6px' }}
-          onChange={handleChange}
+          onChange={handleFilterChange}
           bordered={false}
           className="custom-select"
 
@@ -56,11 +81,11 @@ if(error) return "Error! "+ error.message;
               options: [
                 {
                   label: 'En Yeni',
-                  value: 'enYeni'
+                  value: 'en-yeni'
                 },
                 {
                   label: 'En Eski',
-                  value: 'enEski'
+                  value: 'en-eski'
                 },
 
               ],
@@ -70,11 +95,11 @@ if(error) return "Error! "+ error.message;
               options: [
                 {
                   label: 'Büyükten Küçüğe',
-                  value: 'büyüktenKücüge'
+                  value: 'buyukten-kucuge-sirala'
                 },
                 {
                   label: 'Küçükten Büyüğe',
-                  value: 'kücüktenBüyüge'
+                  value: 'kucukten-buyuge-sirala'
                 },
               ],
             },
@@ -113,9 +138,22 @@ if(error) return "Error! "+ error.message;
                 </TableRow>
               </TableHead>
               <TableBody>
-                {kullanicilar.map((item) => (
-                  <AdminKullaniciListe userid={item._id} email={item.email} kullaniciAdi={item.kullaniciAdi} kayitTarihi={item.kayitTarihi} telefonNo={item.telefonNo} adres={item.adres} />
-                ))}
+              {Array.isArray(kullanicilar) ? (
+    kullanicilar.map((item) => (
+      <AdminKullaniciListe
+        userid={item._id}
+        email={item.email}
+        kullaniciAdi={item.kullaniciAdi}
+        kayitTarihi={item.kayitTarihi}
+        telefonNo={item.telefonNo}
+        adres={item.adres}
+      />
+    ))
+  ) : (
+    <TableRow>
+      <TableCell colSpan={5}>Kullanıcı bulunamadı.</TableCell>
+    </TableRow>
+  )}
 
               </TableBody>
             </Table>

@@ -15,7 +15,12 @@ const kullaniciSiparisSil = async (id, siparisId)  => {
     const response = await axios.delete(`${process.env.REACT_APP_BASE_ENDPOINT}/kullanici/${id}/siparisler/${siparisId}`, setAuth());
     return response;
 }
+const adminTumSiparisleriGetir = async ()  => {
+    const response = await axios.delete(`${process.env.REACT_APP_BASE_ENDPOINT}/admin/siparisler`, setAuth());
+    return response;
+}
 export{
     kullaniciSiparisleriGetir,
-    kullaniciSiparisSil
+    kullaniciSiparisSil,
+    adminTumSiparisleriGetir
 }

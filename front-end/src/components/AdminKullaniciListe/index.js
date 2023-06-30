@@ -17,7 +17,7 @@ import { useQueryClient } from 'react-query';
 const confirm = () => {
   console.log("silindi")
 };
-function AdminKullaniciListe({ kullaniciAdi, userid, adres, email, telefonNo, kayitTarihi }) {
+function AdminKullaniciListe({ kullaniciAdi, userid, adres, email, telefonNo, kayitTarihi}) {
   const [open, setOpen] = React.useState(false);
 
   const firstLetter = kullaniciAdi[0].toUpperCase();
@@ -81,13 +81,13 @@ function AdminKullaniciListe({ kullaniciAdi, userid, adres, email, telefonNo, ka
                 </TableHead>
                 <TableBody>
                   <TableRow key={userid}>
-                    <TableCell >
+                    <TableCell sx={{width:'20%'}}>
                       {email}
                     </TableCell>
-                    <TableCell >
+                    <TableCell sx={{width:'30%'}}>
                       {telefonNo}
                     </TableCell>
-                    <TableCell >
+                    <TableCell sx={{width:'50%'}}>
                     {adres.map((adresItem) => (
         <div key={adresItem._id}>
           <p>{adresItem.adres}</p>

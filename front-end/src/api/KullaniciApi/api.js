@@ -50,7 +50,7 @@ const kullaniciAdresGuncelle = async (id, adresId, input) => {
 }
 const adminTumKullanicilariGetir = async () => {
     const response = await axios.get(`${process.env.REACT_APP_BASE_ENDPOINT}/tum-kullanicilari-getir`, setAuth());
-    return  response;
+    return  response.data;
 }
 const adminKullaniciSil = async (userid) => {
     const response = await axios.delete(`${process.env.REACT_APP_BASE_ENDPOINT}/admin/kullanicilar/${userid}`, setAuth());
@@ -59,7 +59,11 @@ const adminKullaniciSil = async (userid) => {
 
 const adminTariheGoreKullaniciGetir = async (kayitTarihi) => {
     const response = await axios.get(`${process.env.REACT_APP_BASE_ENDPOINT}/admin/kullanici-getir/${kayitTarihi}`, setAuth());
-    return  response;
+    return  response.data;
+}
+const adminKullaniciAdinaGoreKullaniciGetir = async (isim) => {
+    const response = await axios.get(`${process.env.REACT_APP_BASE_ENDPOINT}/admin/kullanici-sirala/${isim}`, setAuth());
+    return  response.data;
 }
 export{
     kayitOl,
@@ -73,5 +77,7 @@ export{
     kullaniciAdresEkle,
     kullaniciAdresGuncelle,
     adminTumKullanicilariGetir,
-    adminKullaniciSil
+    adminKullaniciSil,
+    adminTariheGoreKullaniciGetir,
+    adminKullaniciAdinaGoreKullaniciGetir
 }
