@@ -3,7 +3,7 @@ import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
-
+import { useAuth } from '../../contexts/AuthContext';
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
   borderRadius: theme.shape.borderRadius,
@@ -27,14 +27,14 @@ const SearchIconWrapper = styled('div')(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  color:"#dc3545"
+  color: "#dc3545"
 }));
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: 'inherit',
   '& .MuiInputBase-input': {
     padding: theme.spacing(1, 1, 1, 0),
-    color:"black",
+    color: "black",
     // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create('width'),
@@ -48,18 +48,22 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 function UrunArama() {
+  const { arama, setArama } = useAuth();
+
   return (
-          <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", m:"auto"}}>
-            <Search>
-              <SearchIconWrapper>
-                <SearchIcon />
-              </SearchIconWrapper>
-              <StyledInputBase
-                placeholder="Arama"
-                inputProps={{ 'aria-label': 'search' }}
-              />
-            </Search>
-          </Box>
+    <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", m: "auto" }}>
+      <Search>
+        <SearchIconWrapper>
+          <SearchIcon />
+        </SearchIconWrapper>
+        <StyledInputBase
+          placeholder="Arama"
+          inputProps={{ 'aria-label': 'search' }}
+          value={arama}
+          onChange={(e) => setArama(e.target.value)}
+        />
+      </Search>
+    </Box>
   );
 }
 export default UrunArama;

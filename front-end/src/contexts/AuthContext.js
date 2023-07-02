@@ -10,6 +10,7 @@ const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
     const [sepet, setSepet] = useState(localStorage.getItem("sepet") ? JSON.parse(localStorage.getItem("sepet")) : []);
+    const [arama, setArama] = useState("");
     useEffect(() => {
         (async () => {
             try {
@@ -61,7 +62,9 @@ const AuthProvider = ({ children }) => {
         sepet,
         SepeteEkle,
         SepettenSil,
-        SepetSifirla
+        SepetSifirla,
+        arama,
+        setArama
     };
     if (loading) {
         return (

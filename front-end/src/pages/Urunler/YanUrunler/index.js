@@ -3,11 +3,12 @@ import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import { Container } from '@mui/material';
 import CardComponent from "../../../components/CardComponent"
-import {useQuery } from 'react-query';
+import { useQuery } from 'react-query';
 import { kategoriyeGoreUrunGetir } from '../../../api/UrunApi/api';
-
+import { useAuth } from '../../../contexts/AuthContext';
 
 function YanUrunler() {
+  const { arama } = useAuth();
 
   const tatlilarQuery = useQuery("tatlilar", () => kategoriyeGoreUrunGetir("tatli"));
   const soslarQuery = useQuery("soslar", () => kategoriyeGoreUrunGetir("sos"));
@@ -20,7 +21,7 @@ function YanUrunler() {
   const icecekler = iceceklerQuery.data;
   const baslangiclar = baslangiclarQuery.data;
 
- 
+
 
   useEffect(() => {
     let timeoutId;
@@ -29,12 +30,12 @@ function YanUrunler() {
       timeoutId = setTimeout(() => {
         const sections = document.querySelectorAll("section[id]");
         const scrollPosition = window.scrollY;
-  
+
         sections.forEach((section) => {
           const top = section.offsetTop;
           const height = section.offsetHeight;
           const offset = window.innerHeight / 2;
-  
+
           if (scrollPosition >= top - offset && scrollPosition < top + height - offset) {
             window.history.replaceState(null, "", `#${section.id}`);
           }
@@ -74,9 +75,20 @@ function YanUrunler() {
           </Typography>
           <Grid container spacing={2} sx={{ mt: 1, mb: 5, top: -80 }}>
 
-            {tatlilar.map((item) => (
-              <CardComponent resimUrl={item.resimUrl} urunAdi={item.urunAdi} urunDetay={item.urunDetay} urunOzellikler={item.urunOzellikler} urunFiyat={item.urunFiyat} link={"yan-urunler/tatlilar"} urunid={item._id} />
-            ))}
+            {tatlilar.map((item,index) => {
+              if (arama.length > 0) {
+                if (item.urunAdi.toLowerCase().includes(arama.toLowerCase())) {
+                  return (
+                    <CardComponent key={index} resimUrl={item.resimUrl} urunAdi={item.urunAdi} urunDetay={item.urunDetay} urunOzellikler={item.urunOzellikler} urunFiyat={item.urunFiyat} link={"yan-urunler/tatlilar"} urunid={item._id} />
+                  )
+                }
+              }
+              else {
+                return (
+                  <CardComponent key={index} resimUrl={item.resimUrl} urunAdi={item.urunAdi} urunDetay={item.urunDetay} urunOzellikler={item.urunOzellikler} urunFiyat={item.urunFiyat} link={"yan-urunler/tatlilar"} urunid={item._id} />
+                )
+              }
+            })}
           </Grid>
 
         </section>
@@ -86,9 +98,20 @@ function YanUrunler() {
           </Typography>
           <Grid container spacing={2} sx={{ mt: 1, mb: 5 }}>
 
-            {soslar.map((item) => (
-              <CardComponent resimUrl={item.resimUrl} urunAdi={item.urunAdi} urunDetay={item.urunDetay} urunOzellikler={item.urunOzellikler} urunFiyat={item.urunFiyat} link={"yan-urunler/soslar"} urunid={item._id}/>
-            ))}
+            {soslar.map((item,index) => {
+              if (arama.length > 0) {
+                if (item.urunAdi.toLowerCase().includes(arama.toLowerCase())) {
+                  return (
+                    <CardComponent key={index} resimUrl={item.resimUrl} urunAdi={item.urunAdi} urunDetay={item.urunDetay} urunOzellikler={item.urunOzellikler} urunFiyat={item.urunFiyat} link={"yan-urunler/soslar"} urunid={item._id} />
+                  )
+                }
+              } else {
+                return (
+                  <CardComponent key={index} resimUrl={item.resimUrl} urunAdi={item.urunAdi} urunDetay={item.urunDetay} urunOzellikler={item.urunOzellikler} urunFiyat={item.urunFiyat} link={"yan-urunler/soslar"} urunid={item._id} />
+                )
+              }
+
+            })}
           </Grid>
         </section>
         <section id='icecekler'>
@@ -97,9 +120,20 @@ function YanUrunler() {
           </Typography>
           <Grid container spacing={2} sx={{ mt: 1, mb: 5 }}>
 
-            {icecekler.map((item) => (
-              <CardComponent resimUrl={item.resimUrl} urunAdi={item.urunAdi} urunDetay={item.urunDetay} urunOzellikler={item.urunOzellikler} urunFiyat={item.urunFiyat} link={"yan-urunler/icecekler"} urunid={item._id}/>
-            ))}
+            {icecekler.map((item,index) => {
+              if (arama.length > 0) {
+                if (item.urunAdi.toLowerCase().includes(arama.toLowerCase())) {
+                  return (
+                    <CardComponent key={index} resimUrl={item.resimUrl} urunAdi={item.urunAdi} urunDetay={item.urunDetay} urunOzellikler={item.urunOzellikler} urunFiyat={item.urunFiyat} link={"yan-urunler/icecekler"} urunid={item._id} />
+                  )
+                }
+              } else {
+                return (
+                  <CardComponent key={index} resimUrl={item.resimUrl} urunAdi={item.urunAdi} urunDetay={item.urunDetay} urunOzellikler={item.urunOzellikler} urunFiyat={item.urunFiyat} link={"yan-urunler/icecekler"} urunid={item._id} />
+                )
+              }
+
+            })}
           </Grid>
         </section>
         <section id='baslangiclar'>
@@ -108,9 +142,21 @@ function YanUrunler() {
           </Typography>
           <Grid container spacing={2} sx={{ mt: 1, mb: 10 }}>
 
-            {baslangiclar.map((item) => (
-              <CardComponent resimUrl={item.resimUrl} urunAdi={item.urunAdi} urunDetay={item.urunDetay} urunOzellikler={item.urunOzellikler} urunFiyat={item.urunFiyat} link={"yan-urunler/baslangiclar"} urunid={item._id}/>
-            ))}
+            {baslangiclar.map((item,index) => {
+              if (arama.length > 0) {
+                if (item.urunAdi.toLowerCase().includes(arama.toLowerCase())) {
+                  return (
+                    <CardComponent key={index} resimUrl={item.resimUrl} urunAdi={item.urunAdi} urunDetay={item.urunDetay} urunOzellikler={item.urunOzellikler} urunFiyat={item.urunFiyat} link={"yan-urunler/baslangiclar"} urunid={item._id} />
+                  )
+                }
+              } else {
+                return (
+                  <CardComponent key={index} resimUrl={item.resimUrl} urunAdi={item.urunAdi} urunDetay={item.urunDetay} urunOzellikler={item.urunOzellikler} urunFiyat={item.urunFiyat} link={"yan-urunler/baslangiclar"} urunid={item._id} />
+                )
+              }
+
+            }
+            )}
           </Grid>
         </section>
       </Container>
