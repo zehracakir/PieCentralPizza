@@ -24,7 +24,6 @@ function AdminSiparisListe({ siparis, siparisTarihi, siparisDurum, siparisEden, 
   const handleChange = async (value) => {
     try {
       const response = await adminSiparisDurumuGuncelle(userid, siparisid, { siparisDurum: value });
-      console.log(response);
     } catch (error) {
       console.error(error);
     }

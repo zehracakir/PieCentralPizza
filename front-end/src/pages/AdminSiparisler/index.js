@@ -59,7 +59,6 @@ function AdminSiparisler() {
 
   
 
-  console.log(siparisler);
   
   return (
     <Box sx={{ display: "flex", flexDirection: "column" }}>

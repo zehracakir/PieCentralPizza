@@ -144,8 +144,8 @@ const adminSiparisDurumGuncelle = function (req, res) {
         KullaniciSema.findById(userid).select("siparisler")
           .then(siparisler => {
             if (siparisler) {
-              const siparis = siparisler.siparisler.filter(siparis => siparis._id == siparisid);
-              if (siparis.length == 0) {
+              const siparis = siparisler.siparisler.id(siparisid);
+              if (!siparis) {
                 cevapOlustur(res, 404, { "hata": "siparis bulunamadi" });
               } else {
                 const siparisDurum = req.body.siparisDurum;

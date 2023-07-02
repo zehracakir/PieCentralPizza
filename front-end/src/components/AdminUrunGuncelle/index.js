@@ -36,7 +36,6 @@ function AdminUrunGuncelle({ open, handleClose,urunid,urunAdi,urunDetay,urunOzel
             bag.setErrors({ general: error}); 
             console.log(error); 
           }
-          console.log(values, "--> değerleri veritabanına yazılacak");
           handleClose();
         }}
         validationSchema={validations}
