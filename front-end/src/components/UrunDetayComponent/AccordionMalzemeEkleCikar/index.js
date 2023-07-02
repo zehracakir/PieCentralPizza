@@ -35,8 +35,8 @@ function AccordionMalzemeEkleCikar({ header, urunFiyat, fiyatBelirle }) {
       <AccordionDetails sx={{ display: 'block', padding: 0 }}>
         <Typography>
           <Typography variant="body2" sx={{ fontWeight: 'bold' }}>Ekstra Malzemeler </Typography>
-          {items.map((item) => (
-            <CheckboxEkstraMalzeme ekstraMalzemeAdi={item.ekstraMalzemeAdi} ekstraMalzemeFiyati={item.ekstraMalzemeFiyati} urunFiyat={urunFiyat} fiyatBelirle={fiyatBelirle} />
+          {items.map((item,index) => (
+            <CheckboxEkstraMalzeme key={index} ekstraMalzemeAdi={item.ekstraMalzemeAdi} ekstraMalzemeFiyati={item.ekstraMalzemeFiyati} urunFiyat={urunFiyat} fiyatBelirle={fiyatBelirle} />
           ))}
           <Typography variant="body2" sx={{ fontWeight: 'bold', mt: 2 }}>Çıkarmak İstediğiniz Malzemeler </Typography>
           <ChipCikarilacakMalzeme chipData={chipData} setChipData={setChipData} />

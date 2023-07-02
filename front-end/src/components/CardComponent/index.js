@@ -23,6 +23,7 @@ function CardComponent({ resimUrl, urunAdi, urunDetay, urunOzellikler, urunFiyat
     const [isFavorite, setIsFavorite] = useState(false);
     useEffect(() => {
         const fetchData = async () => {
+            if(!user) return;
             const favoriler = await kullaniciFavorileriGetir(user._id);
             setIsFavorite(favoriler.data.favoriler.some((urun) => urun.urunAdi === urunAdi));
         };
@@ -46,7 +47,7 @@ function CardComponent({ resimUrl, urunAdi, urunDetay, urunOzellikler, urunFiyat
         <Grid item xs={12} sm={6} md={4} lg={3} sx={{ mb: 2 }}>
 
             <Card sx={{ maxWidth: 280, height: 'auto' }} className="card-image">
-            <IconButton onClick={handleFavoriteClick}
+                    <IconButton onClick={handleFavoriteClick}
                         size="sm"
                         variant="plain"
                         color="neutral"
