@@ -13,15 +13,30 @@ import { Avatar } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Popconfirm } from 'antd';
 import { Select } from 'antd';
+import { useQueryClient } from 'react-query';
+import { kullaniciSiparisSil, adminSiparisDurumuGuncelle} from '../../api/SiparisApi/api';
 
-const confirm = () => {
-  console.log("silindi")
-};
-function AdminSiparisListe({ urunAdi, siparisTarihi, siparisDurum, resimUrl, siparisEden, id, siparisAdres }) {
+function AdminSiparisListe({ siparis, siparisTarihi, siparisDurum, siparisEden, id, siparisAdres,siparisEdenId }) {
+  let userid=siparisEdenId;
+  let siparisid=id;
   const [open, setOpen] = React.useState(false);
-  const handleChange = (value) => {
-    console.log(`selected ${value}`);
+  const queryClient = useQueryClient();
+  const handleChange = async (value) => {
+    try {
+      const response = await adminSiparisDurumuGuncelle(userid, siparisid, { siparisDurum: value });
+      console.log(response);
+    } catch (error) {
+      console.error(error);
+    }
   };
+  
+  
+
+  const siparisSil= async () => {
+    const response = await kullaniciSiparisSil(userid,siparisid);
+    queryClient.invalidateQueries(['siparisler']);
+}
+
 
   return (
     <React.Fragment >
@@ -36,33 +51,32 @@ function AdminSiparisListe({ urunAdi, siparisTarihi, siparisDurum, resimUrl, sip
           </IconButton>
         </TableCell>
         <TableCell>
-          <Avatar sx={{ marginRight: '8px', width: 70, height: 50 }} alt="Remy Sharp" src={resimUrl} />
+          <Avatar sx={{ marginRight: '8px', width: 70, height: 50 }} alt="Remy Sharp" src={siparis[0].resimUrl} />
         </TableCell>
         <TableCell>
           {siparisEden}
         </TableCell>
-        <TableCell >
-          {/* {siparisDurum} */}
-<Select
-      defaultValue="Hazırlanıyor"
-      style={{ width: 150, backgroundColor: '#efefef', borderRadius: '6px' }}
-      onChange={handleChange}
-      bordered={false}
-      className="custom-select"
-     
-      options={[
-        { value: 'hazirlaniyor', label: 'Hazırlanıyor' },
-        { value: 'yolda', label: 'Yolda' },
-        { value: 'teslim-edildi', label: 'Teslim Edildi' },
-      ]}
-    />
+        <TableCell>
+          <Select
+            key={siparisDurum} 
+            defaultValue={siparisDurum}
+            style={{ width: 150, backgroundColor: '#efefef', borderRadius: '6px' }}
+            onChange={handleChange}
+            bordered={false}
+            className="custom-select"
+            options={[
+              { value: 'Hazirlaniyor', label: 'Hazırlanıyor' },
+              { value: 'Yolda', label: 'Yolda' },
+              { value: 'Teslim edildi', label: 'Teslim Edildi' },
+            ]}
+          />
         </TableCell>
         <TableCell>
           <Popconfirm
             placement="right"
             title="Sipariş Sil"
             description="Siparişi silmek istiyor musunuz ?"
-            onConfirm={confirm}
+            onConfirm={siparisSil}
             okText="Evet"
             cancelText="Hayır"
           >
@@ -90,9 +104,13 @@ function AdminSiparisListe({ urunAdi, siparisTarihi, siparisDurum, resimUrl, sip
                     <TableCell >
                       {siparisTarihi}
                     </TableCell>
-                    <TableCell >
-                      {urunAdi}
-                    </TableCell>
+                    <TableCell>
+  {siparis.map((item) => (
+    <React.Fragment key={item.id}>
+      {item.urunAdi}
+    </React.Fragment>
+  ))}
+</TableCell>
                     <TableCell >
                       {siparisAdres}
                     </TableCell>

@@ -11,19 +11,31 @@ import {
 } from '@mui/material'
 import { Formik } from 'formik'
 import validations from './Validation';
-function AdminUrunGuncelle({ open, handleClose }) {
+import { adminUrunGuncelle } from '../../api/UrunApi/api';
+import { useQueryClient } from 'react-query';
+function AdminUrunGuncelle({ open, handleClose,urunid,urunAdi,urunDetay,urunOzellikler,resimUrl,urunFiyat,stok,kategori }) {
+  const queryClient = useQueryClient();
   return (
     <Dialog open={open} onClose={handleClose} fullWidth maxWidth={"sm"}>
       <Formik
         initialValues={{
-          urunAdi: '',
-          urunDetay: '',
-          urunOzellikler: '',
-          resimUrl: '',
-          urunFiyat: null,
-          stok: null,
+          urunAdi: urunAdi,
+          urunDetay: urunDetay,
+          urunOzellikler: urunOzellikler,
+          resimUrl: resimUrl,
+          urunFiyat: urunFiyat,
+          stok: stok,
+          kategori:kategori
         }}
-        onSubmit={(values) => {
+        onSubmit={ async (values,bag) => {
+          try {
+            const response = await adminUrunGuncelle(urunid,values);
+            queryClient.invalidateQueries(['urunler']);
+            handleClose();
+          } catch (error) {
+            bag.setErrors({ general: error}); 
+            console.log(error); 
+          }
           console.log(values, "--> değerleri veritabanına yazılacak");
           handleClose();
         }}
@@ -40,12 +52,14 @@ function AdminUrunGuncelle({ open, handleClose }) {
                 label="Ürün Adı"
                 name='urunAdi'
                 variant="outlined"
+                type='text'
                 fullWidth margin='normal'
                 error={Boolean(errors.urunAdi && touched.urunAdi)}
                 onChange={handleChange}
                 onBlur={handleBlur}
                 value={values.urunAdi}
                 helperText={errors.urunAdi && touched.urunAdi && `${errors.urunAdi}`}
+
               />
               <TextField
                 id="urunDetay"
@@ -91,6 +105,7 @@ function AdminUrunGuncelle({ open, handleClose }) {
                 variant="outlined"
                 fullWidth margin='normal'
                 error={Boolean(errors.urunFiyat && touched.urunFiyat)}
+                value={values.urunFiyat}
                 onChange={handleChange}
                 onBlur={handleBlur}
 
@@ -103,10 +118,24 @@ function AdminUrunGuncelle({ open, handleClose }) {
                 variant="outlined"
                 fullWidth margin='normal'
                 error={Boolean(errors.stok && touched.stok)}
+                value={values.stok}
                 onChange={handleChange}
                 onBlur={handleBlur}
 
                 helperText={errors.stok && touched.stok && `${errors.stok}`}
+              />
+              <TextField
+                id="kategori"
+                label="Kategori"
+                name='kategori'
+                variant="outlined"
+                fullWidth margin='normal'
+                error={Boolean(errors.kategori && touched.kategori)}
+                value={values.kategori}
+                onChange={handleChange}
+                onBlur={handleBlur}
+
+                helperText={errors.kategori && touched.kategori && `${errors.kategori}`}
               />
             </DialogContent>
             <DialogActions>

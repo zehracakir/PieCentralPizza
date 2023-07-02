@@ -16,18 +16,25 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import { adminUrunSil } from '../../api/UrunApi/api';
+import { useQueryClient } from 'react-query';
 const confirm = () => {
   console.log("silindi")
 };
-function AdminUrunListe({ urunAdi, urunOzellikler, urunFiyat, resimUrl, urunDetay, id }) {
+function AdminUrunListe({ urunAdi, urunOzellikler, urunFiyat, resimUrl, urunDetay, urunid,kategori,stok }) {
   const [open1, setOpen1] = React.useState(false);
   const [open2, setOpen2] = React.useState(false);
+  const queryClient = useQueryClient();
   const handleClose = () => {
     setOpen2(false)
   }
   const clickOpen = () => {
     setOpen2(true)
   }
+  const urunSil = async () => {
+    const response = await adminUrunSil(urunid);
+    queryClient.invalidateQueries(['urunler']);
+}
 
   return (
     <React.Fragment >
@@ -48,7 +55,7 @@ function AdminUrunListe({ urunAdi, urunOzellikler, urunFiyat, resimUrl, urunDeta
           {urunAdi}
         </TableCell>
         <TableCell >
-          <AdminUrunGuncelle open={open2} handleClose={handleClose} />
+          <AdminUrunGuncelle open={open2} handleClose={handleClose} urunid={urunid} urunAdi={urunAdi} urunDetay={urunDetay} urunFiyat={urunFiyat} urunOzellikler={String(urunOzellikler)} resimUrl={resimUrl} stok={stok} kategori={kategori}/>
           <IconButton edge="end" aria-label="comments" onClick={clickOpen}>
             <ModeEditIcon />
           </IconButton>
@@ -59,7 +66,7 @@ function AdminUrunListe({ urunAdi, urunOzellikler, urunFiyat, resimUrl, urunDeta
             placement="right"
             title="Ürünü Sil"
             description="Ürünü silmek istiyor musunuz ?"
-            onConfirm={confirm}
+            onConfirm={() => urunSil()}
             okText="Evet"
             cancelText="Hayır"
 
@@ -84,16 +91,16 @@ function AdminUrunListe({ urunAdi, urunOzellikler, urunFiyat, resimUrl, urunDeta
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  <TableRow key={id}>
-                    <TableCell  >
+                  <TableRow key={urunid}>
+                    <TableCell sx={{width:'20%'}} >
                       {urunFiyat} TL
                     </TableCell>
-                    <TableCell >
+                    <TableCell sx={{width:'35%'}}>
                       {urunDetay}
                     </TableCell>
-                    <TableCell >
-                      {urunOzellikler}
-                    {/* {urunOzellikler.length > 0 ? urunOzellikler.map((ozellik, index) => {
+                    <TableCell sx={{width:'45%'}}>
+                     
+                    {urunOzellikler.length > 0 ? urunOzellikler.map((ozellik, index) => {
                                     return (
                                         <React.Fragment key={index}>
                                             {ozellik}
@@ -101,7 +108,7 @@ function AdminUrunListe({ urunAdi, urunOzellikler, urunFiyat, resimUrl, urunDeta
                                             &nbsp;
                                         </React.Fragment>
                                     );
-                                }) : null} */}
+                                }) : null}
                     </TableCell>
                   </TableRow>
 

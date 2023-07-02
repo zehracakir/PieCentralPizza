@@ -12,14 +12,21 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import { Avatar } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Popconfirm } from 'antd';
+import { adminKullaniciSil } from '../../api/KullaniciApi/api';
+import { useQueryClient } from 'react-query';
 
-const confirm = () => {
-  console.log("silindi")
-};
-function AdminSiparisListe({ kullaniciAdi, id, adres, email, telefonNo, kayitTarihi }) {
+function AdminKullaniciListe({ kullaniciAdi, userid, adres, email, telefonNo, kayitTarihi}) {
   const [open, setOpen] = React.useState(false);
 
   const firstLetter = kullaniciAdi[0].toUpperCase();
+  const queryClient = useQueryClient();
+
+  const kullaniciSil = async () => {
+    const response = await adminKullaniciSil(userid);
+    queryClient.invalidateQueries(['kullanicilar']);
+}
+
+  
   return (
     <React.Fragment >
       <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
@@ -46,7 +53,7 @@ function AdminSiparisListe({ kullaniciAdi, id, adres, email, telefonNo, kayitTar
             placement="right"
             title="Kullanıcı Sil"
             description="Kullanıcıyı silmek istiyor musunuz ?"
-            onConfirm={confirm}
+            onConfirm={() => kullaniciSil()}
             okText="Evet"
             cancelText="Hayır"
 
@@ -71,15 +78,20 @@ function AdminSiparisListe({ kullaniciAdi, id, adres, email, telefonNo, kayitTar
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  <TableRow key={id}>
-                    <TableCell >
+                  <TableRow key={userid}>
+                    <TableCell sx={{width:'20%'}}>
                       {email}
                     </TableCell>
-                    <TableCell >
+                    <TableCell sx={{width:'30%'}}>
                       {telefonNo}
                     </TableCell>
-                    <TableCell >
-                      {adres}
+                    <TableCell sx={{width:'50%'}}>
+                    {adres.map((adresItem) => (
+        <div key={adresItem._id}>
+          <p>{adresItem.adres}</p>
+          
+        </div>
+      ))}
                     </TableCell>
                   </TableRow>
 
@@ -93,4 +105,4 @@ function AdminSiparisListe({ kullaniciAdi, id, adres, email, telefonNo, kayitTar
   )
 }
 
-export default AdminSiparisListe
+export default AdminKullaniciListe

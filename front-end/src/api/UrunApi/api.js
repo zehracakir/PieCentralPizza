@@ -30,15 +30,26 @@ const urunDetayGetir = async (urunid) => {
     return data;
 }
 
-const yeniUrunEkle = async () => {
-    const { data } = await axios.post(`${process.env.REACT_APP_BASE_ENDPOINT}/admin/urunler`);
+const yeniUrunEkle = async (input) => {
+    const { data } = await axios.post(`${process.env.REACT_APP_BASE_ENDPOINT}/admin/urunler`, input, setAuth());
     return data;
 }
 
 const adminTumUrunleriGetir = async () => {
-    const { data } = await axios.get(`${process.env.REACT_APP_BASE_ENDPOINT}/urunler`);
+    const { data } = await axios.get(`${process.env.REACT_APP_BASE_ENDPOINT}/urunler`, setAuth());
     return data;
 }
+
+const adminUrunGuncelle = async (urunid, values) => {
+    const { data } = await axios.put(`${process.env.REACT_APP_BASE_ENDPOINT}/admin/urunler/${urunid}`, values, setAuth());
+    return data;
+}
+
+const adminUrunSil = async (urunid) => {
+    const { data } = await axios.delete(`${process.env.REACT_APP_BASE_ENDPOINT}/admin/urunler/${urunid}`, setAuth());
+    return data;
+}
+
 
 export {
     kullaniciFavorileriGetir,
@@ -47,6 +58,7 @@ export {
     urunDetayGetir,
     yeniUrunEkle,
     adminTumUrunleriGetir,
+    adminUrunGuncelle,
+    adminUrunSil,
     kullaniciFavoriEkle
 }
-

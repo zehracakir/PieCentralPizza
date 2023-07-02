@@ -12,51 +12,18 @@ import {
   List,
 } from '@mui/material'
 import AdminUrunListe from '../../components/AdminUrunListe'
+import { adminTumUrunleriGetir } from '../../api/UrunApi/api';
+import { useQuery } from 'react-query';
 function AdminUrunler() {
-  const urunler = [
-    {
-      resimUrl: "https://raw.githubusercontent.com/SDU-Bilgisayar-Muhendisligi/PieCentralPizza/zehra/photos/urunler/pizzalar/ciftlik-evi.jpg",
-      urunAdi: "Çiftlik Evi (Büyük)",
-      urunDetay: "Bol Malzemeli",
-      urunOzellikler: "Pizza sosu, mozzarella peyniri, salam, mantar",
-      urunFiyat: "149.90 TL"
-    },
-    {
-      resimUrl: "https://raw.githubusercontent.com/SDU-Bilgisayar-Muhendisligi/PieCentralPizza/zehra/photos/urunler/pizzalar/festival.jpg",
-      urunAdi: "Festival (Büyük)",
-      urunDetay: "Bol Malzemeli",
-      urunOzellikler: "Pizza sosu, mozzarella peyniri, domates, yeşilbiber, sosis, kekik",
-      urunFiyat: "149.90 TL"
-    },
-    {
-      resimUrl: "https://raw.githubusercontent.com/SDU-Bilgisayar-Muhendisligi/PieCentralPizza/zehra/photos/urunler/pizzalar/sebzesever.jpg",
-      urunAdi: "Sebzesever (Büyük)",
-      urunDetay: "Bol Malzemeli",
-      urunOzellikler: "Pizza sosu, mozzarella peyniri, mantar, yeşilbiber, soğan, domates, mısır",
-      urunFiyat: "149.90 TL"
-    },
-    {
-      resimUrl: "https://raw.githubusercontent.com/SDU-Bilgisayar-Muhendisligi/PieCentralPizza/zehra/photos/urunler/pizzalar/sucuk-misir.jpg",
-      urunAdi: "Sucuk Mısır (Büyük)",
-      urunDetay: "Bol Malzemeli",
-      urunOzellikler: "Pizza sosu, mozzarella peyniri, sucuk, mısır",
-      urunFiyat: "149.90 TL"
-    },
-    {
-      resimUrl: "https://raw.githubusercontent.com/SDU-Bilgisayar-Muhendisligi/PieCentralPizza/zehra/photos/urunler/pizzalar/lezzet-3lusu.jpg",
-      urunAdi: "Lezzet 3'lüsü (Büyük)",
-      urunDetay: "Bol Malzemeli",
-      urunOzellikler: "Pizza sosu, mozzarella peyniri, sosis, mısır, mantar",
-      urunFiyat: "149.90 TL"
-    },
-    {
-      resimUrl: "https://raw.githubusercontent.com/SDU-Bilgisayar-Muhendisligi/PieCentralPizza/zehra/photos/urunler/pizzalar/margarita.jpg",
-      urunAdi: "Margarita",
-      urunDetay: "Bol Malzemeli",
-      urunOzellikler: "Pizza sosu, mozzarella peyniri",
-      urunFiyat: "149.90 TL"
-    }
-  ];
+  const {isLoading,error,data}=useQuery(["urunler"],()=>adminTumUrunleriGetir());
+  if(isLoading){
+  return "Loading..."
+  } 
+
+if(error) return "Error! "+ error.message;
+
+  const urunler = data;
+  // console.log(urunler);
   return (
     <Box sx={{ display: "flex", flexDirection: "column" }}>
       <Typography variant='h5' mb={2} sx={{ fontWeight: 'bold' }}>Ürünler</Typography>
@@ -89,7 +56,7 @@ function AdminUrunler() {
               </TableHead>
               <TableBody>
                 {urunler.map((item) => (
-                  <AdminUrunListe id={item.id} urunAdi={item.urunAdi} urunOzellikler={item.urunOzellikler} urunFiyat={item.urunFiyat} resimUrl={item.resimUrl} urunDetay={item.urunDetay} />
+                  <AdminUrunListe urunid={item._id} urunAdi={item.urunAdi} urunOzellikler={item.urunOzellikler} urunFiyat={item.urunFiyat} resimUrl={item.resimUrl} urunDetay={item.urunDetay} stok={item.stok} kategori={item.kategori}/>
                 ))}
 
               </TableBody>

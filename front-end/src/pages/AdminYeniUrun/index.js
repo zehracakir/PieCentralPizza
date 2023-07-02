@@ -9,7 +9,8 @@ import AddIcon from '@mui/icons-material/Add';
 import validations from './Validation';
 import { Formik } from 'formik'
 import Uyari from '../../components/Uyari';
-
+import Basarili from '../../components/Basarili'
+import { yeniUrunEkle } from '../../api/UrunApi/api';
 function AdminYeniUrun() {
   
   return (
@@ -21,17 +22,33 @@ function AdminYeniUrun() {
         resimUrl: '',
         urunFiyat: null,
         stok: null,
+        kategori:''
       }}
-      onSubmit={(values) => {
-        console.log(values, " --> veri tabanına iletildi");
+      onSubmit={(values, { setSubmitting, setErrors, setStatus }) => {
+        yeniUrunEkle(values)
+          .then((response) => {
+            console.log(response.data, '--> veri tabanına iletildi');
+            setStatus('success');
+          })
+          .catch((error) => {
+            if (error.response && error.response.data) {
+              setErrors({ general: error.response.data });
+            } else {
+              console.log(error);
+            }
+          })
+          .finally(() => {
+            setSubmitting(false);
+          });
       }}
       validationSchema={validations}
     >
-      {({ handleSubmit, handleBlur, handleChange, values, errors, touched }) => (
+      {({ handleSubmit, handleBlur, handleChange, values, errors, touched,status }) => (
         <form onSubmit={handleSubmit}>
           <Box sx={{ width: 500, maxWidth: '100%' }}>
             <Typography variant='h5' mb={2} sx={{ fontWeight: 'bold' }}>Yeni Ürün</Typography>
-            {errors.general && <Uyari mesaj={"Bu ürün daha önceden kayıtlı"} />}
+            {errors.general && <Uyari mesaj={"Bu isimde bir ürün zaten kayıtlı"} />}
+            {status === 'success' && <Basarili mesaj={"Ürün başarıyla eklendi"} />}
             <TextField
               id="urunAdi"
               label="Ürün Adı"
@@ -104,6 +121,18 @@ function AdminYeniUrun() {
               onBlur={handleBlur}
 
               helperText={errors.stok && touched.stok && `${errors.stok}`}
+            />
+            <TextField
+              id="kategori"
+              label="Kategori"
+              name='kategori'
+              variant="outlined"
+              fullWidth margin='normal'
+              error={Boolean(errors.kategori && touched.kategori)}
+              onChange={handleChange}
+              onBlur={handleBlur}
+
+              helperText={errors.kategori && touched.kategori && `${errors.kategori}`}
             />
 
             <Button variant="contained" color='success' endIcon={<AddIcon />} sx={{ mt: 2 }} type='submit'>

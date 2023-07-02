@@ -31,7 +31,7 @@ router
 
 router
     .route('/urunler')
-    .get(ctrlUrun.urunGetir)   //tum urunleri getirme (tum kullanicilar icin)
+    .get(auth,ctrlUrun.urunGetir)   //tum urunleri getirme (admin icin)
 
 router
     .route('/urunler/:urunid')

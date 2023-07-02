@@ -11,44 +11,44 @@ import Paper from '@mui/material/Paper';
 import AdminKullaniciListe from '../../components/AdminKullaniciListe'
 import List from '@mui/material/List'
 import { Select } from 'antd';
+import { adminTumKullanicilariGetir,adminTariheGoreKullaniciGetir, adminKullaniciAdinaGoreKullaniciGetir } from '../../api/KullaniciApi/api';
+import { useQuery} from 'react-query';
+import { useState,useEffect } from 'react';
 
-const kullanicilar = [
-  {
-    id: 1,
-    email: 'zehracakir@email.com',
-    kayitTarihi: '5 May, 18:05',
-    telefonNo: '05558741212',
-    kullaniciAdi: 'zehracakir',
-    adres: 'Sdü Batı Kampüsü, Mühendislik Fakültesi Bilgisayar mühendisliği bölümü'
-  },
-  {
-    id: 2,
-    email: 'yusufdd@gmail.com',
-    kayitTarihi: '15 May, 18:05',
-    telefonNo: '05558741212',
-    kullaniciAdi: 'yusufdd',
-    adres: 'Sdü Batı Kampüsü, Mühendislik Fakültesi Bilgisayar mühendisliği bölümü'
-  },
-  {
-    id: 3,
-    email: 'zehra_cakir@hotmail.com',
-    kayitTarihi: '23 April, 19:00',
-    telefonNo: '05558741212',
-    kullaniciAdi: 'zehra_cakir',
-    adres: 'Sdü Batı Kampüsü, Mühendislik Fakültesi Bilgisayar mühendisliği bölümü'
-  }, {
-    id: 4,
-    email: 'aliveli@hotmail.com',
-    kayitTarihi: '2 June, 19:00',
-    telefonNo: '05558741212',
-    kullaniciAdi: 'ali_veli',
-    adres: 'Sdü Batı Kampüsü, Mühendislik Fakültesi Bilgisayar mühendisliği bölümü'
-  }
-]
-const handleChange = (value) => {
-  console.log(`selected ${value}`);
-};
 function AdminKullanicilar() {
+  const { isLoading, error, data } = useQuery(["kullanicilar"],()=>adminTumKullanicilariGetir());
+  const [kullanicilar, setKullanicilar] = useState([]);
+
+  useEffect(() => {
+    if (data) {
+      setKullanicilar(data);
+    }
+  }, [data]);
+  const handleFilterChange = async (value) => {
+    try {
+      var kullanicilar;
+      if (!value || value === 'tumu') {
+        kullanicilar = await adminTumKullanicilariGetir();
+      } else if (value === "en-yeni" || value === "en-eski") {
+        kullanicilar = await adminTariheGoreKullaniciGetir(value);
+      }
+      else if(value === "buyukten-kucuge-sirala" || value === "kucukten-buyuge-sirala"){
+        kullanicilar = await adminKullaniciAdinaGoreKullaniciGetir(value);
+      }
+      setKullanicilar(kullanicilar);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  if (isLoading) {
+    return "Loading...";
+  }
+
+  if (error) {
+    return "Error! " + error.message;
+  }
+  
   return (
     <Box sx={{ display: "flex", flexDirection: "column" }}>
 
@@ -62,7 +62,7 @@ function AdminKullanicilar() {
         <Select
           suffixIcon={<div style={{ color: '#dc3545' }}>☲</div>}
           style={{ width: 150, backgroundColor: '#D3D3D3', borderRadius: '6px' }}
-          onChange={handleChange}
+          onChange={handleFilterChange}
           bordered={false}
           className="custom-select"
 
@@ -79,11 +79,11 @@ function AdminKullanicilar() {
               options: [
                 {
                   label: 'En Yeni',
-                  value: 'enYeni'
+                  value: 'en-yeni'
                 },
                 {
                   label: 'En Eski',
-                  value: 'enEski'
+                  value: 'en-eski'
                 },
 
               ],
@@ -93,11 +93,11 @@ function AdminKullanicilar() {
               options: [
                 {
                   label: 'Büyükten Küçüğe',
-                  value: 'büyüktenKücüge'
+                  value: 'buyukten-kucuge-sirala'
                 },
                 {
                   label: 'Küçükten Büyüğe',
-                  value: 'kücüktenBüyüge'
+                  value: 'kucukten-buyuge-sirala'
                 },
               ],
             },
@@ -136,9 +136,22 @@ function AdminKullanicilar() {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {kullanicilar.map((item) => (
-                  <AdminKullaniciListe id={item.id} email={item.email} kullaniciAdi={item.kullaniciAdi} kayitTarihi={item.kayitTarihi} telefonNo={item.telefonNo} adres={item.adres} />
-                ))}
+              {Array.isArray(kullanicilar) ? (
+    kullanicilar.map((item) => (
+      <AdminKullaniciListe
+        userid={item._id}
+        email={item.email}
+        kullaniciAdi={item.kullaniciAdi}
+        kayitTarihi={item.kayitTarihi}
+        telefonNo={item.telefonNo}
+        adres={item.adres}
+      />
+    ))
+  ) : (
+    <TableRow>
+      <TableCell colSpan={5}>Kullanıcı bulunamadı.</TableCell>
+    </TableRow>
+  )}
 
               </TableBody>
             </Table>

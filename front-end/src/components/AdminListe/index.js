@@ -15,7 +15,9 @@ import PeopleIcon from '@mui/icons-material/People';
 import EventNoteIcon from '@mui/icons-material/EventNote';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { Link, useLocation } from 'react-router-dom';
+import { useAuth } from '../../contexts/AuthContext';
 function AdminListe() {
+    const { Logout } = useAuth();
     const location = useLocation(); // Sayfa yolunu alın
     const currentPath = location.pathname; // Sayfa yolunun tamamını alın
     return (
@@ -88,8 +90,7 @@ function AdminListe() {
 
                 </ListItem>
                 <ListItem sx={{ display: "block", width: "90%" }}>
-                    <Link to="/" style={{ textDecoration: "none", color: "black" }}>
-                        <ListItemButton>
+                        <ListItemButton onClick={Logout}>
                             <ListItemIcon>
                                 <LogoutIcon fontSize='large' />
                             </ListItemIcon>
@@ -99,7 +100,7 @@ function AdminListe() {
                                 </Typography>
                             </ListItemText>
                         </ListItemButton>
-                    </Link>
+
                 </ListItem>
             </List>
         </Box>

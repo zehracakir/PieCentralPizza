@@ -48,6 +48,23 @@ const kullaniciAdresGuncelle = async (id, adresId, input) => {
     const response = await axios.put(`${process.env.REACT_APP_BASE_ENDPOINT}/kullanici/${id}/adreslerim/${adresId}`, input, setAuth());
     return response;
 }
+const adminTumKullanicilariGetir = async () => {
+    const response = await axios.get(`${process.env.REACT_APP_BASE_ENDPOINT}/tum-kullanicilari-getir`, setAuth());
+    return  response.data;
+}
+const adminKullaniciSil = async (userid) => {
+    const response = await axios.delete(`${process.env.REACT_APP_BASE_ENDPOINT}/admin/kullanicilar/${userid}`, setAuth());
+    return  response;
+}
+
+const adminTariheGoreKullaniciGetir = async (kayitTarihi) => {
+    const response = await axios.get(`${process.env.REACT_APP_BASE_ENDPOINT}/admin/kullanici-getir/${kayitTarihi}`, setAuth());
+    return  response.data;
+}
+const adminKullaniciAdinaGoreKullaniciGetir = async (isim) => {
+    const response = await axios.get(`${process.env.REACT_APP_BASE_ENDPOINT}/admin/kullanici-sirala/${isim}`, setAuth());
+    return  response.data;
+}
 export{
     kayitOl,
     girisYap,
@@ -58,5 +75,9 @@ export{
     kullaniciAdresGetir,
     kullaniciAdresSil,
     kullaniciAdresEkle,
-    kullaniciAdresGuncelle
+    kullaniciAdresGuncelle,
+    adminTumKullanicilariGetir,
+    adminKullaniciSil,
+    adminTariheGoreKullaniciGetir,
+    adminKullaniciAdinaGoreKullaniciGetir
 }

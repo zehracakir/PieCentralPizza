@@ -6,7 +6,8 @@ let validations = object({
   urunOzellikler: string().required('Bu alan gereklidir'),
   resimUrl: string().required('Bu alan gereklidir'),
   urunFiyat: number().typeError('Lütfen sayı giriniz').min(0, 'Fiyat 0 dan büyük olmalıdır').required('Bu alan gereklidir'),
-  stok: number().typeError('Lütfen sayı giriniz').min(0, 'Stok adedi 0 dan büyük olmalıdır').required('Bu alan gereklidir')
+  stok: number().typeError('Lütfen sayı giriniz').min(0, 'Stok adedi 0 dan büyük olmalıdır').required('Bu alan gereklidir'),
+  kategori: string().required('Bu alan gereklidir'),
 });
 
 export default validations;

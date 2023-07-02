@@ -73,6 +73,7 @@ function YanUrunler() {
           <Typography sx={{ fontWeight: 'bold', fontSize: "22px", mt: 3 }}>
             Tatlılar
           </Typography>
+          
           <Grid container spacing={2} sx={{ mt: 1, mb: 5, top: -80 }}>
 
             {tatlilar.map((item,index) => {
