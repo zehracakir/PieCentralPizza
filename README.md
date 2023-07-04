@@ -1,70 +1,105 @@
-# Getting Started with Create React App
+# PieCentral Pizza
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Süleyman Demirel Üniversitesi Bilgisayar Mühendisliği bölümünde Yazılım Mühendisliği dersi için yapmış olduğumuz bir web uygulamasıdır. 
 
-## Available Scripts
+Uygulamanın sağladığı imkanlar :  
 
-In the project directory, you can run:
+- Ürünleri ve ürün detaylarını görüntüleme,
+- Kayıt olabilme,
+- Giriş yapabilme,
+- Kullanıcı için :
+    - Sepete ekleyebilme,
+    - Sepeti düzenleyebilme,
+    - Sipariş verebilme,
+    - Bilgilerini ekleyebilme,
+    - Bilgilerini silebilme,
+    - Bilgilerini güncelleyebilme,
+    - Siparişlerini yönetebilme,
+    - Favorilere ekleyebilme,
+    - Favorilerini yönetebilme ve filtreleyebilme imkanları
+- Admin için :  (Admin, kullanıcının imkanlarına da sahiptir. Aşağıda yazanlar ek özellikleridir.)
+    - Yeni ürün ekleyebilme,
+    - Ürünleri görüntüleyebilme,
+    - Ürünleri güncelleyebilme,
+    - Ürünleri silebilme,
+    - Kullanıcıları görüntüleyebilme, filtreleyebilme,
+    - Kulllanıcıları silebilme,
+    - Siparişleri görüntüleyebilme, filtreleyebilme,
+    - Siparişleri silebilme,
+    - Sipariş durumlarını güncelleme imkanları
 
-### `npm start`
+## Uygulama Özellikleri
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Bu uygulama `npx create-react-app` komutu ile oluşturulmuş bir React.js projesidir.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- Uygulama front-end ve back-end olmak üzere iki kısımdan oluşmaktadır.
+- Front-End çatısı olarak [React](https://react.dev/) kullanılmıştır.
+- Back-End Çatısı olarak [Express.Js](https://expressjs.com/) kullanılmıştır.
+- Front-End ve back-end arasındaki iletişim Rest Api ile sağlanmıştır.
 
-### `npm test`
+## **Kullanılan Teknolojiler ve Araçlar**
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Front-end: React
+- Back-end: ExpressJS
+- Veritabanı: MongoDB
+- Veri Modelleme: Mongoose
+- Kimlik Doğrulama, Güvenlik: PassportJS, JWT
+- Validasyon İşlemleri : YupJs
+- Component Kütüphanesi : Mui, Antd
+- Haberleşme: REST API, Axios, React Query
+- Sayfa Yönlendirme: React Router Dom
+- Form Yönetim Aracı : Formik
+- Test: Postman
+- IDE: Visual Studio Code
+- REST API Client: Postman
+- Versiyonlama: Git
 
-### `npm run build`
+## Uygulamanın Kişisel Bilgisayarınıza İndirilmesi
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- **Uygulamayı İndirmek İçin :**
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```bash
+git clone https://github.com/SDU-Bilgisayar-Muhendisligi/PieCentralPizza.git
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## **Kütüphanelerin Yüklenmesi**
 
-### `npm run eject`
+Çalıştırmadan önce gerekli kütüphanelerin yüklenmesi gerekir. 
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- Uygulama içindeki Back-End klasörü içindeyken terminalde aşağıdaki komutu kullanarak bu kütüphaneleri yükleyin.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```bash
+npm install
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- Uygulama içindeki Front-End klasörü içindeyken terminalde aşağıdaki komutu kullanarak bu kütüphaneleri yükleyin.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```bash
+npm install
+```
 
-## Learn More
+## Uygulamanın Çalıştırılması
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- Uygulama içindeki Back-End klasörü içindeyken terminalde aşağıdaki komutu kullanarak Back-End’i çalıştırın.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```bash
+npm start 
+```
 
-### Code Splitting
+Back-End çalışınca terminal şöyle görünecek : 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+![backend](./photos/Readme/backend.png)
 
-### Analyzing the Bundle Size
+- Şimdi de uygulama içindeki Front-End klasörü içindeyken terminalde aşağıdaki komutu kullanarak Front-End’i çalıştırın.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+```bash
+npm start
+```
 
-### Making a Progressive Web App
+Front-End çalışınca terminal şöyle görünecek : 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+![frontend](./photos/Readme/frontend.png)
 
-### Advanced Configuration
+Uygulama artık local’inizde çalışır halde.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+#
